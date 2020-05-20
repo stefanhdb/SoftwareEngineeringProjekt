@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+	<script src="http://code.jquery.com/jquery-2.0.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	
@@ -36,7 +41,8 @@
 	
 <body>
     
-    <% out.print(Test.APIConnection.executePost("https://creativecommons.tankerkoenig.de/json/list.php?lat=52.521&lng=13.438&rad=1.5&sort=dist&type=all&apikey=2841944f-2cbb-1b7e-ae94-d7f4d7c5599d")); %>
+    <% Test.APIConnection.executePost("https://creativecommons.tankerkoenig.de/json/list.php?lat=52.521&lng=13.438&rad=1.5&sort=dist&type=all&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d"); %>
+	 <% //out.print(Test.APIConnection.TankstellenListe.get(1).getName()); %>
 	 
 	<div class = "Leiste">
 	<h2>Erleben Sie die neue Vielfalt neuer Preisgestaltansichten.</h2>
@@ -48,8 +54,34 @@
     
     <p>Statistik und Preisdaten pro Tankstelle anzeigen lassen!.</p>
 	
-</div>
+	</div>
 </body>
+
+<table data-role="table" id="tankList" data-mode="columntoggle" class="ui-body-a ui-responsive">
+		<thead>
+			<tr class="ui-bar-a">
+				<th data-priority="1">Tankstelle</th>
+				<th data-priority="1">Entfernung</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><%for (int t = 0; t <Test.APIConnection.TankstellenListe.size(); t++ ) {
+				out.print(Test.APIConnection.TankstellenListe.get(t).getName()); }%></td>
+				<td><%out.print(Test.APIConnection.TankstellenListe.get(1).getDist()); %>></td>
+			</tr>
+			<tr>
+				<td>a1</td>
+				<td>b1</td>
+			</tr>
+			<tr>
+				<td>a2</td>
+				<td>b2</td>
+			</tr>
+		</tbody>
+	</table>
+	
+
 <script>
     // Visualization API with the 'corechart' package.
     google.charts.load('visualization', { packages: ['corechart'] });
@@ -88,5 +120,10 @@
             }
         });
     }
+
+	
+    	
 </script>
+
+
 </html>

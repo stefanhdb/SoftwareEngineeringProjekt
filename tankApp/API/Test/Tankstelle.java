@@ -21,88 +21,88 @@ public class  Tankstelle {
 	String houseNumber;
 	int postCode;
 
-	private UUID getId() {
+	public UUID getId() {
 		return id;
 	}
-	private void setId(UUID id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
-	private String getName() {
+	public String getName() {
 		return name;
 	}
-	private void setName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
-	private String getBrand() {
+	public String getBrand() {
 		return brand;
 	}
-	private void setBrand(String brand) {
+	public void setBrand(String brand) {
 		this.brand = brand;
 	}
-	private String getStreet() {
+	public String getStreet() {
 		return street;
 	}
-	private void setStreet(String street) {
+	public void setStreet(String street) {
 		this.street = street;
 	}
-	private String getPlace() {
+	public String getPlace() {
 		return place;
 	}
-	private void setPlace(String place) {
+	public void setPlace(String place) {
 		this.place = place;
 	}
-	private float getLat() {
+	public float getLat() {
 		return lat;
 	}
-	private void setLat(float lat) {
+	public void setLat(float lat) {
 		this.lat = lat;
 	}
-	private float getLng() {
+	public float getLng() {
 		return lng;
 	}
-	private void setLng(float lng) {
+	public void setLng(float lng) {
 		this.lng = lng;
 	}
-	private float getDist() {
+	public float getDist() {
 		return dist;
 	}
-	private void setDist(float dist) {
+	public void setDist(float dist) {
 		this.dist = dist;
 	}
-	private float getDiesel() {
+	public float getDiesel() {
 		return diesel;
 	}
-	private void setDiesel(float diesel) {
+	public void setDiesel(float diesel) {
 		this.diesel = diesel;
 	}
-	private float getE5() {
+	public float getE5() {
 		return e5;
 	}
-	private void setE5(float e5) {
+	public void setE5(float e5) {
 		this.e5 = e5;
 	}
-	private float getE10() {
+	public float getE10() {
 		return e10;
 	}
-	private void setE10(float e10) {
+	public void setE10(float e10) {
 		this.e10 = e10;
 	}
-	private boolean isOpen() {
+	public boolean isOpen() {
 		return isOpen;
 	}
-	private void setOpen(boolean isOpen) {
+	public void setOpen(boolean isOpen) {
 		this.isOpen = isOpen;
 	}
-	private String getHouseNumber() {
+	public String getHouseNumber() {
 		return houseNumber;
 	}
-	private void setHouseNumber(String houseNumber) {
+	public void setHouseNumber(String houseNumber) {
 		this.houseNumber = houseNumber;
 	}
-	private int getPostCode() {
+	public int getPostCode() {
 		return postCode;
 	}
-	private void setPostCode(int postCode) {
+	public void setPostCode(int postCode) {
 		this.postCode = postCode;
 	}
 	
