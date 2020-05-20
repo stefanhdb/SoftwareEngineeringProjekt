@@ -1,3 +1,4 @@
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,10 +43,12 @@
 <body>
     
     <% Test.APIConnection.executePost("https://creativecommons.tankerkoenig.de/json/list.php?lat=52.521&lng=13.438&rad=1.5&sort=dist&type=all&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d"); %>
-	 <% //out.print(Test.APIConnection.TankstellenListe.get(1).getName()); %>
+	    <% //Test.APIConnection.executePost("https://creativecommons.tankerkoenig.de/json/list.php?street=bahnhofstraße&place=pforzheim&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d"); %>
+	
+	 <% //out.print(Test.APIConnection.TankstellenListe.get(1).getName()); <%out.print(Test.APIConnection.TankstellenListe.get(0).getName()); %> %>
 	 
 	<div class = "Leiste">
-	<h2>Erleben Sie die neue Vielfalt neuer Preisgestaltansichten.</h2>
+	<h2>Preisveränderung von e10</h2>
 	</div>
 	
 	<div id="chart" style="width:auto; height:300px;"></div>
@@ -57,36 +60,32 @@
 	</div>
 </body>
 
-<table data-role="table" id="tankList" data-mode="columntoggle" class="ui-body-a ui-responsive">
-		<thead>
-			<tr class="ui-bar-a">
-				<th data-priority="1">Tankstelle</th>
-				<th data-priority="1">Entfernung</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td><%for (int t = 0; t <Test.APIConnection.TankstellenListe.size(); t++ ) {
-				out.print(Test.APIConnection.TankstellenListe.get(t).getName()); }%></td>
-				<td><%out.print(Test.APIConnection.TankstellenListe.get(1).getDist()); %>></td>
-			</tr>
-			<tr>
-				<td>a1</td>
-				<td>b1</td>
-			</tr>
-			<tr>
-				<td>a2</td>
-				<td>b2</td>
-			</tr>
-		</tbody>
-	</table>
-	
+<%request.setAttribute("tankList", Test.APIConnection.TankstellenListe); %>
 
+<table>
+<tr><th>Column 1</th> <th>Column 2</th> <th>Column 3</th></tr>
+<c:forEach var="obj" items="${Test.APIConnection.TankstellenListe}">
+    <tr>
+    <td>${row.getName()}</td> <td>${row.col2data}</td> <td>${row.col3data}</td>
+    </tr>
+</c:forEach>
+
+
+</table>
+	
 <script>
     // Visualization API with the 'corechart' package.
     google.charts.load('visualization', { packages: ['corechart'] });
     google.charts.setOnLoadCallback(drawLineChart);
 
+    function addRow() {
+    	  var root = document.getElementById('tankList').getElementsByTagName('tbody')[0];
+    	  var rows = root.getElementsByTagName('tr');
+    	  var clone = cloneEl(rows[rows.length - 1]);
+    	  cleanUpInputs(clone);
+    	  root.appendChild(clone);
+    	}
+	
     function drawLineChart() {
         $.ajax({
             url: "https://www.volzinnovation.com/fuel_price_variations_germany/data/474e5046/deaf/4f9b/9a32/9797b778f047/e10.json",
