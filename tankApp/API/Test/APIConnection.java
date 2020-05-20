@@ -19,6 +19,7 @@ import java.io.InputStream;
 public class APIConnection {
 
 	public static ArrayList<Tankstelle> TankstellenListe = new ArrayList<Tankstelle>();
+	
 
 	// public void addUser() {
 	// Tankstelle ts = new Tankstelle();
@@ -58,5 +59,16 @@ public class APIConnection {
 		catch (Exception e) {
 		}
 
+	}
+	
+	public static String createTable(){
+		String table = "";
+		for (Tankstelle t : TankstellenListe) {
+		table += "<tr>"+ "<td>" + t.getName() + "</td>" +
+				"<td>" + t.getPlace() + "</td>" +
+						"<td>" + t.getDist() + "</td>" + "</tr>";
+		}
+		System.out.println(table);
+		return table;
 	}
 }

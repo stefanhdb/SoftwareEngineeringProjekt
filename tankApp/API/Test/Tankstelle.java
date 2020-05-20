@@ -20,6 +20,8 @@ public class  Tankstelle {
 	boolean isOpen;
 	String houseNumber;
 	int postCode;
+	
+	
 
 	public UUID getId() {
 		return id;

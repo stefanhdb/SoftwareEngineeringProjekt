@@ -60,19 +60,23 @@
 	</div>
 </body>
 
-<%request.setAttribute("tankList", Test.APIConnection.TankstellenListe); %>
 
-
-
-<table id="tankTabelle" border="1">
-<tr><td>Foo header</td><td>Bar header</td></tr>
-<c:forEach items="${tankList}" var="obj">
-    <tr>
-       <td>${obj.getName()}</td>
-       <td>${obj.getDist()}</td>
-    </tr>
-</c:forEach>
+<table data-role="table" id="tsTabelle" data-mode="columntoggle" class="ui-responsive" border="1">
+	<thead>
+		<tr>
+			<th>Tankstelle</th>
+			<th>Ort</th>
+			<th>Distanz</th>
+		</tr>
+	</thead>
+	<tbody>
+		
+			<% out.print(Test.APIConnection.createTable());
+			%>
+			
+	</tbody>
 </table>
+
 
 
 	
