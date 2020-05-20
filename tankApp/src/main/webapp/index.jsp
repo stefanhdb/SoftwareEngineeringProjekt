@@ -62,29 +62,25 @@
 
 <%request.setAttribute("tankList", Test.APIConnection.TankstellenListe); %>
 
-<table>
-<tr><th>Column 1</th> <th>Column 2</th> <th>Column 3</th></tr>
-<c:forEach var="obj" items="${Test.APIConnection.TankstellenListe}">
+
+
+<table id="tankTabelle" border="1">
+<tr><td>Foo header</td><td>Bar header</td></tr>
+<c:forEach items="${tankList}" var="obj">
     <tr>
-    <td>${row.getName()}</td> <td>${row.col2data}</td> <td>${row.col3data}</td>
+       <td>${obj.getName()}</td>
+       <td>${obj.getDist()}</td>
     </tr>
 </c:forEach>
-
-
 </table>
+
+
 	
 <script>
     // Visualization API with the 'corechart' package.
     google.charts.load('visualization', { packages: ['corechart'] });
     google.charts.setOnLoadCallback(drawLineChart);
 
-    function addRow() {
-    	  var root = document.getElementById('tankList').getElementsByTagName('tbody')[0];
-    	  var rows = root.getElementsByTagName('tr');
-    	  var clone = cloneEl(rows[rows.length - 1]);
-    	  cleanUpInputs(clone);
-    	  root.appendChild(clone);
-    	}
 	
     function drawLineChart() {
         $.ajax({
