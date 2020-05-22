@@ -42,10 +42,10 @@
 	
 <body>
     
-    <% Test.APIConnection.executePost("https://creativecommons.tankerkoenig.de/json/list.php?lat=52.521&lng=13.438&rad=1.5&sort=dist&type=all&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d"); %>
+    <% //Test.APIConnection.executePost("https://creativecommons.tankerkoenig.de/json/list.php?", lat, bret); %>
 	    <% //Test.APIConnection.executePost("https://creativecommons.tankerkoenig.de/json/list.php?street=bahnhofstraße&place=pforzheim&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d"); %>
 	
-	 <% //out.print(Test.APIConnection.TankstellenListe.get(1).getName()); <%out.print(Test.APIConnection.TankstellenListe.get(0).getName()); %> %>
+	 <% //out.print(Test.APIConnection.TankstellenListe.get(1).getName()); <%out.print(Test.APIConnection.TankstellenListe.get(0).getName()); %>
 	 
 	<div class = "Leiste">
 	<h2>Preisveränderung von e10</h2>
@@ -61,6 +61,13 @@
 </body>
 
 
+<%//BUTTON %>
+<p>Click the button to get your coordinates.</p>
+<button onclick="getLocation()">Try It</button>
+<p id="demo"></p>
+
+
+<%//TABELLE %>
 <table data-role="table" id="tsTabelle" data-mode="columntoggle" class="ui-responsive" border="1">
 	<thead>
 		<tr>
@@ -70,10 +77,8 @@
 		</tr>
 	</thead>
 	<tbody>
-		
 			<% out.print(Test.APIConnection.createTable());
-			%>
-			
+			%>	
 	</tbody>
 </table>
 
@@ -118,6 +123,22 @@
                 alert('Got an Error');
             }
         });
+    }
+
+    var x = document.getElementById("demo");
+
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+      }
+    }
+
+    function showPosition(position) {
+      x.innerHTML = "Latitude: " + position.coords.latitude + 
+      "<br>Longitude: " + position.coords.longitude;
+
     }
 
 	

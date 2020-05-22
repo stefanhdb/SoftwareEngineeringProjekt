@@ -19,15 +19,19 @@ import java.io.InputStream;
 public class APIConnection {
 
 	public static ArrayList<Tankstelle> TankstellenListe = new ArrayList<Tankstelle>();
-	
 
 	// public void addUser() {
 	// Tankstelle ts = new Tankstelle();
 	// TankstellenListe.add(ts);
 	// }
 
-	public static void executePost(String targetURL) {
+	public static void executePost(String targetURL, String lat, String bret) {
 		HttpURLConnection connection = null;
+
+		String komplettURl = targetURL + "lat=" + lat + "&lng=" + bret + "&rad=" + "1,5"
+				+ "&sort=dist&type=all&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d";
+
+		System.out.println(komplettURl);
 
 		try {
 			// Create connection
@@ -50,8 +54,8 @@ public class APIConnection {
 			}
 
 			for (Tankstelle t : TankstellenListe) {
-				//System.out.println(t.toString());
-				//System.out.println(Test.APIConnection.TankstellenListe.get(0).getName());
+				// System.out.println(t.toString());
+				// System.out.println(Test.APIConnection.TankstellenListe.get(0).getName());
 			}
 
 		}
@@ -60,13 +64,12 @@ public class APIConnection {
 		}
 
 	}
-	
-	public static String createTable(){
+
+	public static String createTable() {
 		String table = "";
 		for (Tankstelle t : TankstellenListe) {
-		table += "<tr>"+ "<td>" + t.getName() + "</td>" +
-				"<td>" + t.getPlace() + "</td>" +
-						"<td>" + t.getDist() + "</td>" + "</tr>";
+			table += "<tr>" + "<td>" + t.getName() + "</td>" + "<td>" + t.getPlace() + "</td>" + "<td>" + t.getDist()
+					+ "</td>" + "</tr>";
 		}
 		System.out.println(table);
 		return table;
