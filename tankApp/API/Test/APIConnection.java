@@ -72,7 +72,7 @@ public class APIConnection {
 	public static String createUrl(String latPar, String lngPar) {
 		String url = null;
 
-		if (latPar == null && lngPar == null) {
+		if ((latPar == null && lngPar == null) || (latPar.equals("") && lngPar.equals(""))) {
 			double lat = 48.8851;
 			double lng = 8.7307;
 			url = "https://creativecommons.tankerkoenig.de/json/list.php?lat=" + lat + "&lng=" + lng

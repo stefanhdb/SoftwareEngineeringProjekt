@@ -45,11 +45,7 @@
 
 <body>
 
-	<%
-		
-
-		
-
+	<%		
 		//https://creativecommons.tankerkoenig.de/json/list.php?street=bahnhofstraße&place=pforzheim&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d");
 		//https://creativecommons.tankerkoenig.de/json/list.php?lat=48.916901499999994&lng=8.7445567&rad=1.5&sort=dist&type=all&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d
 		//https://creativecommons.tankerkoenig.de/json/list.php?lat=48.916901499999994&lng=8.7445567&rad=1.5&sort=dist&type=all&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d
@@ -76,9 +72,7 @@
 		<fieldset>
 			<input id="latLabel" type="text" name="lat"> 
 			<input id="lngLabel" type="text" name="lng">
-
-			<button type="button" id="out" onclick="geoFindMe()"> Zeige meine Position an</button>
-
+			<button type="button" id="out" onclick="showPosition()"> Zeige meine Position an</button>
 			<button type="submit">Submit</button>
 		</fieldset>
 	</form>
@@ -162,23 +156,26 @@
 				});
 	}
 
-	function geoFindMe() {
+	function showPosition() {
 
-		if (!navigator.geolocation) {
-			output.innerHTML = "<p>Geolokation wird von ihrem Browser nicht unterstützt</p>";
-			return;
+		 if(navigator.geolocation)
+		    {
+		        navigator.geolocation.getCurrentPosition(showMap, showError);
+		    } 
+		    else
+		    {
+		        alert("Sorry, your browser does not support HTML5 geolocation.");
+		    }
 		}
-		else{
-		navigator.geolocation.getCurrentPosition(success, showError);
-		}
-	}
-	function success(position) {
-		var latitude = position.coords.latitude;
-		var longitude = position.coords.longitude;
 
-		document.getElementById("latLabel").value = latitude;
-		document.getElementById("lngLabel").value = longitude;
-	}
+		function showMap(position)
+		{
+		    lat = position.coords.latitude;
+		    lon = position.coords.longitude;
+		    document.getElementById("latLabel").value = lat;
+		    document.getElementById("lngLabel").value = lon;
+		}
+
 	
 	function showError(error) {
 	    switch (error.code) {
