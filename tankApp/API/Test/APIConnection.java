@@ -25,13 +25,8 @@ public class APIConnection {
 	// TankstellenListe.add(ts);
 	// }
 
-	public static void executePost(String targetURL, String lat, String bret) {
+	public static void executePost(String targetURL) {
 		HttpURLConnection connection = null;
-
-		String komplettURl = targetURL + "lat=" + lat + "&lng=" + bret + "&rad=" + "1,5"
-				+ "&sort=dist&type=all&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d";
-
-		System.out.println(komplettURl);
 
 		try {
 			// Create connection
@@ -53,10 +48,9 @@ public class APIConnection {
 				TankstellenListe = gson.fromJson(jsonString, listType);
 			}
 
-			for (Tankstelle t : TankstellenListe) {
-				// System.out.println(t.toString());
-				// System.out.println(Test.APIConnection.TankstellenListe.get(0).getName());
-			}
+//			for (Tankstelle t : TankstellenListe) {
+//				System.out.println(t.toString());
+//			}
 
 		}
 
@@ -69,9 +63,27 @@ public class APIConnection {
 		String table = "";
 		for (Tankstelle t : TankstellenListe) {
 			table += "<tr>" + "<td>" + t.getName() + "</td>" + "<td>" + t.getPlace() + "</td>" + "<td>" + t.getDist()
-					+ "</td>" + "</tr>";
+					+ "</td>" + "<td>" + "<button>Zu Favoriten Hinzufügen</button>" + "</td>" + "</tr>";
 		}
-		System.out.println(table);
+		// System.out.println(table);
 		return table;
+	}
+
+	public static String createUrl(String latPar, String lngPar) {
+		String url = null;
+
+		if (latPar == null && lngPar == null) {
+			double lat = 48.8851;
+			double lng = 8.7307;
+			url = "https://creativecommons.tankerkoenig.de/json/list.php?lat=" + lat + "&lng=" + lng
+					+ "&rad=5&sort=dist&type=all&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d";
+
+		} else {
+
+			url = "https://creativecommons.tankerkoenig.de/json/list.php?lat=" + latPar + "&lng=" + lngPar
+					+ "&rad=5&sort=dist&type=all&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d";
+			System.out.println(url);
+		}
+		return url;
 	}
 }
