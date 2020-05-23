@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
@@ -12,6 +13,9 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
+	
+	
+	<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
 
 <div class="‹berschrift">
 	<h2>Tank - App</h2>
@@ -40,6 +44,8 @@
 }
 </Style>
 
+
+
 </head>
 
 
@@ -52,6 +58,17 @@
 		//https://creativecommons.tankerkoenig.de/json/list.php?lat=48.8851&lng=8.7307&rad=1.5&sort=dist&type=all&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d
 		//https://creativecommons.tankerkoenig.de/json/list.php?lat=48.916902799999995&lng=8.744553800000002&rad=1.5&sort=dist&type=all&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d
 		//out.print(Test.APIConnection.TankstellenListe.get(1).getName());
+		
+		Cookie[] cookies = request.getCookies();
+		if(cookies != null){
+		for(Cookie c : cookies){
+			if(c.getName().equals("FavoritenID")){
+				Test.APIConnection.getFav(c.getValue());
+				break;
+			}
+		}
+		}
+		
 	%>
 
 	<div class="Leiste">
@@ -78,13 +95,16 @@
 	</form>
 
 
-	<table data-role="table" id="tsTabelle" data-mode="columntoggle"
-		class="ui-responsive" border="1">
+	<table data-role="table" id="tsTabelle" class="ui-responsive" border="1">
 		<thead>
 			<tr>
 				<th>Tankstelle</th>
+				<th>Straﬂe</th>
 				<th>Ort</th>
 				<th>Distanz</th>
+				<th>Diesel</th>
+				<th>E10</th>
+				<th>E5</th>
 				<th>Favoriten</th>
 			</tr>
 		</thead>
@@ -101,8 +121,30 @@
 			%>
 		</tbody>
 	</table>
+	
+	<table data-role="table" id="tsFavTabelle" class="ui-responsive" border="1">
+		<thead>
+			<tr>
+				<th>Tankstelle</th>
+				<th>Straﬂe</th>
+				<th>Ort</th>
+				<th>Distanz</th>
+				<th>Diesel</th>
+				<th>E10</th>
+				<th>E5</th>
+				<th>Favoriten</th>
+			</tr>
+		</thead>
+		<tbody>
+			<%
+				out.print(Test.APIConnection.createTableFav());
+			%>
+		</tbody>
+	</table>
 
 </body>
+
+
 
 
 
@@ -166,6 +208,7 @@
 		    {
 		        alert("Sorry, your browser does not support HTML5 geolocation.");
 		    }
+		 
 		}
 
 		function showMap(position)
@@ -193,6 +236,20 @@
 	        break;
 	    }
 	}
+
+	function setFav(t){
+		 var cookie = Cookies.get("FavoritenID");
+		 if(cookie == null){
+         Cookies.set("FavoritenID", t);         	
+		}
+		 else{
+			 cookie += "&"
+			 cookie += t
+		 Cookies.set("FavoritenID", cookie);
+		 }
+		 location.reload();
+	}
+		 
 </script>
 
 
