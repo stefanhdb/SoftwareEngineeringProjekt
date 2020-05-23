@@ -23,10 +23,6 @@ public class APIConnection {
 	public static ArrayList<Tankstelle> TankstellenFavListe = new ArrayList<Tankstelle>();
 	
 	
-	// public void addUser() {
-	// Tankstelle ts = new Tankstelle();
-	// TankstellenListe.add(ts);
-	// }
 
 	public static void executePost(String targetURL) {
 		HttpURLConnection connection = null;
@@ -51,9 +47,6 @@ public class APIConnection {
 				TankstellenListe = gson.fromJson(jsonString, listType);
 			}
 
-			//for (Tankstelle t : TankstellenListe) {
-				//System.out.println(t.toString());
-			//}
 
 		}
 
@@ -75,11 +68,10 @@ public class APIConnection {
 			
 			table += "<tr>" + "<td>" + t.getName() + "</td>" + "<td>" + t.getStreet() + "</td>"	+ "<td>" + t.getPlace() + "</td>" + "<td>" + t.getDist() 
 			+ "<td>" + t.getDiesel() + " Euro</td>" + "<td>" + t.getE10() + " Euro</td>" + "<td>" + t.getE5() + " Euro</td>"
-					+ "</td>" + "<td>" + "<button id="+ t.getId() +" onclick=\"setFav(this.id)\">"+buttonText+"</button>"
+					+ "</td>" + "<td>" + "<button id="+ t.getId() +" onclick=\"favVerw(this.id)\">"+buttonText+"</button>"
 					+ "</td>" 					
 					+ "</tr>";
 		}
-		
 		return table;
 	}
 
@@ -113,6 +105,7 @@ public class APIConnection {
 			url = "https://creativecommons.tankerkoenig.de/json/detail.php?";
 			url += "id=" + i +"&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d";
 			
+			
 			try {
 				// Create connection
 				URL targetUrl = new URL(url);
@@ -138,6 +131,7 @@ public class APIConnection {
 				}
 			}
 		}
+		
 	
 	public static String createTableFav() {
 		String table = "";
@@ -145,11 +139,10 @@ public class APIConnection {
 		for (Tankstelle t : TankstellenFavListe) {
 			table += "<tr>" + "<td>" + t.getName() + "</td>" + "<td>" + t.getStreet() + "</td>"	+ "<td>" + t.getPlace() + "</td>" + "<td>" + t.getDist() 
 			+ "<td>" + t.getDiesel() + " Euro</td>" + "<td>" + t.getE10() + " Euro</td>" + "<td>" + t.getE5() + " Euro</td>"
-					+ "</td>" + "<td>" + "<button id="+ t.getId() +" onclick=\"setFav(this.id)\">Von Favoriten entfernen</button>"
+					+ "</td>" + "<td>" + "<button id="+ t.getId() +" onclick=\"favVerw(this.id)\">Von Favoriten entfernen</button>"
 					+ "</td>" 					
 					+ "</tr>";
-		}
-		
+		}		
 		return table;
 	}
 }

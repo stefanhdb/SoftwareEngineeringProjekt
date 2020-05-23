@@ -60,16 +60,7 @@
 		//out.print(Test.APIConnection.TankstellenListe.get(1).getName());
 		
 		
-		//Favoriten ArrayList erschaffen
-		Cookie[] cookies = request.getCookies();
-		if(cookies != null){
-		for(Cookie c : cookies){
-			if(c.getName().equals("FavoritenID")){
-				Test.APIConnection.getFav(c.getValue());
-				break;
-				}
-			}
-		}
+		
 		
 	%>
 
@@ -140,8 +131,22 @@
 			</tr>
 		</thead>
 		<tbody>
-			<%	//Favoriten Tabelle schreiben lassen
-				out.print(Test.APIConnection.createTableFav());
+			<%
+			//Favoriten ArrayList erschaffen
+			Cookie[] cookies = request.getCookies();
+			if(cookies != null){
+				out.print("");
+			for(Cookie c : cookies){
+				if(c.getName().equals("FavoritenID")){
+					Test.APIConnection.getFav(c.getValue());
+					break;
+					}
+				}
+			//Favoriten Tabelle schreiben lassen
+			out.print(Test.APIConnection.createTableFav());
+			}	
+			
+			
 			%>
 		</tbody>
 	</table>
@@ -241,25 +246,24 @@
 	    }
 	}
 
-	function setFav(t){
+	function favVerw(t){
 		 var cookie = Cookies.get("FavoritenID");
-
-		 if(cookie.includes(t)){
-				if(cookie != null){
-				var newCookie = cookie.replace(t+"&","");
-				Cookies.set("FavoritenID", newCookie);
-				}				
+		 
+		 if(!cookie.includes(t)){
+			 if(cookie == null){
+		         Cookies.set("FavoritenID", t + "&");         	
+					}			
+				 else{			 
+					 cookie += t
+					 cookie += "&"
+				 	Cookies.set("FavoritenID", cookie);
+				 	}			 							
 			 }
 		 else{
-			 if(cookie == null){
-	         Cookies.set("FavoritenID", t + "&");         	
-				}			
-			 else{			 
-				 cookie += t
-				 cookie += "&"
-			 	Cookies.set("FavoritenID", cookie);
-			 	}	
-			}
+					var newCookie = cookie.replace(t+"&","");
+					Cookies.set("FavoritenID", newCookie);
+					}
+			
 		 location.reload();	
 		}
 		 
