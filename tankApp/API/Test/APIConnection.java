@@ -64,17 +64,21 @@ public class APIConnection {
 
 	public static String createTable() {
 		String table = "";
+		String buttonText= "Zu Favoriten Hinzufügen";
 		
 		
 		
 		for (Tankstelle t : TankstellenListe) {
+			if(TankstellenFavListe.contains(t)) {
+				buttonText = "Von Favoriten entfernen";
+			}
+			
 			table += "<tr>" + "<td>" + t.getName() + "</td>" + "<td>" + t.getStreet() + "</td>"	+ "<td>" + t.getPlace() + "</td>" + "<td>" + t.getDist() 
-			+ "<td>" + t.getDiesel() + "</td>" + "<td>" + t.getE10() + "</td>" + "<td>" + t.getE5() + "</td>"
-					+ "</td>" + "<td>" + "<button id="+ t.getId() +" onclick=\"setFav(this.id)\">Zu Favoriten Hinzufügen</button>"
+			+ "<td>" + t.getDiesel() + " Euro</td>" + "<td>" + t.getE10() + " Euro</td>" + "<td>" + t.getE5() + " Euro</td>"
+					+ "</td>" + "<td>" + "<button id="+ t.getId() +" onclick=\"setFav(this.id)\">"+buttonText+"</button>"
 					+ "</td>" 					
 					+ "</tr>";
 		}
-		 System.out.println(table);
 		
 		return table;
 	}
@@ -102,6 +106,8 @@ public class APIConnection {
 		String[] id = c.split("&");
 		String url = "https://creativecommons.tankerkoenig.de/json/detail.php?";
 		
+		TankstellenFavListe.clear();
+		
 		for(String i : id) {
 			HttpURLConnection connection = null;
 			url = "https://creativecommons.tankerkoenig.de/json/detail.php?";
@@ -123,28 +129,26 @@ public class APIConnection {
 					String jsonString = obj.toString().substring(obj.toString().indexOf("station")+9,
 							(obj.toString().length()-1));
 					Gson gson = new Gson();
-					
 					TankstellenFavListe.add(gson.fromJson(jsonString, Tankstelle.class)) ;
-				}
+					}
 				
 			
-		}
+				}
 			catch (Exception e) {
+				}
 			}
-	}
-}
+		}
 	
 	public static String createTableFav() {
 		String table = "";
 		
 		for (Tankstelle t : TankstellenFavListe) {
 			table += "<tr>" + "<td>" + t.getName() + "</td>" + "<td>" + t.getStreet() + "</td>"	+ "<td>" + t.getPlace() + "</td>" + "<td>" + t.getDist() 
-			+ "<td>" + t.getDiesel() + "</td>" + "<td>" + t.getE10() + "</td>" + "<td>" + t.getE5() + "</td>"
-					+ "</td>" + "<td>" + "<button id="+ t.getId() +" onclick=\"setFav(this.id)\">Zu Favoriten Hinzufügen</button>"
+			+ "<td>" + t.getDiesel() + " Euro</td>" + "<td>" + t.getE10() + " Euro</td>" + "<td>" + t.getE5() + " Euro</td>"
+					+ "</td>" + "<td>" + "<button id="+ t.getId() +" onclick=\"setFav(this.id)\">Von Favoriten entfernen</button>"
 					+ "</td>" 					
 					+ "</tr>";
 		}
-		 System.out.println(table);
 		
 		return table;
 	}

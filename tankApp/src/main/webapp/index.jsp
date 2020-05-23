@@ -59,14 +59,16 @@
 		//https://creativecommons.tankerkoenig.de/json/list.php?lat=48.916902799999995&lng=8.744553800000002&rad=1.5&sort=dist&type=all&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d
 		//out.print(Test.APIConnection.TankstellenListe.get(1).getName());
 		
+		
+		//Favoriten ArrayList erschaffen
 		Cookie[] cookies = request.getCookies();
 		if(cookies != null){
 		for(Cookie c : cookies){
 			if(c.getName().equals("FavoritenID")){
 				Test.APIConnection.getFav(c.getValue());
 				break;
+				}
 			}
-		}
 		}
 		
 	%>
@@ -117,6 +119,8 @@
 			
 			Test.APIConnection.executePost(url);
 			
+			//Tabelle schreiben lassen
+			
 				out.print(Test.APIConnection.createTable());
 			%>
 		</tbody>
@@ -136,7 +140,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<%
+			<%	//Favoriten Tabelle schreiben lassen
 				out.print(Test.APIConnection.createTableFav());
 			%>
 		</tbody>
@@ -239,16 +243,25 @@
 
 	function setFav(t){
 		 var cookie = Cookies.get("FavoritenID");
-		 if(cookie == null){
-         Cookies.set("FavoritenID", t);         	
-		}
+
+		 if(cookie.includes(t)){
+				if(cookie != null){
+				var newCookie = cookie.replace(t+"&","");
+				Cookies.set("FavoritenID", newCookie);
+				}				
+			 }
 		 else{
-			 cookie += "&"
-			 cookie += t
-		 Cookies.set("FavoritenID", cookie);
-		 }
-		 location.reload();
-	}
+			 if(cookie == null){
+	         Cookies.set("FavoritenID", t + "&");         	
+				}			
+			 else{			 
+				 cookie += t
+				 cookie += "&"
+			 	Cookies.set("FavoritenID", cookie);
+			 	}	
+			}
+		 location.reload();	
+		}
 		 
 </script>
 
