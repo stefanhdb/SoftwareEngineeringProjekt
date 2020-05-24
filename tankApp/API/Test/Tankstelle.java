@@ -4,7 +4,7 @@ import java.util.UUID;
 
 public class  Tankstelle {
 	
-	UUID id;
+	String id;
 	String name;
 	String brand;
 	String street;
@@ -21,12 +21,15 @@ public class  Tankstelle {
 	String houseNumber;
 	int postCode;
 	
+	public Tankstelle(String id) {
+		this.id=id;
+	}
 	
 
-	public UUID getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(UUID id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getName() {

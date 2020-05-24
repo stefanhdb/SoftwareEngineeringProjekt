@@ -52,6 +52,12 @@ public class APIConnection {
 
 		catch (Exception e) {
 		}
+		
+//		TankstellenListe = new ArrayList<Tankstelle>();
+//		TankstellenListe.add(new Tankstelle("123"));
+//		TankstellenListe.add(new Tankstelle("456"));
+//		TankstellenListe.add(new Tankstelle("789"));
+//		TankstellenListe.add(new Tankstelle("101"));
 
 	}
 
@@ -62,15 +68,18 @@ public class APIConnection {
 		
 		
 		for (Tankstelle t : TankstellenListe) {
-			if(TankstellenFavListe.contains(t)) {
-				buttonText = "Von Favoriten entfernen";
-			}
+//			for(Tankstelle tf : TankstellenFavListe) {
+//			if(t.getId().equals(tf.getId())) {
+//				buttonText = "Von Favoriten entfernen";
+//			}
+//			}
 			
 			table += "<tr>" + "<td>" + t.getName() + "</td>" + "<td>" + t.getStreet() + "</td>"	+ "<td>" + t.getPlace() + "</td>" + "<td>" + t.getDist() 
 			+ "<td>" + t.getDiesel() + " Euro</td>" + "<td>" + t.getE10() + " Euro</td>" + "<td>" + t.getE5() + " Euro</td>"
 					+ "</td>" + "<td>" + "<button id="+ t.getId() +" onclick=\"favVerw(this.id)\">"+buttonText+"</button>"
 					+ "</td>" 					
 					+ "</tr>";
+//			buttonText= "Zu Favoriten Hinzufügen";
 		}
 		return table;
 	}
@@ -130,6 +139,13 @@ public class APIConnection {
 			catch (Exception e) {
 				}
 			}
+		
+//		for(Tankstelle t : TankstellenFavListe) {
+//			if(c.contains(t.getId())) {
+//				TankstellenFavListe.add(t);
+//				System.out.println(t.getId());
+//			}
+//		}
 		}
 		
 	

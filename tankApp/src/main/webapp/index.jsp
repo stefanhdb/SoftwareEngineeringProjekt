@@ -21,28 +21,7 @@
 	<h2>Tank - App</h2>
 </div>
 
-<Style>
-.header {
-	padding: 80px; /* some padding */
-	text-align: center; /* center the text */
-	background: #FFA500; /* green background */
-	color: white; /* white text color */
-}
 
-.Leiste {
-	padding: 20px; /* some padding */
-	text-align: center; /* center the text */
-	background: #DA70D6; /* green background */
-	color: white;
-}
-
-.Überschrift {
-	mpadding: 20px; /* some padding */
-	text-align: center; /* center the text */
-	background: #C0C0C0; /* green background */
-	color: white;
-}
-</Style>
 
 
 
@@ -63,18 +42,9 @@
 		
 		
 	%>
+	
 
-	<div class="Leiste">
-		<h2>Preisveränderung von e10</h2>
-	</div>
-
-	<div id="chart" style="width: auto; height: 300px;"></div>
-
-	<div class="header">
-
-		<p>Statistik und Preisdaten pro Tankstelle anzeigen lassen!.</p>
-
-	</div>
+	
 
 
 
@@ -248,24 +218,25 @@
 
 	function favVerw(t){
 		 var cookie = Cookies.get("FavoritenID");
-		 
-		 if(!cookie.includes(t)){
-			 if(cookie == null){
-		         Cookies.set("FavoritenID", t + "&");         	
-					}			
-				 else{			 
-					 cookie += t
-					 cookie += "&"
-				 	Cookies.set("FavoritenID", cookie);
-				 	}			 							
-			 }
-		 else{
-					var newCookie = cookie.replace(t+"&","");
-					Cookies.set("FavoritenID", newCookie);
-					}
+
+		 if(cookie == null){
+	        Cookies.set("FavoritenID", t + "&");         	
+			}
+							
+		 else if(!cookie.includes(t) ){		 
+			cookie += t
+			cookie += "&"
+		 	Cookies.set("FavoritenID", cookie);
+		 	}			 							
+			 
+	 	else{
+			var newCookie = cookie.replace(t+"&","");
+			Cookies.set("FavoritenID", newCookie);
+			}
 			
 		 location.reload();	
 		}
+	
 		 
 </script>
 
