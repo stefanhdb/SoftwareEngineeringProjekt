@@ -16,14 +16,95 @@
 	
 	
 	<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+	
+	
+	<a target= "_blank" style="text-decoration: none;" href="http://www.hs-pforzheim.de">
+		<div class="MeinButton">Kontakt</div> </a>
 
-<div class="Überschrift">
-	<h2>Tank - App</h2>
-</div>
+<div class="Überschrift"> 
+		<h2> <img src="Fuel_Symbol.jpg" width="100" height="80" alt""/> 
+			 Deine Tank-App </h2>
+	</div>
+
+<div class="Beschreibung">  Schön, dass Sie da sind. Erleben Sie die Vielfalt aktueller Preise und finden Sie Ihre Tankstelle, jetzt. </div>
+	
+	<div class="picture0">
+		<img src="Zapfhahn_Sunset_Klein.jpg" width="1000" height="620" alt=""/>	</div>
+	
+	<div class="Beschreibung">  Jetzt bequem Ihren Standort ermitteln lassen und den Überblick behalten </div>
+	
+	<div class="picture">		
+		<img src="Tankstellenpreise.jpg" width="980" height="550" alt=""/> </div>
 
 
+<Style>
+	
+	.Beschreibung
+	{
+	mpadding: 20px; /* some padding */
+	text-align:center; /* center the text */
+	background: beige; /* green background */
+	color: black;
+	font-size: 16pt;  /*Schrift-Größe*/
+	}
+	
+	.MeinButton
+	{
+		float: right;
+		border: 2px solid black;
+		width: 5%;
+		text-align: center;
+		padding: 8px;
+		background-color: chocolate;
+		color: white;
+		border-radius: 6px;
+	}
+	.MeinButton:hover
+	{
+		background-color: orangered;
+	}
+	
+	
+.header {
+	padding: 80px; /* some padding */
+	text-align: center; /* center the text */
+	background: beige; /* green background */
+	color: black; /* white text color */
+}
 
+	.picture0 {
+	padding: 50px; /* some padding */
+	text-align:center; /* center the text */
+	background: beige; /* green background */
+	color: black;
+	}
+	.picture {
+	
+	padding: 50px; /* some padding */
+	text-align:center; /* center the text */
+	background: beige; /* green background */
+	color: black;
+	}
+	
 
+	
+.Leiste {
+	padding: 20px; /* some padding */
+	text-align: center; /* center the text */
+	background: beige; /* green background */
+	color: black;
+	<div
+}
+
+.Überschrift {
+	mpadding: 20px; /* some padding */
+	text-align: left; /* center the text */
+	background: beige; /* green background */
+	color: black;
+	font-size: 16pt;  /*Schrift-Größe*/
+}
+		
+</Style>
 
 </head>
 
