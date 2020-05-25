@@ -22,7 +22,7 @@
 		<div class="MeinButton">Kontakt</div> </a>
 
 <div class="Überschrift"> 
-		<h2> <img src="Fuel_Symbol.jpg" width="100" height="80" alt""/> 
+		<h2> <img src="Fuel_Symbol.jpg" width="100" height="100" alt""/> 
 			 Deine Tank-App </h2>
 	</div>
 
@@ -118,23 +118,16 @@
 		//https://creativecommons.tankerkoenig.de/json/list.php?lat=48.8851&lng=8.7307&rad=1.5&sort=dist&type=all&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d
 		//https://creativecommons.tankerkoenig.de/json/list.php?lat=48.916902799999995&lng=8.744553800000002&rad=1.5&sort=dist&type=all&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d
 		//out.print(Test.APIConnection.TankstellenListe.get(1).getName());
-		
-		
-		
-		
 	%>
 	
 
 	
-
-
-
 	<form action="index.jsp" method="GET">
 		<fieldset>
-			<input id="latLabel" type="text" name="lat"> 
-			<input id="lngLabel" type="text" name="lng">
+			<input id="latLabel" type="text" name="lat" readonly="readonly"> 
+			<input id="lngLabel" type="text" name="lng" readonly="readonly">
 			<button type="button" id="out" onclick="showPosition()"> Zeige meine Position an</button>
-			<button type="submit">Submit</button>
+			<button type="submit">Bestätigen</button>
 		</fieldset>
 	</form>
 
@@ -149,6 +142,7 @@
 				<th>Diesel</th>
 				<th>E10</th>
 				<th>E5</th>
+				<th>Geöffnet</th>
 				<th>Favoriten</th>
 			</tr>
 		</thead>
@@ -178,6 +172,7 @@
 				<th>Diesel</th>
 				<th>E10</th>
 				<th>E5</th>
+				<th>Geöffnet</th>
 				<th>Favoriten</th>
 			</tr>
 		</thead>

@@ -25,39 +25,39 @@ public class APIConnection {
 	
 
 	public static void executePost(String targetURL) {
-//		HttpURLConnection connection = null;
-//
-//		try {
-//			// Create connection
-//			URL url = new URL(targetURL);
-//			connection = (HttpURLConnection) url.openConnection();
-//			connection.setRequestMethod("GET");
-//			connection.connect();
-//
-//			JsonElement element = JsonParser.parseReader(new InputStreamReader(connection.getInputStream()));
-//			JsonObject obj = element.getAsJsonObject();
-//
-//			if (obj.get("status").getAsString().equals("ok")) {
-//
-//				String jsonString = obj.toString().substring(obj.toString().indexOf("["),
-//						(obj.toString().indexOf("]") + 1));
-//				Gson gson = new Gson();
-//				Type listType = new TypeToken<ArrayList<Tankstelle>>() {
-//				}.getType();
-//				TankstellenListe = gson.fromJson(jsonString, listType);
-//			}
-//
-//
-//		}
-//
-//		catch (Exception e) {
-//		}
+		HttpURLConnection connection = null;
+
+		try {
+			// Create connection
+			URL url = new URL(targetURL);
+			connection = (HttpURLConnection) url.openConnection();
+			connection.setRequestMethod("GET");
+			connection.connect();
+
+			JsonElement element = JsonParser.parseReader(new InputStreamReader(connection.getInputStream()));
+			JsonObject obj = element.getAsJsonObject();
+
+			if (obj.get("status").getAsString().equals("ok")) {
+
+				String jsonString = obj.toString().substring(obj.toString().indexOf("["),
+						(obj.toString().indexOf("]") + 1));
+				Gson gson = new Gson();
+				Type listType = new TypeToken<ArrayList<Tankstelle>>() {
+				}.getType();
+				TankstellenListe = gson.fromJson(jsonString, listType);
+			}
+
+
+		}
+
+		catch (Exception e) {
+		}
 		
-		TankstellenListe = new ArrayList<Tankstelle>();
-		TankstellenListe.add(new Tankstelle("123"));
-		TankstellenListe.add(new Tankstelle("456"));
-		TankstellenListe.add(new Tankstelle("789"));
-		TankstellenListe.add(new Tankstelle("101"));
+//		TankstellenListe = new ArrayList<Tankstelle>();
+//		TankstellenListe.add(new Tankstelle("123"));
+//		TankstellenListe.add(new Tankstelle("456"));
+//		TankstellenListe.add(new Tankstelle("789"));
+//		TankstellenListe.add(new Tankstelle("101"));
 
 	}
 
@@ -73,14 +73,14 @@ public class APIConnection {
 				buttonText = "Von Favoriten entfernen";
 			}
 			}
-			
 			table += "<tr>" + "<td>" + t.getName() + "</td>" + "<td>" + t.getStreet() + "</td>"	+ "<td>" + t.getPlace() + "</td>" + "<td>" + t.getDist() 
 			+ "<td>" + t.getDiesel() + " Euro</td>" + "<td>" + t.getE10() + " Euro</td>" + "<td>" + t.getE5() + " Euro</td>"
-					+ "</td>" + "<td>" + "<button id="+ t.getId() +" onclick=\"favVerw(this.id)\">"+buttonText+"</button>"
+					+ "</td>" +  "<td>" + t.isOpen() + " </td>" + "<td>" + "<button id="+ t.getId() +" onclick=\"favVerw(this.id)\">"+buttonText+"</button>"
 					+ "</td>" 					
 					+ "</tr>";
 			
 			buttonText= "Zu Favoriten Hinzufügen";
+			
 		}
 		return table;
 	}
@@ -105,49 +105,49 @@ public class APIConnection {
 	
 	
 	public static void getFav(String c) {
-//		String[] id = c.split("&");
-//		String url = "https://creativecommons.tankerkoenig.de/json/detail.php?";
-//		
-//		TankstellenFavListe.clear();
-//		
-//		for(String i : id) {
-//			HttpURLConnection connection = null;
-//			url = "https://creativecommons.tankerkoenig.de/json/detail.php?";
-//			url += "id=" + i +"&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d";
-//			
-//			
-//			try {
-//				// Create connection
-//				URL targetUrl = new URL(url);
-//				connection = (HttpURLConnection) targetUrl.openConnection();
-//				connection.setRequestMethod("GET");
-//				connection.connect();
-//
-//				JsonElement element = JsonParser.parseReader(new InputStreamReader(connection.getInputStream()));
-//				JsonObject obj = element.getAsJsonObject();
-//				
-//
-//				if (obj.get("status").getAsString().equals("ok")) {
-//					
-//					String jsonString = obj.toString().substring(obj.toString().indexOf("station")+9,
-//							(obj.toString().length()-1));
-//					Gson gson = new Gson();
-//					TankstellenFavListe.add(gson.fromJson(jsonString, Tankstelle.class)) ;
-//					}
-//				
-//			
-//				}
-//			catch (Exception e) {
-//				}
-//			}
+		String[] id = c.split("&");
+		String url = "https://creativecommons.tankerkoenig.de/json/detail.php?";
 		
+		TankstellenFavListe.clear();
 		
-		TankstellenFavListe = new ArrayList<Tankstelle>();
-		for(Tankstelle t : TankstellenListe) {
-			if(c.contains(t.getId())) {
-				TankstellenFavListe.add(t);
+		for(String i : id) {
+			HttpURLConnection connection = null;
+			url = "https://creativecommons.tankerkoenig.de/json/detail.php?";
+			url += "id=" + i +"&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d";
+			
+			
+			try {
+				// Create connection
+				URL targetUrl = new URL(url);
+				connection = (HttpURLConnection) targetUrl.openConnection();
+				connection.setRequestMethod("GET");
+				connection.connect();
+
+				JsonElement element = JsonParser.parseReader(new InputStreamReader(connection.getInputStream()));
+				JsonObject obj = element.getAsJsonObject();
+				
+
+				if (obj.get("status").getAsString().equals("ok")) {
+					
+					String jsonString = obj.toString().substring(obj.toString().indexOf("station")+9,
+							(obj.toString().length()-1));
+					Gson gson = new Gson();
+					TankstellenFavListe.add(gson.fromJson(jsonString, Tankstelle.class)) ;
+					}
+				
+			
+				}
+			catch (Exception e) {
+				}
 			}
-		}
+		
+		
+//		TankstellenFavListe = new ArrayList<Tankstelle>();
+//		for(Tankstelle t : TankstellenListe) {
+//			if(c.contains(t.getId())) {
+//				TankstellenFavListe.add(t);
+//			}
+//		}
 		
 		}
 		
@@ -156,12 +156,14 @@ public class APIConnection {
 		String table = "";
 		
 		for (Tankstelle t : TankstellenFavListe) {
+			
 			table += "<tr>" + "<td>" + t.getName() + "</td>" + "<td>" + t.getStreet() + "</td>"	+ "<td>" + t.getPlace() + "</td>" + "<td>" + t.getDist() 
 			+ "<td>" + t.getDiesel() + " Euro</td>" + "<td>" + t.getE10() + " Euro</td>" + "<td>" + t.getE5() + " Euro</td>"
-					+ "</td>" + "<td>" + "<button id="+ t.getId() +" onclick=\"favVerw(this.id)\">Von Favoriten entfernen</button>"
+					+ "</td>" + "<td>" + t.isOpen() + " </td>" + "<td>" + "<button id="+ t.getId() +" onclick=\"favVerw(this.id)\">Von Favoriten entfernen</button>"
 					+ "</td>" 					
 					+ "</tr>";
 		}		
+		
 		return table;
 	}
 }
