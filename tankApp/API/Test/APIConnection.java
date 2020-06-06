@@ -23,10 +23,6 @@ public class APIConnection {
 	public static ArrayList<Tankstelle> TankstellenFavListe = new ArrayList<Tankstelle>();
 	
 	
-	// public void addUser() {
-	// Tankstelle ts = new Tankstelle();
-	// TankstellenListe.add(ts);
-	// }
 
 	public static void executePost(String targetURL) {
 		HttpURLConnection connection = null;
@@ -51,31 +47,41 @@ public class APIConnection {
 				TankstellenListe = gson.fromJson(jsonString, listType);
 			}
 
-			//for (Tankstelle t : TankstellenListe) {
-				//System.out.println(t.toString());
-			//}
 
 		}
 
 		catch (Exception e) {
 		}
+		
+//		TankstellenListe = new ArrayList<Tankstelle>();
+//		TankstellenListe.add(new Tankstelle("123"));
+//		TankstellenListe.add(new Tankstelle("456"));
+//		TankstellenListe.add(new Tankstelle("789"));
+//		TankstellenListe.add(new Tankstelle("101"));
 
 	}
 
 	public static String createTable() {
 		String table = "";
+		String buttonText= "Zu Favoriten Hinzufügen";
 		
 		
 		
 		for (Tankstelle t : TankstellenListe) {
+			for(Tankstelle tf : TankstellenFavListe) {
+			if(t.getId().equals(tf.getId())) {
+				buttonText = "Von Favoriten entfernen";
+			}
+			}
 			table += "<tr>" + "<td>" + t.getName() + "</td>" + "<td>" + t.getStreet() + "</td>"	+ "<td>" + t.getPlace() + "</td>" + "<td>" + t.getDist() 
-			+ "<td>" + t.getDiesel() + "</td>" + "<td>" + t.getE10() + "</td>" + "<td>" + t.getE5() + "</td>"
-					+ "</td>" + "<td>" + "<button id="+ t.getId() +" onclick=\"setFav(this.id)\">Zu Favoriten Hinzufügen</button>"
+			+ "<td>" + t.getDiesel() + " Euro</td>" + "<td>" + t.getE10() + " Euro</td>" + "<td>" + t.getE5() + " Euro</td>"
+					+ "</td>" +  "<td>" + t.isOpen() + " </td>" + "<td>" + "<button id="+ t.getId() +" onclick=\"favVerw(this.id)\">"+buttonText+"</button>"
 					+ "</td>" 					
 					+ "</tr>";
+			
+			buttonText= "Zu Favoriten Hinzufügen";
+			
 		}
-		 System.out.println(table);
-		
 		return table;
 	}
 
@@ -102,10 +108,13 @@ public class APIConnection {
 		String[] id = c.split("&");
 		String url = "https://creativecommons.tankerkoenig.de/json/detail.php?";
 		
+		TankstellenFavListe.clear();
+		
 		for(String i : id) {
 			HttpURLConnection connection = null;
 			url = "https://creativecommons.tankerkoenig.de/json/detail.php?";
 			url += "id=" + i +"&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d";
+			
 			
 			try {
 				// Create connection
@@ -123,28 +132,37 @@ public class APIConnection {
 					String jsonString = obj.toString().substring(obj.toString().indexOf("station")+9,
 							(obj.toString().length()-1));
 					Gson gson = new Gson();
-					
 					TankstellenFavListe.add(gson.fromJson(jsonString, Tankstelle.class)) ;
-				}
+					}
 				
 			
-		}
+				}
 			catch (Exception e) {
+				}
 			}
-	}
-}
+		
+		
+//		TankstellenFavListe = new ArrayList<Tankstelle>();
+//		for(Tankstelle t : TankstellenListe) {
+//			if(c.contains(t.getId())) {
+//				TankstellenFavListe.add(t);
+//			}
+//		}
+		
+		}
+		
 	
 	public static String createTableFav() {
 		String table = "";
 		
 		for (Tankstelle t : TankstellenFavListe) {
+			
 			table += "<tr>" + "<td>" + t.getName() + "</td>" + "<td>" + t.getStreet() + "</td>"	+ "<td>" + t.getPlace() + "</td>" + "<td>" + t.getDist() 
-			+ "<td>" + t.getDiesel() + "</td>" + "<td>" + t.getE10() + "</td>" + "<td>" + t.getE5() + "</td>"
-					+ "</td>" + "<td>" + "<button id="+ t.getId() +" onclick=\"setFav(this.id)\">Zu Favoriten Hinzufügen</button>"
+			+ "<td>" + t.getDiesel() + " Euro</td>" + "<td>" + t.getE10() + " Euro</td>" + "<td>" + t.getE5() + " Euro</td>"
+					+ "</td>" + "<td>" + t.isOpen() + " </td>" + "<td>" + "<button id="+ t.getId() +" onclick=\"favVerw(this.id)\">Von Favoriten entfernen</button>"
 					+ "</td>" 					
 					+ "</tr>";
-		}
-		 System.out.println(table);
+		}		
 		
 		return table;
 	}
