@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tank-App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link rel="sytlesheet" type="text/css" href="css/style.css">
+</head>
+<Style>
+    .header {
+        background-image: url(../gas.jpg);
+        height: 100vh;
+        background-size: cober;
+        background-position: center;
+    }
+    
+    ul {
+        float: right;
+        list-style-type: none;
+        margin-top: 25 px;
+    }
+    
+    ul li {
+        display: inline-block;
+    }
+    
+    ul li a {
+        text-decoration: none;
+        color: white;
+        padding: 5px 20px;
+        border: 1px solid white;
+        transition: 0.6s ease;
+    }
+    
+    ul li a:hover {
+        background-color: white;
+        color: black;
+    }
+    
+    .logo img {
+        float: left;
+        width: 150px;
+        height: auto;
+    }
+    
+    .main {
+        max-width: 1200px;
+        margin: auto;
+    }
+    
+    .Navigationsleiste {
+        background-color: #310c0c;
+        padding: 20px;
+        text-align: center;
+    }
+    
+    .unsermodal {
+        z-index: 3;
+        display: none;
+        padding-top: 100px;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4)
+    }
+    
+    .modal-content {
+        margin: auto;
+        background-color: #fff;
+        position: relative;
+        padding: 0;
+        outline: 0;
+        width: 600px
+    }
+    
+    .container,
+    .panel {
+        padding: 0.01em 16px
+    }
+    
+    .panel {
+        margin-top: 16px;
+        margin-bottom: 16px
+    }
+    
+    .button {
+        white-space: normal
+    }
+    
+    .display-topright {
+        position: absolute;
+        right: 0;
+        top: 0
+    }
+    
+    .display-hover {
+        display: block
+    }
+    
+    .platzfürüberschrift {
+        background-color: grey;
+        height: 150px;
+        opacity: 0.5;
+    }
+    
+    .Überschrift h1 {
+        color: red;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 4em;
+        position: fixed;
+        top: 0%;
+        left: 45%;
+        position: absolute;
+        opacity: 1;
+    }
+    
+    .Überschrift {
+        background: url(../tankstelle.jpg);
+        text-align: center;
+        width: 100%;
+        height: auto;
+        background-size: cover;
+        background-attachment: fixed;
+        position: relative;
+        overflow: hidden;
+        border-radius: 0 0 85% 85% / 30%;
+    }
+    
+    .Überschrift .overlay {
+        width: 100%;
+        height: 100%;
+        padding: 50px;
+        color: #FFF;
+        text-shadow: 1px 1px 1px #333;
+        background-image: linear-gradient( 135deg, red, grey);
+        opacity: 0.5;
+    }
+    
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        height: 900px;
+    }
+    
+    header {
+        background: url(../tankstelle.jpg);
+        text-align: center;
+        width: 100%;
+        height: auto;
+        background-size: cover;
+        background-attachment: fixed;
+        position: relative;
+        overflow: hidden;
+        border-radius: 100 100 150% 100% / 3000%;
+    }
+    
+    header .overlay {
+        width: 100%;
+        height: 100%;
+        padding: 50px;
+        color: #FFF;
+        text-shadow: 1px 1px 1px #333;
+        background-image: linear-gradient( 135deg, rgb(124, 108, 108) 10%, #e98b596b 100%);
+    }
+    
+    h1 {
+        font-family: 'Dancing Script', cursive;
+        font-size: 80px;
+        margin-bottom: 30px;
+    }
+    
+    h3,
+    p {
+        font-family: 'Open Sans', sans-serif;
+        margin-bottom: 30px;
+    }
+    
+    button {
+        border: none;
+        outline: none;
+        padding: 10px 20px;
+        border-radius: 50px;
+        color: #333;
+        background: #fff;
+        margin-bottom: 50px;
+        box-shadow: 0 3px 20px 0 #0000003b;
+    }
+    
+    button:hover {
+        cursor: pointer;
+    }
+</Style>
+<header>
+    <div class="overlay">
+        <h1>Tank-App</h1>
+        <h3>Das beste Vergleichportal für's Tanken</h3>
+        <p>Passen sie den besten Moment fürs Tanken ab..</p>
+        <br>
+        <button>READ MORE</button>
+    </div>
+</header>
+
+<body id="myPage">
+
+    <!-- Hintergrund und Leiste -->
+    <div class="header">
+        <div class="logo">
+            <image src="logo.png">
+        </div>
+        <div class="Überschrift">
+            <h1>Tank-App</h1>
+        </div>
+        <ul>
+            <li> <a href="#">Home</a>
+            </li>
+            <li><a href="#">Service</a></li>
+            <li><a href="#">Gallerie</a></li>
+            <li><a href="#">Kontakt</a></li>
+        </ul>
+
+
+
+
+    </div>
+
+
+
+    <!-- Image Buttonfürmodal -->
+    <div class="button">
+
+        <button onclick="document.getElementById('id01').style.display='block'" title="Go To W3.CSS">Diagramm</button>
+    </div>
+    </div>
+    <!-- unsermodal -->
+    <div id="id01" class="unsermodal">
+        <div class="modal-content">
+            <header class="container">
+                <span onclick="document.getElementById('id01').style.display='none'" style="font-size:20px;color:grey">X <i class="fa fa-remove"></i></span>
+
+                <h5><i class="fa fa-smile-o"></i></h5>
+            </header>
+            <div class="container">
+                <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+                <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+            </div>
+            <footer class="container ">
+
+
+
+                <p>Modal footer</p>
+            </footer>
+        </div>
+    </div>
+
+
+
+    <script>
+        // Script for side navigation
+        function w3_open() {
+            var x = document.getElementById("mySidebar");
+            x.style.width = "300px";
+            x.style.paddingTop = "10%";
+            x.style.display = "block";
+        }
+
+        // Close side navigation
+        function w3_close() {
+            document.getElementById("mySidebar").style.display = "none";
+        }
+
+        // Used to toggle the menu on smaller screens when clicking on the menu button
+        function openNav() {
+            var x = document.getElementById("navDemo");
+            if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+            } else {
+                x.className = x.className.replace(" w3-show", "");
+            }
+        }
+
+        window.onload = function() {
+
+            var dataPoints = [];
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                theme: "light2",
+                zoomEnabled: true,
+                title: {
+                    text: "Stunde und Preis"
+                },
+                axisY: {
+                    title: "Preise pro Stunde",
+                    titleFontSize: 24,
+                    includeZero: false
+                },
+                axisX: {
+                    title: "Hours",
+                    maximum: 25,
+
+                },
+                data: [{
+                    type: "line",
+                    yValueFormatString: "number",
+
+                    xValueType: "number",
+                    dataPoints: dataPoints
+                }]
+            });
+
+            function addData(data) {
+                for (var i = 0; i < data.length; i++) {
+                    dataPoints.push({
+                        x: data[i].hour,
+                        y: data[i].price
+                    });
+                }
+                chart.render();
+            }
+
+            $.getJSON("https://www.volzinnovation.com/fuel_price_variations_germany/data/474e5046/deaf/4f9b/9a32/9797b778f047/e10.json", addData);
+
+        }
+    </script>
+
+</body>
+
+</html>
