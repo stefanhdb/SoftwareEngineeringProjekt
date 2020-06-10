@@ -13,105 +13,232 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
-	
-	
-	<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
-	
-	
-	<a target= "_blank" style="text-decoration: none;" href="http://www.hs-pforzheim.de">
-		<div class="MeinButton">Kontakt</div> </a>
-
-<div class="Überschrift"> 
-		<h2> <img src="Fuel_Symbol.jpg" width="100" height="100" alt""/> 
-			 Deine Tank-App </h2>
-	</div>
-
-<div class="Beschreibung">  Schön, dass Sie da sind. Erleben Sie die Vielfalt aktueller Preise und finden Sie Ihre Tankstelle, jetzt. </div>
-	
-	<div class="picture0">
-		<img src="Zapfhahn_Sunset_Klein.jpg" width="1000" height="620" alt=""/>	</div>
-	
-	<div class="Beschreibung">  Jetzt bequem Ihren Standort ermitteln lassen und den Überblick behalten </div>
-	
-	<div class="picture">		
-		<img src="Tankstellenpreise.jpg" width="980" height="550" alt=""/> </div>
 
 
+<script
+	src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+
+
+<a target="_blank" style="text-decoration: none;"
+	href="http://www.hs-pforzheim.de">
+	<div class="MeinButton">Kontakt</div>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+</head>
 <Style>
-	
-	.Beschreibung
-	{
-	mpadding: 20px; /* some padding */
-	text-align:center; /* center the text */
-	background: beige; /* green background */
-	color: black;
-	font-size: 16pt;  /*Schrift-Größe*/
-	}
-	
-	.MeinButton
-	{
-		float: right;
-		border: 2px solid black;
-		width: 5%;
-		text-align: center;
-		padding: 8px;
-		background-color: chocolate;
-		color: white;
-		border-radius: 6px;
-	}
-	.MeinButton:hover
-	{
-		background-color: orangered;
-	}
-	
-	
 .header {
-	padding: 80px; /* some padding */
-	text-align: center; /* center the text */
-	background: beige; /* green background */
-	color: black; /* white text color */
+	background-image: url("Tankstellenpreise.jpg");
+	height: 300vh;
+	background-size: cober;
+	background-position: center;
 }
 
-	.picture0 {
-	padding: 50px; /* some padding */
-	text-align:center; /* center the text */
-	background: beige; /* green background */
-	color: black;
-	}
-	.picture {
-	
-	padding: 50px; /* some padding */
-	text-align:center; /* center the text */
-	background: beige; /* green background */
-	color: black;
-	}
-	
+ul {
+	float: right;
+	list-style-type: none;
+	margin-top: 25 px;
+}
 
-	
-.Leiste {
-	padding: 20px; /* some padding */
-	text-align: center; /* center the text */
-	background: beige; /* green background */
+ul li {
+	display: inline-block;
+}
+
+ul li a {
+	text-decoration: none;
+	color: white;
+	padding: 5px 20px;
+	border: 1px solid white;
+	transition: 0.6s ease;
+}
+
+ul li a:hover {
+	background-color: white;
 	color: black;
-	<div
+}
+
+.logo img {
+	float: left;
+	width: 150px;
+	height: auto;
+}
+
+.main {
+	max-width: 1200px;
+	margin: auto;
+}
+
+.Navigationsleiste {
+	background-color: #310c0c;
+	padding: 20px;
+	text-align: center;
+}
+
+.unsermodal {
+	z-index: 3;
+	display: none;
+	padding-top: 100px;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.4)
+}
+
+.modal-content {
+	margin: auto;
+	background-color: #fff;
+	position: relative;
+	padding: 0;
+	outline: 0;
+	width: 600px
+}
+
+.container, .panel {
+	padding: 0.01em 16px
+}
+
+.panel {
+	margin-top: 16px;
+	margin-bottom: 16px
+}
+
+.button {
+	white-space: normal
+}
+
+.display-topright {
+	position: absolute;
+	right: 0;
+	top: 0
+}
+
+.display-hover {
+	display: block
+}
+
+.platzfürüberschrift {
+	background-color: grey;
+	height: 150px;
+	opacity: 0.5;
 }
 
 .Überschrift {
-	mpadding: 20px; /* some padding */
-	text-align: left; /* center the text */
-	background: beige; /* green background */
-	color: black;
-	font-size: 16pt;  /*Schrift-Größe*/
+	background: url(../Tankstellenpreise.jpg);
+	text-align: center;
+	width: 100%;
+	height: auto;
+	background-size: cover;
+	background-attachment: fixed;
+	position: relative;
+	overflow: hidden;
+	border-radius: 0 0 85% 85%/30%;
 }
-		
+
+.Überschrift .overlay {
+	width: 100%;
+	height: 100%;
+	padding: 50px;
+	color: #FFF;
+	text-shadow: 1px 1px 1px #333;
+	background-image: linear-gradient(135deg, red, grey);
+	opacity: 0.5;
+}
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+body {
+	height: 900px;
+}
+
+header {
+	background: url(Tankstellenpreise.jpg);
+	text-align: center;
+	width: 100%;
+	height: auto;
+	background-size: cover;
+	background-attachment: fixed;
+	position: relative;
+	overflow: hidden;
+	border-radius: 100 100 150% 100%/3000%;
+}
+
+header .overlay {
+	width: 100%;
+	height: 100%;
+	padding: 50px;
+	color: #FFF;
+	text-shadow: 1px 1px 1px #333;
+	background-image: linear-gradient(135deg, rgb(124, 108, 108) 10%,
+		#e98b596b 100%);
+}
+
+h1 {
+	font-family: 'Dancing Script', cursive;
+	font-size: 80px;
+	margin-bottom: 30px;
+}
+
+h3, p {
+	font-family: 'Open Sans', sans-serif;
+	margin-bottom: 30px;
+}
+
+button {
+	border: none;
+	outline: none;
+	padding: 10px 20px;
+	border-radius: 50px;
+	color: #333;
+	background: #fff;
+	margin-bottom: 50px;
+	box-shadow: 0 3px 20px 0 #0000003b;
+}
+
+button:hover {
+	cursor: pointer; }
+	
+tr
+{
+  background-color:grey;
+  color:white;
+}	
+
+
+
 </Style>
 
-</head>
+<header>
+	<div class="overlay">
+		<h1>Tank-App</h1>
+		<h3>Das beste Vergleichportal für's Tanken</h3>
+		<p>Passen sie den besten Moment fürs Tanken ab..</p>
+		<br>
+		<button>READ MORE</button>
+	</div>
+</header>
 
 
 <body>
 
-	<%		
+
+	<%
 		//https://creativecommons.tankerkoenig.de/json/list.php?street=bahnhofstraße&place=pforzheim&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d");
 		//https://creativecommons.tankerkoenig.de/json/list.php?lat=48.916901499999994&lng=8.7445567&rad=1.5&sort=dist&type=all&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d
 		//https://creativecommons.tankerkoenig.de/json/list.php?lat=48.916901499999994&lng=8.7445567&rad=1.5&sort=dist&type=all&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d
@@ -119,83 +246,150 @@
 		//https://creativecommons.tankerkoenig.de/json/list.php?lat=48.916902799999995&lng=8.744553800000002&rad=1.5&sort=dist&type=all&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d
 		//out.print(Test.APIConnection.TankstellenListe.get(1).getName());
 	%>
-	
 
-	
+<body id="myPage">
+
+	<!-- Hintergrund und Leiste -->
+	<div class="header">
+		<div class="logo">
+			<image src="">
+		</div>
+
+		<ul>
+			<li><a href="#">Home</a></li>
+			<li><a href="#">Service</a></li>
+			<li><a href="#">Gallerie</a></li>
+			<li><a href="#">Kontakt</a></li>
+
+
+		</ul>
+
+		<table data-role="table" id="tsTabelle" class="ui-responsive"
+			border="1">
+			<thead>
+				<tr>
+					<th>Tankstelle</th>
+					<th>Straße</th>
+					<th>Ort</th>
+					<th>Distanz</th>
+					<th>Diesel</th>
+					<th>E10</th>
+					<th>E5</th>
+					<th>Geöffnet</th>
+					<th>Favoriten</th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				<%
+					String latPar = request.getParameter("lat");
+					String lngPar = request.getParameter("lng");
+
+					String url = Test.APIConnection.createUrl(latPar, lngPar);
+
+					Test.APIConnection.executePost(url);
+
+					//Tabelle schreiben lassen
+
+					out.print(Test.APIConnection.createTable());
+				%>
+			</tbody>
+		</table>
+
+		<table data-role="table" id="tsFavTabelle" class="ui-responsive"
+			border="1">
+			<thead>
+				<tr>
+					<th>Tankstelle</th>
+					<th>Straße</th>
+					<th>Ort</th>
+					<th>Distanz</th>
+					<th>Diesel</th>
+					<th>E10</th>
+					<th>E5</th>
+					<th>Geöffnet</th>
+					<th>Favoriten</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%
+					//Favoriten ArrayList erschaffen
+					Cookie[] cookies = request.getCookies();
+					if (cookies != null) {
+						out.print("");
+						for (Cookie c : cookies) {
+							if (c.getName().equals("FavoritenID")) {
+								Test.APIConnection.getFav(c.getValue());
+								break;
+							}
+						}
+						//Favoriten Tabelle schreiben lassen
+						out.print(Test.APIConnection.createTableFav());
+					}
+				%>
+			</tbody>
+		</table>
+
+
+
+
+
+
+
+
+
+
+	</div>
+
+	<!-- Image Buttonfürmodal -->
+	<div class="button">
+
+		<button
+			onclick="document.getElementById('id01').style.display='block'"
+			title="hey">Diagramm</button>
+	</div>
+	</div>
+	<!-- unsermodal -->
+	<div id="id01" class="unsermodal">
+		<div class="modal-content">
+			<header class="container">
+				<span onclick="document.getElementById('id01').style.display='none'"
+					style="font-size: 20px; color: grey">X <i
+					class="fa fa-remove"></i></span>
+
+				<h5>
+					<i class="fa fa-smile-o"></i>
+				</h5>
+			</header>
+			<div class="container">
+				<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+				<script
+					src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+				<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+			</div>
+			<footer class="container ">
+
+
+
+				<p>Modal footer</p>
+			</footer>
+		</div>
+	</div>
+
 	<form action="index.jsp" method="GET">
 		<fieldset>
-			<input id="latLabel" type="text" name="lat" readonly="readonly"> 
+			<input id="latLabel" type="text" name="lat" readonly="readonly">
 			<input id="lngLabel" type="text" name="lng" readonly="readonly">
-			<button type="button" id="out" onclick="showPosition()"> Zeige meine Position an</button>
+			<button type="button" id="out" onclick="showPosition()">
+				Zeige meine Position an</button>
 			<button type="submit">Bestätigen</button>
 		</fieldset>
 	</form>
 
 
-	<table data-role="table" id="tsTabelle" class="ui-responsive" border="1">
-		<thead>
-			<tr>
-				<th>Tankstelle</th>
-				<th>Straße</th>
-				<th>Ort</th>
-				<th>Distanz</th>
-				<th>Diesel</th>
-				<th>E10</th>
-				<th>E5</th>
-				<th>Geöffnet</th>
-				<th>Favoriten</th>
-			</tr>
-		</thead>
-		<tbody>
-			<%
-			String latPar = request.getParameter("lat");
-			String lngPar = request.getParameter("lng");
 
-			String url = Test.APIConnection.createUrl(latPar, lngPar);
-			
-			Test.APIConnection.executePost(url);
-			
-			//Tabelle schreiben lassen
-			
-				out.print(Test.APIConnection.createTable());
-			%>
-		</tbody>
-	</table>
-	
-	<table data-role="table" id="tsFavTabelle" class="ui-responsive" border="1">
-		<thead>
-			<tr>
-				<th>Tankstelle</th>
-				<th>Straße</th>
-				<th>Ort</th>
-				<th>Distanz</th>
-				<th>Diesel</th>
-				<th>E10</th>
-				<th>E5</th>
-				<th>Geöffnet</th>
-				<th>Favoriten</th>
-			</tr>
-		</thead>
-		<tbody>
-			<%
-			//Favoriten ArrayList erschaffen
-			Cookie[] cookies = request.getCookies();
-			if(cookies != null){
-				out.print("");
-			for(Cookie c : cookies){
-				if(c.getName().equals("FavoritenID")){
-					Test.APIConnection.getFav(c.getValue());
-					break;
-					}
-				}
-			//Favoriten Tabelle schreiben lassen
-			out.print(Test.APIConnection.createTableFav());
-			}	
-			
-			
-			%>
-		</tbody>
-	</table>
+
+
 
 </body>
 
@@ -208,6 +402,52 @@
 
 	//google.charts.load('visualization', { packages: ['corechart'] });
 	//google.charts.setOnLoadCallback(drawLineChart);
+	window.onload = function() {
+
+		var dataPoints = [];
+
+		var chart = new CanvasJS.Chart("chartContainer", {
+			animationEnabled : true,
+			theme : "light2",
+			zoomEnabled : true,
+			title : {
+				text : "Stunde und Preis"
+			},
+			axisY : {
+				title : "Preise pro Stunde",
+				titleFontSize : 24,
+				includeZero : false
+			},
+			axisX : {
+				title : "Hours",
+				maximum : 25,
+
+			},
+			data : [ {
+				type : "line",
+				yValueFormatString : "number",
+
+				xValueType : "number",
+				dataPoints : dataPoints
+			} ]
+		});
+
+		function addData(data) {
+			for (var i = 0; i < data.length; i++) {
+				dataPoints.push({
+					x : data[i].hour,
+					y : data[i].price
+				});
+			}
+			chart.render();
+		}
+
+		$
+				.getJSON(
+						"https://www.volzinnovation.com/fuel_price_variations_germany/data/474e5046/deaf/4f9b/9a32/9797b778f047/e10.json",
+						addData);
+
+	}
 
 	function drawLineChart() {
 		$
@@ -255,65 +495,58 @@
 
 	function showPosition() {
 
-		 if(navigator.geolocation)
-		    {
-		        navigator.geolocation.getCurrentPosition(showMap, showError);
-		    } 
-		    else
-		    {
-		        alert("Sorry, your browser does not support HTML5 geolocation.");
-		    }
-		 
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(showMap, showError);
+		} else {
+			alert("Sorry, your browser does not support HTML5 geolocation.");
 		}
 
-		function showMap(position)
-		{
-		    lat = position.coords.latitude;
-		    lon = position.coords.longitude;
-		    document.getElementById("latLabel").value = lat;
-		    document.getElementById("lngLabel").value = lon;
-		}
-
-	
-	function showError(error) {
-	    switch (error.code) {
-	    case error.PERMISSION_DENIED:
-	        alert("User denied request for geolocation.");
-	        break;
-	    case error.POSITION_UNAVAILABLE:
-	        alert("Location data not available.");
-	        break;
-	    case error.TIMEOUT:
-	        alert("Request for location timed out.");
-	        break;
-	    case error.UNKNOWN_ERROR:
-	        alert("An error occured.");
-	        break;
-	    }
 	}
 
-	function favVerw(t){
-		 var cookie = Cookies.get("FavoritenID");
+	function showMap(position) {
+		lat = position.coords.latitude;
+		lon = position.coords.longitude;
+		document.getElementById("latLabel").value = lat;
+		document.getElementById("lngLabel").value = lon;
+	}
 
-		 if(cookie == null){
-	        Cookies.set("FavoritenID", t + "&");         	
-			}
-							
-		 else if(!cookie.includes(t) ){		 
+	function showError(error) {
+		switch (error.code) {
+		case error.PERMISSION_DENIED:
+			alert("User denied request for geolocation.");
+			break;
+		case error.POSITION_UNAVAILABLE:
+			alert("Location data not available.");
+			break;
+		case error.TIMEOUT:
+			alert("Request for location timed out.");
+			break;
+		case error.UNKNOWN_ERROR:
+			alert("An error occured.");
+			break;
+		}
+	}
+
+	function favVerw(t) {
+		var cookie = Cookies.get("FavoritenID");
+
+		if (cookie == null) {
+			Cookies.set("FavoritenID", t + "&");
+		}
+
+		else if (!cookie.includes(t)) {
 			cookie += t
 			cookie += "&"
-		 	Cookies.set("FavoritenID", cookie);
-		 	}			 							
-			 
-	 	else{
-			var newCookie = cookie.replace(t+"&","");
-			Cookies.set("FavoritenID", newCookie);
-			}
-			
-		 location.reload();	
+			Cookies.set("FavoritenID", cookie);
 		}
-	
-		 
+
+		else {
+			var newCookie = cookie.replace(t + "&", "");
+			Cookies.set("FavoritenID", newCookie);
+		}
+
+		location.reload();
+	}
 </script>
 
 

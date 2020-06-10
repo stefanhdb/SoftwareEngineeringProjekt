@@ -82,7 +82,7 @@
 
 	<div class="header">
 
-		<p>Statistik und Preisdaten pro Tankstelle anzeigen lassen!.</p>
+		<p>Statistik und Preisdaten pro Tankstelle anzeigen lassen!!.</p>
 
 	</div>
 
