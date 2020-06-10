@@ -18,11 +18,14 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
 
+<!-- CSS only -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+	crossorigin="anonymous">
+<script src="https://kit.fontawesome.com/ca2e4c3b4a.js"
+	crossorigin="anonymous"></script>
 
-<a target="_blank" style="text-decoration: none;"
-	href="http://www.hs-pforzheim.de">
-	<div class="MeinButton">Kontakt</div>
-</a>
 
 
 
@@ -36,9 +39,12 @@
 
 </head>
 <Style>
+@import
+	url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
 .header {
-	background-image: url("Tankstellenpreise.jpg");
-	height: 300vh;
+	/* 	background-image: url(""); */
+	/* 	height: 20vh; */
 	background-size: cober;
 	background-position: center;
 }
@@ -165,6 +171,9 @@ ul li a:hover {
 
 body {
 	height: 900px;
+	font-family: 'Lato', sans-serif;
+	background-color: #F0FFFF;
+	color: #fff;
 }
 
 header {
@@ -212,16 +221,48 @@ button {
 }
 
 button:hover {
-	cursor: pointer; }
-	
-tr
-{
-  background-color:grey;
-  color:white;
-}	
+	cursor: pointer;
+}
 
+tr {
+	background-color: grey;
+	color: white;
+}
 
+.headcontent {
+	-webkit-box-shadow: 0 0 10px 0 #000000;
+	box-shadow: 0 0 10px 0 #000000;
+	background-color: #0f161a;
+	border-left: 5px solid #f42339;
+	float: left;
+	width: 100%;
+	magine-top: 20px;
+}
 
+.contentname {
+	text-transform: uppercase;
+	font-weight: 700;
+	color: grey;
+	padding: 18px;
+}
+
+.contenticon {
+	background-color: #fff;
+	width: 20px;
+	height: 25px;
+	float: left;
+	margin-top: 15px;
+	margin-left: 10px;
+}
+
+.containers {
+	background-image: url("gas_große.jpg");
+	width: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+}
 </Style>
 
 <header>
@@ -230,7 +271,25 @@ tr
 		<h3>Das beste Vergleichportal für's Tanken</h3>
 		<p>Passen sie den besten Moment fürs Tanken ab..</p>
 		<br>
-		<button>READ MORE</button>
+		<!-- Image Buttonfürmodal -->
+		<div class="button">
+
+			<button
+				onclick="document.getElementById('id01').style.display='block'"
+				title="hey">Diagramm</button>
+		</div>
+		<form action="index.jsp" method="GET">
+			<fieldset>
+				<button type="button" id="out" onclick="showPosition()">
+					Zeige meine Position an</button>
+				<button type="submit">Bestätigen</button>
+
+
+				<input id="latLabel" type="text" name="lat" readonly="readonly">
+				<input id="lngLabel" type="text" name="lng" readonly="readonly">
+
+			</fieldset>
+		</form>
 	</div>
 </header>
 
@@ -238,6 +297,20 @@ tr
 <body>
 
 
+
+
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+		integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+		crossorigin="anonymous"></script>
 	<%
 		//https://creativecommons.tankerkoenig.de/json/list.php?street=bahnhofstraße&place=pforzheim&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d");
 		//https://creativecommons.tankerkoenig.de/json/list.php?lat=48.916901499999994&lng=8.7445567&rad=1.5&sort=dist&type=all&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d
@@ -247,114 +320,133 @@ tr
 		//out.print(Test.APIConnection.TankstellenListe.get(1).getName());
 	%>
 
-<body id="myPage">
+<body>
 
-	<!-- Hintergrund und Leiste -->
-	<div class="header">
-		<div class="logo">
-			<image src="">
+	<!-- Contents -->
+	<div class="containers">
+		<div class="row">
+
+
+
+			<div class="col-lg-9">
+
+				<div class="headcontent">
+					<div class="contenticon"></div>
+
+					<div class="contentname">Tabelle für Tankstelleninfos.</div>
+
+				</div>
+				<table data-role="table" id="tsTabelle" class="ui-responsive"
+					border="1">
+					<thead>
+						<tr>
+							<th>Tankstelle</th>
+							<th>Straße</th>
+							<th>Ort</th>
+							<th>Distanz</th>
+							<th>Diesel</th>
+							<th>E10</th>
+							<th>E5</th>
+							<th>Geöffnet</th>
+							<th>Favoriten</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<%
+							String latPar = request.getParameter("lat");
+							String lngPar = request.getParameter("lng");
+
+							String url = Test.APIConnection.createUrl(latPar, lngPar);
+
+							Test.APIConnection.executePost(url);
+
+							//Tabelle schreiben lassen
+
+							out.print(Test.APIConnection.createTable());
+						%>
+					</tbody>
+				</table>
+
+
+				<table data-role="table" id="tsFavTabelle" class="ui-responsive"
+					border="1">
+					<thead>
+						<tr>
+							<th>Tankstelle</th>
+							<th>Straße</th>
+							<th>Ort</th>
+							<th>Distanz</th>
+							<th>Diesel</th>
+							<th>E10</th>
+							<th>E5</th>
+							<th>Geöffnet</th>
+							<th>Favoriten</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%
+							//Favoriten ArrayList erschaffen
+							Cookie[] cookies = request.getCookies();
+							if (cookies != null) {
+								out.print("");
+								for (Cookie c : cookies) {
+									if (c.getName().equals("FavoritenID")) {
+										Test.APIConnection.getFav(c.getValue());
+										break;
+									}
+								}
+								//Favoriten Tabelle schreiben lassen
+								out.print(Test.APIConnection.createTableFav());
+							}
+						%>
+					</tbody>
+				</table>
+
+			</div>
+
+
+
+
+
+
+			<div class="col-lg-3">
+				>
+				<!-- Hintergrund und Leiste -->
+				<div class="header">
+					<div class="logo">
+						<image src="">
+					</div>
+
+					<ul>
+						<li><a target="_blank" style="text-decoration: none;"
+							href="http://www.hs-pforzheim.de">Home</a></li>
+						<li><a href="www.hs-pforzheim.de">Service</a></li>
+						<li><a href="#">Gallerie</a></li>
+						<li><a href="#">Kontakt</a></li>
+					</ul>
+
+
+				</div>
+
+
+
+
+
+
+
+
+			</div>
 		</div>
 
-		<ul>
-			<li><a href="#">Home</a></li>
-			<li><a href="#">Service</a></li>
-			<li><a href="#">Gallerie</a></li>
-			<li><a href="#">Kontakt</a></li>
 
-
-		</ul>
-
-		<table data-role="table" id="tsTabelle" class="ui-responsive"
-			border="1">
-			<thead>
-				<tr>
-					<th>Tankstelle</th>
-					<th>Straße</th>
-					<th>Ort</th>
-					<th>Distanz</th>
-					<th>Diesel</th>
-					<th>E10</th>
-					<th>E5</th>
-					<th>Geöffnet</th>
-					<th>Favoriten</th>
-					
-				</tr>
-			</thead>
-			<tbody>
-				<%
-					String latPar = request.getParameter("lat");
-					String lngPar = request.getParameter("lng");
-
-					String url = Test.APIConnection.createUrl(latPar, lngPar);
-
-					Test.APIConnection.executePost(url);
-
-					//Tabelle schreiben lassen
-
-					out.print(Test.APIConnection.createTable());
-				%>
-			</tbody>
-		</table>
-
-		<table data-role="table" id="tsFavTabelle" class="ui-responsive"
-			border="1">
-			<thead>
-				<tr>
-					<th>Tankstelle</th>
-					<th>Straße</th>
-					<th>Ort</th>
-					<th>Distanz</th>
-					<th>Diesel</th>
-					<th>E10</th>
-					<th>E5</th>
-					<th>Geöffnet</th>
-					<th>Favoriten</th>
-				</tr>
-			</thead>
-			<tbody>
-				<%
-					//Favoriten ArrayList erschaffen
-					Cookie[] cookies = request.getCookies();
-					if (cookies != null) {
-						out.print("");
-						for (Cookie c : cookies) {
-							if (c.getName().equals("FavoritenID")) {
-								Test.APIConnection.getFav(c.getValue());
-								break;
-							}
-						}
-						//Favoriten Tabelle schreiben lassen
-						out.print(Test.APIConnection.createTableFav());
-					}
-				%>
-			</tbody>
-		</table>
-
-
-
-
-
-
-
-
-
-
-	</div>
-
-	<!-- Image Buttonfürmodal -->
-	<div class="button">
-
-		<button
-			onclick="document.getElementById('id01').style.display='block'"
-			title="hey">Diagramm</button>
-	</div>
 	</div>
 	<!-- unsermodal -->
 	<div id="id01" class="unsermodal">
 		<div class="modal-content">
 			<header class="container">
 				<span onclick="document.getElementById('id01').style.display='none'"
-					style="font-size: 20px; color: grey">X <i
+					style="font-size: 20px; color: grey"> <i
 					class="fa fa-remove"></i></span>
 
 				<h5>
@@ -376,15 +468,7 @@ tr
 		</div>
 	</div>
 
-	<form action="index.jsp" method="GET">
-		<fieldset>
-			<input id="latLabel" type="text" name="lat" readonly="readonly">
-			<input id="lngLabel" type="text" name="lng" readonly="readonly">
-			<button type="button" id="out" onclick="showPosition()">
-				Zeige meine Position an</button>
-			<button type="submit">Bestätigen</button>
-		</fieldset>
-	</form>
+
 
 
 
