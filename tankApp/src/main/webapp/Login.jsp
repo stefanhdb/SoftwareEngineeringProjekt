@@ -7,34 +7,37 @@
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Login</title>
 </head>
 <body>
 
+
 <form action="index.jsp" method="post">
 	
-	  <div class="container">
+
 	    <label for="uname"><b>Username</b></label>
 	    <input id="nameLabel" type="text" placeholder="Enter Username" name="uname" required>
 	
 	    <button type="submit" onclick="logIn()">Login</button>
-	    </div>
+
 	</form>
+	
+	<script>
 
-</body>
-
-<script>
-
-function logIn(){
+	function logIn(){
+	
 	var cookie = Cookies.get("Benutzer");
 	var uname = document.getElementById("nameLabel").value;
 
 	if(uname != null && uname != ""){
     Cookies.set("Benutzer", uname);
 	}         	
-
 	}
 
 </script>
+
+</body>
+
+
 
 </html>

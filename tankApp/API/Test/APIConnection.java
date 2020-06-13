@@ -73,9 +73,12 @@ public class APIConnection {
 				buttonText = "Von Favoriten entfernen";
 			}
 			}
+
+			
 			table += "<tr>" + "<td>" + t.getName() + "</td>" + "<td>" + t.getStreet() + "</td>"	+ "<td>" + t.getPlace() + "</td>" + "<td>" + t.getDist() 
 			+ "<td>" + t.getDiesel() + " Euro</td>" + "<td>" + t.getE10() + " Euro</td>" + "<td>" + t.getE5() + " Euro</td>"
-					+ "</td>" +  "<td>" + t.isOpen() + " </td>" + "<td>" + "<button id="+ t.getId() +" onclick=\"favVerw(this.id)\">"+buttonText+"</button>"
+					+ "</td>" +  "<td>" + t.isOpen() + " </td>" + "<td>" + "<button type=\"button\" id="+ t.getId() +" onclick=\"favVerw(this.id)\">"+buttonText+"</button>"
+					+ "</td>" + "<td>" + "<button type=\"button\" id="+ t.getId() +" onclick=\"lbVerw(this.id)\">Leaderboard anzeigen</button>"
 					+ "</td>" 					
 					+ "</tr>";
 			
@@ -85,24 +88,53 @@ public class APIConnection {
 		return table;
 	}
 
-	public static String createUrl(String latPar, String lngPar) {
+	public static String createUrl(String latPar, String lngPar, String coord, String rad) {
 		String url = null;
+		if(rad==null) {
+			rad="5";
+		}
 
-		if ((latPar == null && lngPar == null) || (latPar.equals("") && lngPar.equals(""))) {
-			double lat = 48.8851;
-			double lng = 8.7307;
-			url = "https://creativecommons.tankerkoenig.de/json/list.php?lat=" + lat + "&lng=" + lng
-					+ "&rad=5&sort=dist&type=all&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d";
+		if (((latPar == null && lngPar == null) || (latPar.equals("") && lngPar.equals(""))) && (coord == null  || coord.equals(""))) {
+			url = "https://creativecommons.tankerkoenig.de/json/list.php?lat=" + 48.8851 + "&lng=" + 8.7307
+					+ "&rad="+rad +"&sort=dist&type=all&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d";
 
-		} else {
+		} 
+		else if((latPar == null && lngPar == null) || (latPar.equals("") && lngPar.equals("")) && (coord != null  || !coord.equals(""))) {
+			String[] coordAr = coord.split("&");
+			
+			url = "https://creativecommons.tankerkoenig.de/json/list.php?lat=" + coordAr[0] + "&lng=" + coordAr[1]
+					+ "&rad="+rad +"&sort=dist&type=all&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d";
+		}
+		else {
 
 			url = "https://creativecommons.tankerkoenig.de/json/list.php?lat=" + latPar + "&lng=" + lngPar
-					+ "&rad=5&sort=dist&type=all&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d";
+					+ "&rad="+rad +"&sort=dist&type=all&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d";
 
 		}
 		return url;
 	}
 	
+	public static String createUrl(String latPar, String lngPar, String rad) {
+		String url = null;
+		if(rad==null) {
+			rad="5";
+		}
+
+		if ((latPar == null && lngPar == null) || (latPar.equals("") && lngPar.equals(""))) {
+			url = "https://creativecommons.tankerkoenig.de/json/list.php?lat=" + 48.8851 + "&lng=" + 8.7307
+					+ "&rad="+rad +"&sort=dist&type=all&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d";
+
+		} 		
+		else {
+
+			url = "https://creativecommons.tankerkoenig.de/json/list.php?lat=" + latPar + "&lng=" + lngPar
+					+ "&rad="+rad +"&sort=dist&type=all&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d";
+
+		}
+		return url;
+	}
+	
+
 	
 	public static void getFav(String c) {
 		String[] id = c.split("&");
@@ -159,7 +191,8 @@ public class APIConnection {
 			
 			table += "<tr>" + "<td>" + t.getName() + "</td>" + "<td>" + t.getStreet() + "</td>"	+ "<td>" + t.getPlace() + "</td>" + "<td>" + t.getDist() 
 			+ "<td>" + t.getDiesel() + " Euro</td>" + "<td>" + t.getE10() + " Euro</td>" + "<td>" + t.getE5() + " Euro</td>"
-					+ "</td>" + "<td>" + t.isOpen() + " </td>" + "<td>" + "<button id="+ t.getId() +" onclick=\"favVerw(this.id)\">Von Favoriten entfernen</button>"
+					+ "</td>" + "<td>" + t.isOpen() + " </td>" + "<td>" + "<button type=\"button\" id="+ t.getId() +" onclick=\"favVerw(this.id)\">Von Favoriten entfernen</button>"
+					+ "</td>" + "<td>" + "<button type=\"button\" id=\"lb\" onclick=\"lbVerw()\">Leaderboard anzeigen</button>"
 					+ "</td>" 					
 					+ "</tr>";
 		}		

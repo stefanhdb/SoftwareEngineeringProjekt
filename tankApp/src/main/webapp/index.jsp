@@ -1,11 +1,15 @@
 <!DOCTYPE html>
+<%@page import="Test.DbConnection"%>
 <html>
 <head>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link rel="stylesheet"
 	href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+	
 <script src="http://code.jquery.com/jquery-2.0.1.min.js"></script>
+
 <script
 	src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
@@ -17,26 +21,8 @@
 	
 	<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
 	
+	<title>Hauptseite</title>
 	
-	<a target= "_blank" style="text-decoration: none;" href="http://www.hs-pforzheim.de">
-		<div class="MeinButton">Kontakt</div> </a>
-
-<div class="Überschrift"> 
-		<h2> <img src="Fuel_Symbol.jpg" width="100" height="100" alt""/> 
-			 Deine Tank-App </h2>
-	</div>
-
-<div class="Beschreibung">  Schön, dass Sie da sind. Erleben Sie die Vielfalt aktueller Preise und finden Sie Ihre Tankstelle, jetzt. </div>
-	
-	<div class="picture0">
-		<img src="Zapfhahn_Sunset_Klein.jpg" width="1000" height="620" alt=""/>	</div>
-	
-	<div class="Beschreibung">  Jetzt bequem Ihren Standort ermitteln lassen und den Überblick behalten </div>
-	
-	<div class="picture">		
-		<img src="Tankstellenpreise.jpg" width="980" height="550" alt=""/> </div>
-
-
 <Style>
 	
 	.Beschreibung
@@ -111,21 +97,32 @@
 
 <body>
 
-	<%		
-		//https://creativecommons.tankerkoenig.de/json/list.php?street=bahnhofstraße&place=pforzheim&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d");
-		//https://creativecommons.tankerkoenig.de/json/list.php?lat=48.916901499999994&lng=8.7445567&rad=1.5&sort=dist&type=all&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d
-		//https://creativecommons.tankerkoenig.de/json/list.php?lat=48.916901499999994&lng=8.7445567&rad=1.5&sort=dist&type=all&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d
-		//https://creativecommons.tankerkoenig.de/json/list.php?lat=48.8851&lng=8.7307&rad=1.5&sort=dist&type=all&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d
-		//https://creativecommons.tankerkoenig.de/json/list.php?lat=48.916902799999995&lng=8.744553800000002&rad=1.5&sort=dist&type=all&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d
-		//out.print(Test.APIConnection.TankstellenListe.get(1).getName());
-	%>
+<a target= "_blank" style="text-decoration: none;" href="http://www.hs-pforzheim.de">
+		<div class="MeinButton">Kontakt</div> </a>
+
+
+<div class="Überschrift"> 
+		<h2> <img src="Fuel_Symbol.jpg" width="100" height="100" alt""/> 
+			 Deine Tank-App </h2>
+	</div>
+
+<div class="Beschreibung">  Schön, dass Sie da sind. Erleben Sie die Vielfalt aktueller Preise und finden Sie Ihre Tankstelle, jetzt. </div>
+	
+	<div class="picture0">
+		<img src="Zapfhahn_Sunset_Klein.jpg" width="1000" height="620" alt=""/>	</div>
+	
+	<div class="Beschreibung">  Jetzt bequem Ihren Standort ermitteln lassen und den Überblick behalten </div>
+	
+	<div class="picture">		
+		<img src="Tankstellenpreise.jpg" width="980" height="550" alt=""/> </div>
+	
 	
 
-	
+	<%//Position bestimmen %>
 	<form action="index.jsp" method="GET">
 		<fieldset>
-			<input id="latLabel" type="text" name="lat" readonly="readonly"> 
-			<input id="lngLabel" type="text" name="lng" readonly="readonly">
+			<input id="latLabel" type="text" name="lat" readonly="readonly" required> 
+			<input id="lngLabel" type="text" name="lng" readonly="readonly" required>
 			<button type="button" id="out" onclick="showPosition()"> Zeige meine Position an</button>
 			<button type="submit">Bestätigen</button>
 		</fieldset>
@@ -133,17 +130,30 @@
 	
 	
 	
-	<form action="Login.jsp" method="GET">
-	
-	  <div class="container">
-	
-	    <button type="submit">Login</button>
-	    
+	<form action="Login.jsp" method="POST">	
+	  <div class="container">	
+	    <button type="submit">Login</button>	    
 	</form>
 	
-	
+	<form action="searchTankstelle.jsp" method="POST">	
+	  <div class="container">	
+	    <button type="submit">Nach Tankstelle suchen</button>	    
+	</form>
 
+	<form action="fahrtenbuch.jsp" method="POST">	
+	  <div class="container">	
+	    <button type="submit">Fahrtenbuch eintragen</button>	    
+	</form>
 
+	<form  method="POST">
+	<label>Umkreis:</label>
+	<select id="rad" name="rad">
+			<option value="5" >5 km</option>
+			<option value="10">10 km</option>
+			<option value="15">15 km</option>
+			<option value="25">25 km</option>
+		</select>
+	<button type="submit" onclick="getRad()">Umkreis festlegen</button>
 	<table data-role="table" id="tsTabelle" class="ui-responsive" border="1">
 		<thead>
 			<tr>
@@ -156,14 +166,30 @@
 				<th>E5</th>
 				<th>Geöffnet</th>
 				<th>Favoriten</th>
+				<th>Leaderboard</th>
 			</tr>
 		</thead>
 		<tbody>
 			<%
 			String latPar = request.getParameter("lat");
 			String lngPar = request.getParameter("lng");
+			String radPar = request.getParameter("rad");
+			
+			
+			
+			String coord = "";
+			
+			Cookie[] cookies = request.getCookies();
+			if(cookies != null){
+			for(Cookie c : cookies){
+				if(c.getName().equals("Koordinaten")){
+					coord = c.getValue();
+					break;
+					}
+				}
+			}
 
-			String url = Test.APIConnection.createUrl(latPar, lngPar);
+			String url = Test.APIConnection.createUrl(latPar, lngPar, coord, radPar);	
 			
 			Test.APIConnection.executePost(url);
 			
@@ -173,6 +199,7 @@
 			%>
 		</tbody>
 	</table>
+	</form>
 	
 	<table data-role="table" id="tsFavTabelle" class="ui-responsive" border="1">
 		<thead>
@@ -186,15 +213,16 @@
 				<th>E5</th>
 				<th>Geöffnet</th>
 				<th>Favoriten</th>
+				<th>Leaderboard</th>
 			</tr>
 		</thead>
 		<tbody>
-			<%
+			
+			<%			
 			//Favoriten ArrayList erschaffen
-			Cookie[] cookies = request.getCookies();
+			Cookie[] favCook = request.getCookies();
 			if(cookies != null){
-				out.print("");
-			for(Cookie c : cookies){
+			for(Cookie c : favCook){
 				if(c.getName().equals("FavoritenID")){
 					Test.APIConnection.getFav(c.getValue());
 					break;
@@ -202,18 +230,14 @@
 				}
 			//Favoriten Tabelle schreiben lassen
 			out.print(Test.APIConnection.createTableFav());
-			}	
+			}
 			
-			
+						
 			%>
 		</tbody>
 	</table>
 
 </body>
-
-
-
-
 
 <script>
 
@@ -237,6 +261,14 @@
 		    lon = position.coords.longitude;
 		    document.getElementById("latLabel").value = lat;
 		    document.getElementById("lngLabel").value = lon;
+
+		    var cookie = Cookies.get("Koordinaten");
+
+		    var r = confirm("Möchsten sie diese Koordinaten als ihre Standart-Adresse speichern?");
+		    if (r == true) {
+		    	Cookies.set("Koordinaten", lat + "&" + lon + "&");
+		    } 
+
 		}
 
 	
@@ -281,10 +313,19 @@
 		 location.reload();	
 		}
 
+	function lbVerw(t){
+
+		var url = "http://localhost:8080/tankApp/leaderboard.jsp?id=" + t;
+		 window.location.href = url;
+	}
+
+	function getRad(){
+		
+		var rad = document.getElementById("rad").value;
+		location.reload();	
+		}
 	
-	
-	
-		 
+			 
 </script>
 
 
