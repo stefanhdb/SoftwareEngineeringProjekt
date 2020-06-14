@@ -1,52 +1,131 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<%//jQuery %>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<%
+	//jQuery
+%>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-  <title>Fahrtenbuch</title>
+<title>Fahrtenbuch</title>
+
+
+
+
+<!-- CSS only -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+	crossorigin="anonymous">
+<script src="https://kit.fontawesome.com/ca2e4c3b4a.js"
+	crossorigin="anonymous"></script>
+
+
+
 </head>
+<Style>
+
+
+.containers {
+	background-image: url("gas_groﬂe.jpg");
+	position: fixed;
+	top: 0;
+	left: 0;
+	/* Preserve aspet ratio */
+	min-width: 100%;
+	min-height: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.dircetion{
+  margin-top: 50px;
+	margin-left: 50px;
+	margin-right: 50px;
+
+}
+
+
+
+
+
+
+
+</Style>
 <body>
 
- <form action="fahrtenbuchSupport.jsp" method="GET">
-  <table>
-   <tr>
-    <td>Straﬂe :</td>
-    <td><input type="text" name="street" id="streetInput" required></td>
-   </tr>
-   <tr>
-    <td>Stadt :</td>
-    <td><input type="text" name="place" id="placeInput" required></td>
-   </tr>
-   <tr>
-    <td>Land :</td>
-    <td><input type="text" name="country" id="countryInput" required></td>
-   </tr>
-   <tr>
-    <td>Preis :</td>
-    <td><input type="number" step="0.01" min="0" name="price" id="priceInput" required></td>
-   </tr>
-   <tr>
-    <td>Liter :</td>
-    <td><input type="number" step="0.01" min="0" name="liter" id="literInput" required></td>
-   </tr>
-   <tr>
-    <td>Datum :</td>
-    <td><input type="date" name="date" id="dateInput" required></td>
-   </tr>
-   <tr>
-    <td><input type="text" name="id" id="idInput" required readonly></td>
-    <td><input type="text" name="name" id="nameInput" required readonly></td>
-   </tr>  
-   <tr>
-   <td><button type="button" onclick="getAdress()">Best‰tigen</button></td>   
-    <td><button type="submit" >Submit</button></td>   
-   </tr>
-  </table>
-  
- </form>
- 
- <script> 
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+		integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+		crossorigin="anonymous"></script>
+
+
+
+
+
+
+	<div class="containers">
+
+     <div class="dircetion">
+     
+     <div class="p-3 mb-2 bg-dark text-white">
+
+		<form action="fahrtenbuchSupport.jsp" method="GET">
+			<table>
+				<tr>
+					<td>Straﬂe :</td>
+					<td><input type="text" name="street" id="streetInput" required></td>
+				</tr>
+				<tr>
+					<td>Stadt :</td>
+					<td><input type="text" name="place" id="placeInput" required></td>
+				</tr>
+				<tr>
+					<td>Land :</td>
+					<td><input type="text" name="country" id="countryInput"
+						required></td>
+				</tr>
+				<tr>
+					<td>Preis :</td>
+					<td><input type="number" step="0.01" min="0" name="price"
+						id="priceInput" required></td>
+				</tr>
+				<tr>
+					<td>Liter :</td>
+					<td><input type="number" step="0.01" min="0" name="liter"
+						id="literInput" required></td>
+				</tr>
+				<tr>
+					<td>Datum :</td>
+					<td><input type="date" name="date" id="dateInput" required></td>
+				</tr>
+				<tr>
+					<td><input type="text" name="id" id="idInput" required
+						readonly></td>
+					<td><input type="text" name="name" id="nameInput" required
+						readonly></td>
+				</tr>
+				<tr>
+					<td><button type="button" onclick="getAdress()">Best‰tigen</button></td>
+					<td><button type="submit">Submit</button></td>
+				</tr>
+			</table>
+
+		</form>
+		</div>
+		</div>
+	</div>
+
+	<script> 
  		function getAdress(){ 
 		 
 		  var apikey = '9fb145e6d9e24f8c8cf03aa55a8ef139';
@@ -152,8 +231,8 @@
  		}
 		
 		</script>
- 
- <script>
+
+	<script>
 
 
  
@@ -207,6 +286,6 @@ function searchTsId(coordinates){
 }
 
 </script>
- 
+
 </body>
 </html>
