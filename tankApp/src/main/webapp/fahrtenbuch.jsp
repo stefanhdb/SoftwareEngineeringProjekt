@@ -153,60 +153,7 @@
 		
 		</script>
  
- <script>
 
-
- 
-
-
-function searchTsId(coordinates){
-	
-	//Anfrage an volzinnovation schicken
-	jQuery.getJSON('https://www.volzinnovation.com/fuel_price_variations_germany/data/stations.json', function(data){
-
-		//JSON Datei abspeichern	
-	var jsonStr = '{"gasStation":' + JSON.stringify(data) + "}";
-	var jsonDat = JSON.parse(jsonStr);
-
-	//alert(JSON.stringify(coordinates[0]));
-	//alert(JSON.stringify(coordinates[1]));
-	
-	var tsId=[];
-	var tsName[];
-	var counter=0;
-
-	//ID der passenden Tankstellen abspeichern
-	for(var x=0; x < jsonDat.gasStation.length; x++){
-	var ts =jsonDat.gasStation[x];
-
-	if((coordinates[0] > ts.latitude-0.01 && coordinates[0] < ts.latitude+0.01)  && (coordinates[1] > ts.longitude -0.01 && coordinates[1] < ts.longitude + 0.01)){
-		alert("Geht!!!");
-		tsId[counter] = ts.uuid;
-		tsName[counter] = ts.name;
-		counter++;
-		}
-		}
-	if(tsId.length == 0){
-		alert("Keine Tankstelle wurde unter dieser Adresse gefunden!");
-	}
-	else if(tsId.length == 1){
-		var id = JSON.stringify(tsId[0]).slice(1, -1);
-		var name = JSON.stringify(tsName[0]).slice(1, -1);
-
-		alert("Geht!");
-		
-		document.getElementById("idInput").value = id;
-		document.getElementById("nameInput").value = name;
-		alert("Jaaaa");
-		}
-	else{
-		alert("Mehrere Tankstellen gefunden!");
-	}
-	});
-	
-}
-
-</script>
  
 </body>
 </html>
