@@ -577,46 +577,6 @@ tr {
 	</div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<%
-		//Position bestimmen
-	%>
-
-
-
-
-
-
-
 </body>
 
 <script>
