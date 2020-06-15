@@ -137,49 +137,49 @@ public class APIConnection {
 
 	
 	public static void getFav(String c) {
-		String[] id = c.split("&");
-		String url = "https://creativecommons.tankerkoenig.de/json/detail.php?";
-		
-		TankstellenFavListe.clear();
-		
-		for(String i : id) {
-			HttpURLConnection connection = null;
-			url = "https://creativecommons.tankerkoenig.de/json/detail.php?";
-			url += "id=" + i +"&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d";
-			
-			
-			try {
-				// Create connection
-				URL targetUrl = new URL(url);
-				connection = (HttpURLConnection) targetUrl.openConnection();
-				connection.setRequestMethod("GET");
-				connection.connect();
-
-				JsonElement element = JsonParser.parseReader(new InputStreamReader(connection.getInputStream()));
-				JsonObject obj = element.getAsJsonObject();
-				
-
-				if (obj.get("status").getAsString().equals("ok")) {
-					
-					String jsonString = obj.toString().substring(obj.toString().indexOf("station")+9,
-							(obj.toString().length()-1));
-					Gson gson = new Gson();
-					TankstellenFavListe.add(gson.fromJson(jsonString, Tankstelle.class)) ;
-					}
-				
-			
-				}
-			catch (Exception e) {
-				}
-			}
-		
-		
-//		TankstellenFavListe = new ArrayList<Tankstelle>();
-//		for(Tankstelle t : TankstellenListe) {
-//			if(c.contains(t.getId())) {
-//				TankstellenFavListe.add(t);
+//		String[] id = c.split("&");
+//		String url = "https://creativecommons.tankerkoenig.de/json/detail.php?";
+//		
+//		TankstellenFavListe.clear();
+//		
+//		for(String i : id) {
+//			HttpURLConnection connection = null;
+//			url = "https://creativecommons.tankerkoenig.de/json/detail.php?";
+//			url += "id=" + i +"&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d";
+//			
+//			
+//			try {
+//				// Create connection
+//				URL targetUrl = new URL(url);
+//				connection = (HttpURLConnection) targetUrl.openConnection();
+//				connection.setRequestMethod("GET");
+//				connection.connect();
+//
+//				JsonElement element = JsonParser.parseReader(new InputStreamReader(connection.getInputStream()));
+//				JsonObject obj = element.getAsJsonObject();
+//				
+//
+//				if (obj.get("status").getAsString().equals("ok")) {
+//					
+//					String jsonString = obj.toString().substring(obj.toString().indexOf("station")+9,
+//							(obj.toString().length()-1));
+//					Gson gson = new Gson();
+//					TankstellenFavListe.add(gson.fromJson(jsonString, Tankstelle.class)) ;
+//					}
+//				
+//			
+//				}
+//			catch (Exception e) {
+//				}
 //			}
-//		}
+		
+		
+		TankstellenFavListe = new ArrayList<Tankstelle>();
+		for(Tankstelle t : TankstellenListe) {
+			if(c.contains(t.getId())) {
+				TankstellenFavListe.add(t);
+			}
+		}
 		
 		}
 		

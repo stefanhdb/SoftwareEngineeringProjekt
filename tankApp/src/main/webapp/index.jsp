@@ -310,7 +310,6 @@
 			Cookies.set("FavoritenID", newCookie);
 			}
 			
-		 location.reload();	
 		}
 
 	function lbVerw(t){
