@@ -13,8 +13,7 @@
 <script
 	src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
 	
@@ -292,16 +291,17 @@
 	function favVerw(t){
 		 var cookie = Cookies.get("FavoritenID");
 
-		 //
-		 if(cookie == null){
-	        Cookies.set("FavoritenID", t + "&");         	
+		 if(cookie == null){ 
+	        Cookies.set("FavoritenID", t + "&");   
+	            	
 			}
 
 			//Hinzufügen der Tankstelle	
-		 else if(!cookie.includes(t) ){		 
+		 else if(!cookie.includes(t) ){	
 			cookie += t
 			cookie += "&"
 		 	Cookies.set("FavoritenID", cookie);
+			
 		 	}			 							
 
 		 //Löschen einer Vorhandenen Tankstelle
