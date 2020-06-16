@@ -324,17 +324,30 @@ tr {
 			<form action="Login.jsp" method="POST">
 				<div class="container">
 					<button type="submit">Login</button>
+					</div>
 			</form>
 
 			<form action="searchTankstelle.jsp" method="POST">
 				<div class="container">
 					<button type="submit">Nach Tankstelle suchen</button>
+					</div>
 			</form>
 			<form action="fahrtenbuch.jsp" method="POST">
 				<div class="container">
 					<button type="submit">Fahrtenbuch eintragen</button>
+					</div>
 			</form>
-			<form method="POST">
+			<form action="index.jsp" method="GET">
+							<fieldset>
+								<input id="latLabel" type="text" name="lat" readonly="readonly"
+									required> <input id="lngLabel" type="text" name="lng"
+									readonly="readonly" required>
+								<button type="button" id="out" onclick="showPosition()">Zeige
+										meine Position an</button>
+								<button type="submit">Bestätigen</button>
+							</fieldset>
+						</form>
+			<form action="index.jsp" method="GET">
 				<label>Umkreis:</label> <select id="rad" name="rad">
 					<option value="5">5 km</option>
 					<option value="10">10 km</option>
@@ -342,24 +355,15 @@ tr {
 					<option value="25">25 km</option>
 				</select>
 				<button type="submit" onclick="getRad()">Umkreis festlegen</button>
+				</form>
+				
 		</div>
 	</header>
 
 
 
-
-
-
-
-
-
-
-
-
-
 	<!-- Contents -->
 	<div class="containers">
-
 		<div class="pos-f-t">
 			<div class="collapse" id="navbarToggleExternalContent">
 				<div class="bg-dark p-4">
@@ -371,20 +375,10 @@ tr {
 								onclick="document.getElementById('id01').style.display='block'"
 								title="hey">Diagramm</button>
 
-						</div> <%
- 	//Position bestimmen
- %>
-						<form action="index.jsp" method="GET">
-							<fieldset>
-								<input id="latLabel" type="text" name="lat" readonly="readonly"
-									required> <input id="lngLabel" type="text" name="lng"
-									readonly="readonly" required>
-								<button type="button" id="out" onclick="showPosition()">
-									Zeige meine Position an</button>
-								<button type="submit">Bestätigen</button>
-							</fieldset>
-						</form>
+						
+						
 				</div>
+				</span>
 			</div>
 			<nav class="navbar navbar-dark bg-dark">
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -395,41 +389,18 @@ tr {
 				</button>
 			</nav>
 		</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	</div>
 
 
 
 		<div class="row">
-
-
-
 			<div class="col-lg-9">
-
-
 				<div class="headcontent">
 					<div class="contenticon"></div>
-
 					<div class="contentname">Tabelle für Tankstelleninfos.</div>
-
 				</div>
-
 				<div class="box">
 					<table class="table table-striped table-dark">
-
 						<thead>
 							<tr>
 								<th>Tankstelle</th>
@@ -461,13 +432,9 @@ tr {
 										}
 									}
 								}
-
 								String url = Test.APIConnection.createUrl(latPar, lngPar, coord, radPar);
-
 								Test.APIConnection.executePost(url);
-
 								//Tabelle schreiben lassen
-
 								out.print(Test.APIConnection.createTable());
 							%>
 						</tbody>
@@ -515,13 +482,8 @@ tr {
 					</table>
 
 				</div>
-
 			</div>
-
-
-
-			<div class="col-lg-3">
-				>
+			<div class="col-lg-3">				
 				<!-- Hintergrund und Leiste -->
 				<div class="header">
 					<div class="logo">
@@ -536,10 +498,7 @@ tr {
 <!-- 						<li><a href="#">Kontakt</a></li> -->
 <!-- 					</ul> -->
 
-
 				</div>
-
-
 			</div>
 		</div>
 
@@ -643,7 +602,6 @@ tr {
 			Cookies.set("FavoritenID", newCookie);
 		}
 
-		location.reload();
 	}
 
 	function lbVerw(t) {
@@ -653,9 +611,7 @@ tr {
 	}
 
 	function getRad() {
-
 		var rad = document.getElementById("rad").value;
-		location.reload();
 	}
 </script>
 

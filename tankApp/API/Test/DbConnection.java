@@ -20,7 +20,7 @@ public class DbConnection {
     	
     	String url = "jdbc:sqlite:" + "C:\\Users\\nicho\\OneDrive\\Dokumente\\GitHub\\SoftwareEngineeringProjekt\\tankApp\\Datenbank\\Leaderboard.db";
     	//String url = "jdbc:sqlite:" + DB_PATH;
-    	System.out.println(url);
+    	//System.out.println(url);
         Connection connection = null;
 
         try 
@@ -60,9 +60,7 @@ public class DbConnection {
                 String dateStr = resultSet.getString("Datum");
                 
                 Date date = new SimpleDateFormat("dd.MM.yyyy").parse( dateStr);
-                
-                System.out.println(id);
-                System.out.println(tsId);
+
                 
                 if(id.equals(tsId)) {
                 DbData data = new DbData(tid, tsId, tnId, user, fuel, price, liter, date);
@@ -157,6 +155,40 @@ public static ArrayList<DbData> getArray(int id, String tsId, String tsName, Str
 	return list;
 	
 	}
+
+
+public static boolean searchUName(String uname) {
+	String sql = "SELECT Tanker FROM Leaderboard";
+	try  
+    {     	
+    	Connection conn = connect(); 
+    	PreparedStatement pstmt = conn.prepareStatement(sql);
+        ResultSet resultSet = pstmt.executeQuery();
+                    
+        //Iteriert durch das gesamte Ergebnis der Abfrage 
+        //und erstellt für jede Zeile ein neues Testobjekt
+        while (resultSet.next()) 
+        {
+        	try {
+            String user = resultSet.getString("Tanker"); 
+        	if(uname.equals(user)) {
+        		System.out.println(user);
+        	return false;
+        	}
+
+            }
+            catch(Exception e) {
+            System.out.println("Es ist ein Fehler mit der Datenbank aufgetreten: " + e);	
+            } 
+        }
+        conn.close();
+    } 
+    catch (SQLException e) 
+    {
+        System.out.println(e.getMessage());
+    }
+	return true;
+}
     
     
     
