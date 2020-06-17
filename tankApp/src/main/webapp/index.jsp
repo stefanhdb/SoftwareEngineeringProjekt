@@ -285,7 +285,21 @@ tr {
 
 <body>
 
-
+	<%//Wenn noch kein Benutzer angelegt ist, wird der User zum Login geschickt
+	boolean boo = false;
+	Cookie[] cook = request.getCookies();
+	if(cook != null){
+		for(Cookie c : cook){
+			if(c.getName().equals("Benutzer")){
+				boo= true;
+				break;
+				}
+				}
+			}
+	if(boo==false){
+		out.print("<script>var url = \"http://localhost:8080/tankApp/Login.jsp\";alert(\"Sie müssen zuerst ein Benutzkonto anlegen! Sie werden automatisch zum Login umgeleitet.\"); window.location.href = url;</script>");
+	}
+	%>
 
 	
 
@@ -299,8 +313,8 @@ tr {
 				class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
 				role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="searchTankstelle.jsp">Suchen</a> <a
-						class="dropdown-item" href="fahrtenbuch.jsp">Fahrtenbuch</a> <a
+					<a class="dropdown-item"  onclick="goST()">Suchen</a> <a
+						class="dropdown-item" onclick="goFahrt()">Fahrtenbuch</a> <a
 						class="dropdown-item" href="#">Something else here</a>
 					<div class="dropdown-divider"></div>
 					<a class="dropdown-item" href="#">Separated link</a>
@@ -321,20 +335,20 @@ tr {
 			<h3>Das beste Vergleichportal für's Tanken</h3>
 			<p>Passen sie den besten Moment fürs Tanken ab..</p>
 			<br>
-			<form action="Login.jsp" method="POST">
+			<form >
 				<div class="container">
-					<button type="submit">Login</button>
+					<button type="button" onclick="goLog()">Login</button>
 					</div>
 			</form>
 
-			<form action="searchTankstelle.jsp" method="POST">
+			<form >
 				<div class="container">
-					<button type="submit">Nach Tankstelle suchen</button>
+					<button type="button" onclick="goST()">Nach Tankstelle suchen</button>
 					</div>
 			</form>
-			<form action="fahrtenbuch.jsp" method="POST">
+			<form >
 				<div class="container">
-					<button type="submit">Fahrtenbuch eintragen</button>
+					<button type="button" onclick="goFahrt()">Fahrtenbuch eintragen</button>
 					</div>
 			</form>
 			<form action="index.jsp" method="GET">
@@ -482,7 +496,7 @@ tr {
 					</table>
 
 				</div>
-			</div>
+			
 			<div class="col-lg-3">				
 				<!-- Hintergrund und Leiste -->
 				<div class="header">
@@ -504,7 +518,7 @@ tr {
 
 
 	</div>
-
+</div>
 
 
 
@@ -527,9 +541,6 @@ tr {
 				<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 			</div>
 			<footer class="container ">
-
-
-
 				<p>Modal footer</p>
 			</footer>
 		</div>
@@ -557,7 +568,7 @@ tr {
 
 		var cookie = Cookies.get("Koordinaten");
 
-		var r = confirm("Möchsten sie diese Koordinaten als ihre Standart-Adresse speichern?");
+		var r = confirm("Möchsten sie diese Koordinaten als ihre Standard-Adresse speichern?");
 		if (r == true) {
 			Cookies.set("Koordinaten", lat + "&" + lon + "&");
 		}
@@ -584,9 +595,10 @@ tr {
 	function favVerw(t) {
 		var cookie = Cookies.get("FavoritenID");
 
-		//
+		//Wenn keine Cookies vorhanden sind, wird ein neuer erstellt
 		if (cookie == null) {
 			Cookies.set("FavoritenID", t + "&");
+			alert("Favoritenliste wurde mit der Tankstelle erstellt!");
 		}
 
 		//Hinzufügen der Tankstelle	
@@ -594,12 +606,14 @@ tr {
 			cookie += t
 			cookie += "&"
 			Cookies.set("FavoritenID", cookie);
+			alert("Tankstelle wurde zur Favoritenliste hinzugefügt!");
 		}
 
 		//Löschen einer Vorhandenen Tankstelle
 		else {
 			var newCookie = cookie.replace(t + "&", "");
 			Cookies.set("FavoritenID", newCookie);
+			alert("Tankstelle wurde von der Favoritenliste gelöscht!");
 		}
 
 	}
@@ -610,7 +624,14 @@ tr {
 		window.location.href = url;
 	}
 
+	function goFahrt(){window.location.href = "http://localhost:8080/tankApp/fahrtenbuch.jsp";}
+
+	function goST(){window.location.href = "http://localhost:8080/tankApp/searchTankstelle.jsp";}
+
+	function goLog(){window.location.href = "http://localhost:8080/tankApp/Login.jsp";}
+
 	function getRad() {
+		// Ausgewählten Radius abspeichern
 		var rad = document.getElementById("rad").value;
 	}
 </script>

@@ -79,7 +79,10 @@ margin-top: 50px;
 		</div>
 		</div>
 		
-		<% String uname = request.getParameter("uname");
+		<% try{
+			String uname = request.getParameter("uname");
+					
+			if(!uname.equals(null) || !uname.equals("")){
 			
 			boolean boo = DbConnection.searchUName(uname);
 					
@@ -91,11 +94,10 @@ margin-top: 50px;
 					if(c.getName().equals("Benutzer")){
 						counter=1;
 						if(boo==true){
-							counter=2;
-						out.print(uname);						
+						counter=2;						
 						c.setValue(uname);
-						response.addCookie(c);
-						
+						response.addCookie(c);	
+						out.print("<script>alert(\"Benutzername wurde aktualisiert!\")</script>");
 						break;
 						}
 						}
@@ -103,8 +105,14 @@ margin-top: 50px;
 			}
 			if(counter==0){
 				Cookie cookie = new Cookie("Benutzer", uname);	
-				response.addCookie(cookie);				
-			}		
+				response.addCookie(cookie);		
+				out.print("<script>alert(\"Benutzerprofil wurde erstellt!\")</script>");
+			}
+			if(counter==1){
+				out.print("<script>alert(\"Benutzername ist bereits vorhanden! Wählen sie einen anderen.\")</script>");
+			}
+			}}
+		catch(Exception e){}
 					%>
 	
 
