@@ -348,6 +348,11 @@ tr {
 			</form>
 			<form >
 				<div class="container">
+					<button type="button" onclick="goFav()">Favoritenliste anzeigen LINIIIII</button>
+					</div>
+			</form>
+			<form >
+				<div class="container">
 					<button type="button" onclick="goFahrt()">Fahrtenbuch eintragen</button>
 					</div>
 			</form>
@@ -459,43 +464,7 @@ tr {
 					<div class="contentname">Deine favorisierten Tankstellen.</div>
 				</div>
 
-				<div class="boxfav">
-
-					<table class="table table-striped table-dark">
-						<thead>
-							<tr>
-								<th>Tankstelle</th>
-								<th>Straße</th>
-								<th>Ort</th>
-								<th>Distanz</th>
-								<th>Diesel</th>
-								<th>E10</th>
-								<th>E5</th>
-								<th>Geöffnet</th>
-								<th>Favoriten</th>
-								<th>Leaderboard</th>
-							</tr>
-						</thead>
-						<tbody>
-
-							<%
-								//Favoriten ArrayList erschaffen
-								Cookie[] favCook = request.getCookies();
-								if (cookies != null) {
-									for (Cookie c : favCook) {
-										if (c.getName().equals("FavoritenID")) {
-											Test.APIConnection.getFav(c.getValue());
-											break;
-										}
-									}
-									//Favoriten Tabelle schreiben lassen
-									out.print(Test.APIConnection.createTableFav());
-								}
-							%>
-						</tbody>
-					</table>
-
-				</div>
+				
 			
 			<div class="col-lg-3">				
 				<!-- Hintergrund und Leiste -->
@@ -629,6 +598,8 @@ tr {
 	function goST(){window.location.href = "http://localhost:8080/tankApp/searchTankstelle.jsp";}
 
 	function goLog(){window.location.href = "http://localhost:8080/tankApp/Login.jsp";}
+
+	function goFav(){window.location.href = "http://localhost:8080/tankApp/favoritenListe.jsp";}
 
 	function getRad() {
 		// Ausgewählten Radius abspeichern
