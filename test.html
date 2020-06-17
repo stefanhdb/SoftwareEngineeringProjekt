@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-2.0.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/ca2e4c3b4a.js" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<Style>
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+    .header {
+        /* 	background-image: url(""); */
+        /* 	height: 20vh; */
+        background-size: cober;
+        background-position: center;
+    }
+    
+    ul {
+        float: right;
+        list-style-type: none;
+        margin-top: 25 px;
+    }
+    
+    ul li {
+        display: inline-block;
+    }
+    
+    ul li a {
+        text-decoration: none;
+        color: white;
+        padding: 5px 20px;
+        border: 1px solid white;
+        transition: 0.6s ease;
+    }
+    
+    ul li a:hover {
+        background-color: white;
+        color: black;
+    }
+    
+    .logo img {
+        float: left;
+        width: 150px;
+        height: auto;
+    }
+    
+    .main {
+        max-width: 1200px;
+        margin: auto;
+    }
+    
+    .Navigationsleiste {
+        background-color: #310c0c;
+        padding: 20px;
+        text-align: center;
+    }
+    
+    .unsermodal {
+        z-index: 3;
+        display: none;
+        padding-top: 100px;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4)
+    }
+    
+    .modal-content {
+        margin: auto;
+        background-color: #fff;
+        position: relative;
+        padding: 0;
+        outline: 0;
+        width: 600px
+    }
+    
+    .container,
+    .panel {
+        padding: 0.01em 16px
+    }
+    
+    .panel {
+        margin-top: 16px;
+        margin-bottom: 16px
+    }
+    
+    .button {
+        white-space: normal
+    }
+    
+    .display-topright {
+        position: absolute;
+        right: 0;
+        top: 0
+    }
+    
+    .display-hover {
+        display: block
+    }
+    
+    .platzfürüberschrift {
+        background-color: grey;
+        height: 150px;
+        opacity: 0.5;
+    }
+    
+    .Überschrift {
+        background: url(../Tankstellenpreise.jpg);
+        text-align: center;
+        width: 100%;
+        height: auto;
+        background-size: cover;
+        background-attachment: fixed;
+        position: relative;
+        overflow: hidden;
+        border-radius: 0 0 85% 85%/30%;
+    }
+    
+    .Überschrift .overlay {
+        width: 100%;
+        height: 100%;
+        padding: 50px;
+        color: #FFF;
+        text-shadow: 1px 1px 1px #333;
+        background-image: linear-gradient(135deg, red, grey);
+        opacity: 0.5;
+    }
+    
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        height: 900px;
+        font-family: 'Lato', sans-serif;
+        background-color: #F0FFFF;
+        color: #fff;
+    }
+    
+    header {
+        background: url(Tankstellenpreise.jpg);
+        text-align: center;
+        width: 100%;
+        height: auto;
+        background-size: cover;
+        background-attachment: fixed;
+        position: relative;
+        overflow: hidden;
+        border-radius: 100 100 150% 100%/3000%;
+    }
+    
+    header .overlay {
+        width: 100%;
+        height: 100%;
+        padding: 50px;
+        color: #FFF;
+        text-shadow: 1px 1px 1px #333;
+        background-image: linear-gradient(135deg, rgb(124, 108, 108) 10%, #e98b596b 100%);
+    }
+    
+    h1 {
+        font-family: 'Dancing Script', cursive;
+        font-size: 80px;
+        margin-bottom: 30px;
+    }
+    
+    h3,
+    p {
+        font-family: 'Open Sans', sans-serif;
+        margin-bottom: 30px;
+    }
+    
+    button {
+        border: none;
+        outline: none;
+        padding: 10px 20px;
+        border-radius: 50px;
+        color: #333;
+        background: #fff;
+        margin-bottom: 50px;
+        box-shadow: 0 3px 20px 0 #0000003b;
+    }
+    
+    button:hover {
+        cursor: pointer;
+    }
+    
+    tr {
+        background-color: grey;
+        color: white;
+    }
+    
+    .headcontent {
+        -webkit-box-shadow: 0 0 10px 0 #000000;
+        box-shadow: 0 0 10px 0 #000000;
+        background-color: #0f161a;
+        border-left: 5px solid #f42339;
+        float: left;
+        width: 100%;
+        magine-top: 20px;
+    }
+    
+    .contentname {
+        text-transform: uppercase;
+        font-weight: 700;
+        color: grey;
+        padding: 18px;
+    }
+    
+    .contenticon {
+        background-color: #fff;
+        width: 20px;
+        height: 25px;
+        float: left;
+        margin-top: 15px;
+        margin-left: 10px;
+    }
+    
+    .containers {
+        background-image: url("gas_große.jpg");
+        width: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+}
+</Style>
+
+<body>
+
+
+
+    <div class="container">
+        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+        <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    </div>
+
+
+
+
+
+
+
+
+
+</body>
+
+
+
+
+
+<script>
+    // Visualization API with the 'corechart' package.
+    //google.charts.load('visualization', { packages: ['corechart'] });
+    //google.charts.setOnLoadCallback(drawLineChart);
+    window.onload = function() {
+        var dataPoints = [];
+        var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            theme: "light2",
+            zoomEnabled: true,
+            title: {
+                text: "Stunde und Preis"
+            },
+            axisY: {
+                title: "Preise pro Stunde",
+                titleFontSize: 24,
+                includeZero: false
+            },
+            axisX: {
+                title: "Hours",
+                maximum: 25,
+            },
+            data: [{
+                type: "line",
+                yValueFormatString: "number",
+                xValueType: "number",
+                dataPoints: dataPoints
+            }]
+        });
+
+        function addData(data) {
+            for (var i = 0; i < data.length; i++) {
+                dataPoints.push({
+                    x: data[i].hour,
+                    y: data[i].price
+                });
+            }
+            chart.render();
+        }
+        $
+            .getJSON(
+                "https://www.volzinnovation.com/fuel_price_variations_germany/data/474e5046/deaf/4f9b/9a32/9797b778f047/e10.json",
+                addData);
+    }
+</script>
+
+
+</html>
