@@ -38,7 +38,7 @@ String date = request.getParameter("date");
 
 
 
-String tsPreis = APIConnection.getPrice();
+String tsPreis = "" + APIConnection.getPrice(tsId);
 
 
 double avgP =  DbConnection.avgP(tsId, fuel);

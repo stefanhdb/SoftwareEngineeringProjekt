@@ -133,24 +133,18 @@ public class DbConnection {
 			System.out.println("connected");			
 
 			JsonElement element = JsonParser.parseReader(new InputStreamReader(con.getInputStream()));
-			System.out.println("1.1");
 			JsonArray  obj = element.getAsJsonArray();
-			System.out.println("1");
 
 
-				System.out.println("2");
 				String jsonString = obj.toString();
 				Gson gson = new Gson();
 				ArrayList<Preise> preis = new ArrayList<Preise>();
 				Type listType = new TypeToken<ArrayList<Preise>>() {
 				}.getType();
-				System.out.println("3");
 				preis = gson.fromJson(jsonString, listType);
-				System.out.println("4");
 				for (Preise p : preis) {
 					totalPrice = totalPrice + p.getPrice();
 				}
-				System.out.println(totalPrice/preis.size());
 				double avgP = totalPrice/preis.size();
 				return avgP;
 			
@@ -190,7 +184,9 @@ public class DbConnection {
             pstmt.setDouble(7, db.get(0).getLiter());
             pstmt.setString(8, dateForm);
             pstmt.setDouble(9, db.get(0).getTsPreis());
+            System.out.println(db.get(0).getTsPreis());
             pstmt.setDouble(10, db.get(0).getAvgP());
+            System.out.println(db.get(0).getAvgP());
             //Nun vollständiges SQL statement wird jetzt ausgeführt
             pstmt.executeUpdate();
             conn.close();

@@ -198,11 +198,15 @@ public class APIConnection {
 	}
 	
 	public static double getPrice(String id) {
+		String realId = id.replace("\"", "");
 		
-		for(Tankstelle ts:APIConnection.TankstellenListe){
-			if(ts.getId().equals(id)){
-				
+		for(Tankstelle ts: APIConnection.TankstellenListe){
+			if(ts.getId().equals(realId)){
+			double price = ts.getDiesel();
+			System.out.println(price);
+				return price;	
 			}
 		}
+		return 0;
 	}
 }
