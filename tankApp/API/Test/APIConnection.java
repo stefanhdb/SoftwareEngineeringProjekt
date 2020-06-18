@@ -1,20 +1,15 @@
 package Test;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
-
-import java.io.InputStream;
 
 public class APIConnection {
 
@@ -60,6 +55,8 @@ public class APIConnection {
 //		TankstellenListe.add(new Tankstelle("101"));
 
 	}
+	
+	
 
 	public static String createTable() {
 		String table = "";
@@ -198,5 +195,14 @@ public class APIConnection {
 		}		
 		
 		return table;
+	}
+	
+	public static double getPrice(String id) {
+		
+		for(Tankstelle ts:APIConnection.TankstellenListe){
+			if(ts.getId().equals(id)){
+				
+			}
+		}
 	}
 }

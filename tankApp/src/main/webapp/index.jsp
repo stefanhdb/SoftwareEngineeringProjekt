@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="Test.APIConnection"%>
 <%@page import="Test.DbConnection"%>
 <html>
 <head>
@@ -299,6 +300,7 @@ tr {
 	if(boo==false){
 		out.print("<script>var url = \"http://localhost:8080/tankApp/Login.jsp\";alert(\"Sie müssen zuerst ein Benutzkonto anlegen! Sie werden automatisch zum Login umgeleitet.\"); window.location.href = url;</script>");
 	}
+	
 	%>
 
 	

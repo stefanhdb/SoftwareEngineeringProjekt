@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class DbData {
 	
+	
 	int tId;
 	String tsId;
 	String tsName;
@@ -12,8 +13,12 @@ public class DbData {
 	double preis;
 	double liter;	
 	Date date;
+	double tsPreis;
+	double avgP;
 	
-public DbData(int tId, String tsId, String tsName, String user, String fuel, double preis, double liter, Date date) {
+	
+	public DbData(int tId, String tsId, String tsName, String user, String fuel, double preis, double liter, Date date,
+			double tsPreis, double avgP) {
 		super();
 		this.tId = tId;
 		this.tsId = tsId;
@@ -23,9 +28,12 @@ public DbData(int tId, String tsId, String tsName, String user, String fuel, dou
 		this.preis = preis;
 		this.liter = liter;
 		this.date = date;
+		this.tsPreis = tsPreis;
+		this.avgP = avgP;
 	}
-
-public int gettId() {
+	
+	
+	public int gettId() {
 		return tId;
 	}
 	public void settId(int tId) {
@@ -73,5 +81,19 @@ public int gettId() {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	public double getTsPreis() {
+		return tsPreis;
+	}
+	public void setTsPreis(double tsPreis) {
+		this.tsPreis = tsPreis;
+	}
+	public double getAvgP() {
+		return avgP;
+	}
+	public void setAvgP(double avgP) {
+		this.avgP = avgP;
+	}
+	
+	
 
 }

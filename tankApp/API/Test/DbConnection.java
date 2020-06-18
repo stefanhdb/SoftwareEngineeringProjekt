@@ -1,12 +1,23 @@
 package Test;
 
 import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -58,12 +69,14 @@ public class DbConnection {
                 double price = resultSet.getDouble("Preis");
                 double liter = resultSet.getDouble("Liter");
                 String dateStr = resultSet.getString("Datum");
+                double tsPreis = resultSet.getDouble("TankstellenPreis");
+        		double avgP =  resultSet.getDouble("DurchschnittAbweichung");
                 
                 Date date = new SimpleDateFormat("dd.MM.yyyy").parse( dateStr);
 
                 
                 if(id.equals(tsId)) {
-                DbData data = new DbData(tid, tsId, tnId, user, fuel, price, liter, date);
+                DbData data = new DbData(tid, tsId, tnId, user, fuel, price, liter, date, tsPreis, avgP);
                 list.add(data);
                 }
                 }
@@ -84,12 +97,13 @@ public class DbConnection {
     public static String createTable(ArrayList<DbData> list) {
 		String table = "";
 		
-		
+		double avg = avgP(list.get(0).getTsId(), list.get(0).getFuel());
+		System.out.println(avg);
 		
 		for (DbData db : list) {
 //			System.out.println(db.getLiter());
 //			System.out.println(db.getPreis());
-			double preisProLiter = db.getPreis()/db.getLiter();
+			double preisProLiter = db.getLiter()/db.getPreis();
 			
 			
 			table += "<tr>" + "<td>" + db.getUser() + "</td>" + "<td>" + preisProLiter + "</td>"					
@@ -98,6 +112,59 @@ public class DbConnection {
 		}
 		return table;
 	}
+    
+    public static double avgP(String id, String fuel) {
+    	HttpURLConnection con = null;
+    	double totalPrice =0;
+    	
+    	String newId = id.replace("-", "/");
+    	
+    	String urlSt = "https://www.volzinnovation.com/fuel_price_variations_germany/data/"+ newId + "/"+ fuel +".json";
+    	System.out.println(urlSt);
+    	
+    	
+    	try {
+			// Create connection
+			URL url = new URL(urlSt);
+			con = (HttpURLConnection) url.openConnection();
+			con.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0");
+			con.setRequestMethod("GET");
+			con.connect();
+			System.out.println("connected");			
+
+			JsonElement element = JsonParser.parseReader(new InputStreamReader(con.getInputStream()));
+			System.out.println("1.1");
+			JsonArray  obj = element.getAsJsonArray();
+			System.out.println("1");
+
+
+				System.out.println("2");
+				String jsonString = obj.toString();
+				Gson gson = new Gson();
+				ArrayList<Preise> preis = new ArrayList<Preise>();
+				Type listType = new TypeToken<ArrayList<Preise>>() {
+				}.getType();
+				System.out.println("3");
+				preis = gson.fromJson(jsonString, listType);
+				System.out.println("4");
+				for (Preise p : preis) {
+					totalPrice = totalPrice + p.getPrice();
+				}
+				System.out.println(totalPrice/preis.size());
+				double avgP = totalPrice/preis.size();
+				return avgP;
+			
+
+
+		}
+
+		catch (Exception e) {
+			System.out.println("Ein Fehler ist bei der Preisabfrage entstanden: " + e);
+			
+		}
+    	return 0;	
+    	
+    }
     
     
     public static void insertData(ArrayList<DbData> db) {
@@ -122,6 +189,8 @@ public class DbConnection {
             pstmt.setDouble(6, db.get(0).getPreis());
             pstmt.setDouble(7, db.get(0).getLiter());
             pstmt.setString(8, dateForm);
+            pstmt.setDouble(9, db.get(0).getTsPreis());
+            pstmt.setDouble(10, db.get(0).getAvgP());
             //Nun vollständiges SQL statement wird jetzt ausgeführt
             pstmt.executeUpdate();
             conn.close();
@@ -133,19 +202,21 @@ public class DbConnection {
 
     }
     
-public static ArrayList<DbData> getArray(int id, String tsId, String tsName, String user, String fuel, String price, String liter, String dateStr)    {
+public static ArrayList<DbData> getArray(int id, String tsId, String tsName, String user, String fuel, String price, String liter, String dateStr, String tsPreisStr, String avgPStr)    {
 	
 	ArrayList<DbData> list = new ArrayList<DbData>();
 	try {
 	double preis = Double.parseDouble(price);
 	double literDoub = Double.parseDouble(liter);
+	double tsPreis = Double.parseDouble(tsPreisStr);
+	double avgP = Double.parseDouble(avgPStr);
 	
 	String[] result = dateStr.split("-");
 	String newDate =  result[2] + "." + result[1] + "." + result[0];
 	
 	Date date = new SimpleDateFormat("dd.MM.yyyy").parse( newDate);
 	
-	DbData data = new DbData(id, tsId, tsName, user, fuel, preis, literDoub, date);
+	DbData data = new DbData(id, tsId, tsName, user, fuel, preis, literDoub, date, tsPreis, avgP);
 	list.add(data);
 	
 	}
