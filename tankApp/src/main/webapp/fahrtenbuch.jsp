@@ -79,10 +79,16 @@
     <td>Liter :</td>
     <td><input type="number" step="0.01" min="0" name="liter" id="literInput" required></td>
    </tr>
+   
    <tr>
-    <td>Datum :</td>
-    <td><input type="date" name="date" id="dateInput" required></td>
-   </tr>
+	<td>Treibstoff: :</td>
+	<td><select id="fuelInput" name="fuel">
+		<option value="diesel">diesel</option>
+		<option value="e5">e5</option>
+		<option value="e10">e10</option>
+	</select>
+	</tr>
+
    <tr>
     <td><input type="text" name="id" id="idInput" required readonly></td>
     <td><input type="text" name="name" id="nameInput" required readonly></td>

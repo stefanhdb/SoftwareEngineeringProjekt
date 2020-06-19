@@ -591,7 +591,7 @@ tr {
 
 	function lbVerw(t) {
 
-		var url = "http://localhost:8080/tankApp/leaderboard.jsp?id=" + t;
+		var url = "http://localhost:8080/tankApp/leaderboard.jsp?id=" + t + "&fuel=&dateAb=&dateBis=";
 		window.location.href = url;
 	}
 

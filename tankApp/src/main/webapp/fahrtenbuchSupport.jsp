@@ -34,11 +34,11 @@ String fuel = request.getParameter("fuel");
 
 String price = request.getParameter("price");
 String liter = request.getParameter("liter");
-String date = request.getParameter("date");
+String date = "";
 
 
 
-String tsPreis = "" + APIConnection.getPrice(tsId);
+String tsPreis = "" + APIConnection.getPrice(tsId,fuel);
 
 
 double avgP =  DbConnection.avgP(tsId, fuel);

@@ -197,16 +197,49 @@ public class APIConnection {
 		return table;
 	}
 	
-	public static double getPrice(String id) {
-		String realId = id.replace("\"", "");
+	public static double getPrice(String id, String fuel) {		
+			HttpURLConnection connection = null;
+			String realId = id.replace("\"", "");
+			
+			String urlStr = "https://creativecommons.tankerkoenig.de/json/detail.php?";
+			urlStr += "id=" + realId +"&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d";
+			
+			try {
+				// Create connection
+				URL targetUrl = new URL(urlStr);
+				connection = (HttpURLConnection) targetUrl.openConnection();
+				connection.setRequestMethod("GET");
+				connection.connect();
+
+				JsonElement element = JsonParser.parseReader(new InputStreamReader(connection.getInputStream()));
+				JsonObject obj = element.getAsJsonObject();
+				
+				if (obj.get("status").getAsString().equals("ok")) {
+					
+					String jsonString = obj.toString().substring(obj.toString().indexOf("station")+9,
+							(obj.toString().length()-1));
+					Gson gson = new Gson();
+					ArrayList<Tankstelle> TankstellenPreis = new ArrayList<Tankstelle>();
+					TankstellenPreis.add(gson.fromJson(jsonString, Tankstelle.class));
+					if(fuel.equals("diesel")) {
+					double price = TankstellenPreis.get(0).getDiesel();
+					return price;	
+					}
+					else if(fuel.equals("e5")) {
+						double price = TankstellenPreis.get(0).getE5();
+						return price;	
+						}
+					else {
+						double price = TankstellenPreis.get(0).getE10();
+						return price;	
+					}
+					}
+				
+			
+				}
+			catch (Exception e) {
+				}
+			return 0;
 		
-		for(Tankstelle ts: APIConnection.TankstellenListe){
-			if(ts.getId().equals(realId)){
-			double price = ts.getDiesel();
-			System.out.println(price);
-				return price;	
-			}
-		}
-		return 0;
-	}
+			}	
 }
