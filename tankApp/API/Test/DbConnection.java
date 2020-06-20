@@ -29,7 +29,7 @@ public class DbConnection {
 	
     private static Connection connect() {
     	
-    	String url = "jdbc:sqlite:" + "C:\\Users\\nicho\\OneDrive\\Dokumente\\GitHub\\SoftwareEngineeringProjekt\\tankApp\\Datenbank\\Leaderboard.db";
+    	String url = "jdbc:sqlite:" + "C:\\Users\\stefa\\Documents\\GitHub\\SoftwareEngineeringProjekt\\tankApp\\Datenbank\\Leaderboard.db";
     	//String url = "jdbc:sqlite:" + DB_PATH;
     	//System.out.println(url);
         Connection connection = null;

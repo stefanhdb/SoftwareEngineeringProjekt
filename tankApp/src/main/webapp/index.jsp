@@ -278,6 +278,30 @@ tr {
 .buttonsheader {
 	
 }
+
+.logo {
+	float: left;
+}
+#myBtn{
+
+background:#e7e7e7;
+      border-radius: 30px;
+      width: 15em;
+      height: 3em;
+      position:left;
+display: table-cell; vertical-align: left;
+display: inline-block;
+ 
+
+}
+.mytext{
+height:45px; 
+width:250px;
+
+
+
+ }
+
 </Style>
 
 
@@ -309,7 +333,7 @@ tr {
 	<header>
 
 		<ul class="nav nav-tabs">
-			<li class="nav-item"><a class="nav-link active" href="Login.jsp">Login</a>
+			<li class="nav-item"><a class="nav-link active" onclick="goLog()">Login</a>
 			</li>
 			<li class="nav-item dropdown"><a
 				class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
@@ -332,53 +356,19 @@ tr {
 
 
 		<div class="overlay">
+		<div class="logo">
+				<nav>
+					<a href="http://localhost:8080/tankApp/"><img src="logo.png"
+						height="130" width="156" /></a>
+				</nav>
+			</div>
 			<div class="buttonsheader"></div>
 			<h1>Tank-App</h1>
 			<h3>Das beste Vergleichportal für's Tanken</h3>
 			<p>Passen sie den besten Moment fürs Tanken ab..</p>
 			<br>
 			<form >
-				<div class="container">
-					<button type="button" onclick="goLog()">Login</button>
-					</div>
-			</form>
-
-			<form >
-				<div class="container">
-					<button type="button" onclick="goST()">Nach Tankstelle suchen</button>
-					</div>
-			</form>
-			<form >
-				<div class="container">
-					<button type="button" onclick="goFav()">Favoritenliste anzeigen LINIIIII</button>
-					</div>
-			</form>
-			<form >
-				<div class="container">
-					<button type="button" onclick="goFahrt()">Fahrtenbuch eintragen</button>
-					</div>
-			</form>
-			<form action="index.jsp" method="GET">
-							<fieldset>
-								<input id="latLabel" type="text" name="lat" readonly="readonly"
-									required> <input id="lngLabel" type="text" name="lng"
-									readonly="readonly" required>
-								<button type="button" id="out" onclick="showPosition()">Zeige
-										meine Position an</button>
-								<button type="submit">Bestätigen</button>
-							</fieldset>
-						</form>
-			<form action="index.jsp" method="GET">
-				<label>Umkreis:</label> <select id="rad" name="rad">
-					<option value="5">5 km</option>
-					<option value="10">10 km</option>
-					<option value="15">15 km</option>
-					<option value="25">25 km</option>
-				</select>
-				<button type="submit" onclick="getRad()">Umkreis festlegen</button>
-				</form>
-				
-		</div>
+			</div>	
 	</header>
 
 
@@ -388,18 +378,92 @@ tr {
 		<div class="pos-f-t">
 			<div class="collapse" id="navbarToggleExternalContent">
 				<div class="bg-dark p-4">
-					<h4 class="text-white">Collapsed content</h4>
-					<span class="text-muted"> <!-- Image Buttonfürmodal -->
-						<div class="button">
-
-							<button
-								onclick="document.getElementById('id01').style.display='block'"
-								title="hey">Diagramm</button>
-
+					<h5 class="text-white h4">Collapsed content</h5>
+			
+						<span class="text-muted">
 						
-						
+					
+<!-- 					<button id="myBtn" style="height:45px; width:120px">hassf</button> -->
+				
+					
+					
+					
+					
+					<form>
+				<div class="sd">
+					<button id="myBtn" type="button" onclick="goLog()"style="height:45px; width:250px; ">Login</button>
+					
 				</div>
-				</span>
+			</form>
+
+			<form>
+				<div class="sd">
+				<button id="myBtn" type="button" onclick="goST()"style="height:45px; width:250px;">Nach Tankstelle
+						suchen</button>
+					
+				</div>
+			</form>
+			<form>
+				<div class="sdsd">
+				<button id="myBtn" type="button" onclick="goFav()"style="height:45px; width:250px; ">Favoritenliste
+						anzeigen</button>
+					
+				</div>
+			</form>
+			<form>
+				<div class="sdd">
+				<button id="myBtn" type="button" onclick="goFahrt()"style="height:45px; width:250px;">Fahrtenbuch
+						eintragen</button>
+				
+				</div>
+			</form>
+			<form action="index.jsp" method="GET">
+				<fieldset>
+				<div class="sdd">
+				<button  type="button" type="button" id="myBtn" onclick="showPosition()" style="height:45px; width:250px;">Zeige
+						meine Position an</button>
+						</div>
+						
+						 
+					<input id="latLabel" type="text" name="lat" class="mytext" readonly="readonly" 
+						required > 
+					<input id="lngLabel"  type="text" name="lng"
+						readonly="readonly" required>
+					<button type="submit" type="button" id="myBtn" >Bestätigen</button>
+					
+				</fieldset>
+				
+			</form>
+		
+			<form action="index.jsp" method="GET" >
+				<label>Umkreis:</label> <select id="rad" name="rad" ">
+					<option value="5">5 km</option>
+					<option value="10">10 km</option>
+					<option value="15">15 km</option>
+					<option value="25">25 km</option>
+				</select>
+				<button id="myBtn" type="submit" onclick="getRad()" >Umkreis festlegen</button>
+			</form>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+				
+					</span>
+				</div>
 			</div>
 			<nav class="navbar navbar-dark bg-dark">
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -410,7 +474,8 @@ tr {
 				</button>
 			</nav>
 		</div>
-	</div>
+	
+
 
 
 
@@ -462,9 +527,7 @@ tr {
 					</table>
 				</div>
 
-				<div class="headcontent">
-					<div class="contentname">Deine favorisierten Tankstellen.</div>
-				</div>
+			
 
 				
 			

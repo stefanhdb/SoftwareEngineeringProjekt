@@ -42,6 +42,13 @@
 	margin-left: 50px;
 	margin-right: 50px;
 }
+.logo{
+
+
+float: left;
+
+
+}
 </Style>
   
   
@@ -56,7 +63,12 @@
      <div class="dircetion">
      
      <div class="p-3 mb-2 bg-dark text-white">
-     
+     <div class="logo">
+					<nav>
+						<a href="http://localhost:8080/tankApp/"><img src="logo.png" height="115" 
+							width="115" /></a>
+					</nav>
+				</div>
  <form action="fahrtenbuchSupport.jsp" method="GET">
   <table>
    <tr>

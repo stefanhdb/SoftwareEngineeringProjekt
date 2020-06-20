@@ -55,6 +55,13 @@ margin-top: 50px;
 
 
 }
+.logo{
+
+
+float: left;
+
+
+}
 
 </Style>
 <body>
@@ -71,6 +78,13 @@ margin-top: 50px;
          
 			<label for="uname"><b>Username</b></label> <input id="nameLabel"
 				type="text" placeholder="Enter Username" name="uname" required>
+				
+				 <div class="logo">
+					<nav>
+						<a href="http://localhost:8080/tankApp/"><img src="logo.png" height="55" 
+							width="55" /></a>
+					</nav>
+				</div>
 			<button type="submit" >Bestätigen</button>
 			<button type="button" onclick="goMain()">Zurück zum Hauptmenu</button>				
 		</form>

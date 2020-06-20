@@ -47,7 +47,13 @@
 	margin-right: 50px;
 
 }
+.logo{
 
+
+float: left;
+
+
+}
 }
 </Style>
 <body>
@@ -72,6 +78,12 @@
 		<div class="dircetion">
 		<div class="p-3 mb-2 bg-dark text-white">
 			<form action="searchTankstelle.jsp" method="GET">
+			<div class="logo">
+					<nav>
+						<a href="http://localhost:8080/tankApp/"><img src="logo.png" height="105" 
+							width="105" /></a>
+					</nav>
+				</div>
 				<table>
 					<tr>
 						<td>Straﬂe :</td>
