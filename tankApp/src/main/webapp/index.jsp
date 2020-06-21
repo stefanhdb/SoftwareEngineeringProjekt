@@ -530,7 +530,7 @@ margin-bottom: 0px;
 <!-- 					</ul> -->
 
 				</div>
-			</div>
+			</div> 
 		</div>
 
 
