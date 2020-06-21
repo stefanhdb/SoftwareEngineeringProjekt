@@ -58,30 +58,10 @@
 	background-position: center;
 }
 
-ul {
-	float: right;
-	list-style-type: none;
-	margin-top: 25 px;
-}
 
-ul li {
-	display: inline-block;
-}
-
-ul li a {
-	text-decoration: none;
-	color: white;
-	padding: 5px 20px;
-	border: 1px solid white;
-	transition: 0.6s ease;
-}
-
-ul li a:hover {
-	background-color: white;
-	color: black;
-}
 
 .logo img {
+
 	float: left;
 	width: 150px;
 	height: auto;
@@ -183,7 +163,7 @@ body {
 	
 }
 
-header {
+.header {
 	background: url(Tankstellenpreise.jpg);
 	text-align: center;
 	width: 100%;
@@ -195,7 +175,7 @@ header {
 	border-radius: 100 100 150% 100%/3000%;
 }
 
-header .overlay {
+.header .overlay {
 	width: 100%;
 	height: 100%;
 	padding: 50px;
@@ -301,7 +281,57 @@ width:250px;
 
 
  }
+ .sdd{
+ 
+ margin-left: 35%;
+ 
+ 
+ 
+ }
+.fetsleg{
 
+ margin-left: 42%;
+
+
+
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #DCDCDC;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #A9A9A9;
+}
+
+.active {
+  background-color: #A9A9A9;
+}
+.navbaar{ 
+
+
+
+margin-left: 0px;
+margin-bottom: 0px;
+
+
+
+}
 </Style>
 
 
@@ -322,33 +352,40 @@ width:250px;
 				}
 			}
 	if(boo==false){
-		out.print("<script>var url = \"http://localhost:8080/tankApp/Login.jsp?uname=\";alert(\"Sie müssen zuerst ein Benutzkonto anlegen! Sie werden automatisch zum Login umgeleitet.\"); window.location.href = url;</script>");
+		out.print("<script>var url = \"http://localhost:8080/tankApp/Login.jsp\";alert(\"Sie müssen zuerst ein Benutzkonto anlegen! Sie werden automatisch zum Login umgeleitet.\"); window.location.href = url;</script>");
 	}
 	
 	%>
-
+    <div class="navbaar">
+  <ul>
+  <li><a class="active" onclick="goLog()">Login</a></li>
+  <li><a onclick="goST()">Suchen</a></li>
+  <li><a onclick="goFav()">Favoriten</a></li>
+  <li><a onclick="goFahrt()">Fahrtenbuch</a></li>
+  
+</ul>
+</div>	
+	
+	 <div class="header">
 	
 
-
-	<header>
-
-		<ul class="nav nav-tabs">
-			<li class="nav-item"><a class="nav-link active" onclick="goLog()">Login</a>
-			</li>
-			<li class="nav-item dropdown"><a
-				class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
-				role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-				<div class="dropdown-menu">
-					<a class="dropdown-item"  onclick="goST()">Suchen</a> <a
-						class="dropdown-item" onclick="goFahrt()">Fahrtenbuch</a> <a
-						class="dropdown-item" href="#">Something else here</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="#">Separated link</a>
-				</div></li>
-			<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
-			<li class="nav-item"><a class="nav-link disabled" href="#"
-				tabindex="-1" aria-disabled="true">Disabled</a></li>
-		</ul>
+<!-- 		<ul class="nav nav-tabs"> -->
+<!-- 			<li class="nav-item"><a class="nav-link active" onclick="goLog()">Login</a> -->
+<!-- 			</li> -->
+<!-- 			<li class="nav-item dropdown"><a -->
+<!-- 				class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" -->
+<!-- 				role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a> -->
+<!-- 				<div class="dropdown-menu"> -->
+<!-- 					<a class="dropdown-item"  onclick="goST()">Suchen</a> <a -->
+<!-- 						class="dropdown-item" onclick="goFahrt()">Fahrtenbuch</a> <a -->
+<!-- 						class="dropdown-item" href="#">Something else here</a> -->
+<!-- 					<div class="dropdown-divider"></div> -->
+<!-- 					<a class="dropdown-item" href="#">Separated link</a> -->
+<!-- 				</div></li> -->
+<!-- 			<li class="nav-item"><a class="nav-link" href="#">Link</a></li> -->
+<!-- 			<li class="nav-item"><a class="nav-link disabled" href="#" -->
+<!-- 				tabindex="-1" aria-disabled="true">Disabled</a></li> -->
+<!-- 		</ul> -->
 
 
 
@@ -369,7 +406,7 @@ width:250px;
 			<br>
 			<form >
 			</div>	
-	</header>
+	</div>	
 
 
 
@@ -378,7 +415,7 @@ width:250px;
 		<div class="pos-f-t">
 			<div class="collapse" id="navbarToggleExternalContent">
 				<div class="bg-dark p-4">
-					<h5 class="text-white h4">Collapsed content</h5>
+					<h5 class="text-white h4">Position/Umkreis</h5>
 			
 						<span class="text-muted">
 						
@@ -387,50 +424,19 @@ width:250px;
 				
 					
 					
-					
-					
-					<form>
-				<div class="sd">
-					<button id="myBtn" type="button" onclick="goLog()"style="height:45px; width:250px; ">Login</button>
-					
-				</div>
-			</form>
-
-			<form>
-				<div class="sd">
-				<button id="myBtn" type="button" onclick="goST()"style="height:45px; width:250px;">Nach Tankstelle
-						suchen</button>
-					
-				</div>
-			</form>
-			<form>
-				<div class="sdsd">
-				<button id="myBtn" type="button" onclick="goFav()"style="height:45px; width:250px; ">Favoritenliste
-						anzeigen</button>
-					
-				</div>
-			</form>
-			<form>
-				<div class="sdd">
-				<button id="myBtn" type="button" onclick="goFahrt()"style="height:45px; width:250px;">Fahrtenbuch
-						eintragen</button>
 				
-				</div>
-			</form>
 			<form action="index.jsp" method="GET">
 				<fieldset>
-				<div class="sdd">
-				<button  type="button" type="button" id="myBtn" onclick="showPosition()" style="height:45px; width:250px;">Zeige
-						meine Position an</button>
-						</div>
-						
-						 
+					 
 					<input id="latLabel" type="text" name="lat" class="mytext" readonly="readonly" 
 						required > 
 					<input id="lngLabel"  type="text" name="lng"
 						readonly="readonly" required>
+						<div class="sdd">
+					<button  type="button" type="button" id="myBtn" onclick="showPosition()" style="height:45px; width:250px;">Zeige
+						meine Position an</button>	
 					<button type="submit" type="button" id="myBtn" >Bestätigen</button>
-					
+					</div>
 				</fieldset>
 				
 			</form>
@@ -442,11 +448,26 @@ width:250px;
 					<option value="15">15 km</option>
 					<option value="25">25 km</option>
 				</select>
-				<button id="myBtn" type="submit" onclick="getRad()" >Umkreis festlegen</button>
+				<button id="myBtn" class ="fetsleg" type="submit" onclick="getRad()" >Umkreis festlegen</button>
 			</form>
 					
 					
 					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+				
 					</span>
 				</div>
 			</div>
@@ -647,9 +668,11 @@ width:250px;
 
 	function goST(){window.location.href = "http://localhost:8080/tankApp/searchTankstelle.jsp";}
 
-	function goLog(){window.location.href = "http://localhost:8080/tankApp/Login.jsp?uname=";}
+	function goLog(){window.location.href = "http://localhost:8080/tankApp/Login.jsp";}
 
 	function goFav(){window.location.href = "http://localhost:8080/tankApp/favoritenListe.jsp";}
+
+	function goGraph(t){window.location.href = "http://localhost:8080/tankApp/preisGraph.jsp?id="+t+"&fuel=diesel";}
 
 	function getRad() {
 		// Ausgewählten Radius abspeichern

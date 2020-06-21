@@ -66,12 +66,18 @@ public class APIConnection {
 		
 		for (Tankstelle t : TankstellenListe) {
 			for(Tankstelle tf : TankstellenFavListe) {
+				//Die Favoritenliste durchgehen, ob die Tankstelle in beiden vorhanden ist und dementsprechend den Text umändern
 			if(t.getId().equals(tf.getId())) {
 				buttonText = "Von Favoriten entfernen";
 			}
 			}
-
+			//Wenn die Tankstelle geschlossen ist, den text ändern
+			String open ="Geöffnet";
+			if(t.isOpen()==false) {
+				open="Geschlossen";
+			}
 			
+			//Den String für die Tabelle schreiben
 			table += "<tr>" 
 					+ "<td>" + t.getName() + "</td>" 
 					+ "<td>" + t.getStreet() + "</td>"	
@@ -80,9 +86,10 @@ public class APIConnection {
 					+ "<td>" + t.getDiesel() + " Euro</td>" 
 					+ "<td>" + t.getE10() + " Euro</td>" 
 					+ "<td>" + t.getE5() + " Euro</td>"
-					+ "<td>" + t.isOpen() + " </td>" 
+					+ "<td>" + open + " </td>" 
 					+ "<td>" + "<button type=\"button\" id="+ t.getId() +" onclick=\"favVerw(this.id)\">"+buttonText+"</button>"+ "</td>"
-					+ "<td>" + "<button type=\"button\" id="+ t.getId() +" onclick=\"lbVerw(this.id)\">Leaderboard anzeigen</button>"+ "</td>" 					
+					+ "<td>" + "<button type=\"button\" id="+ t.getId() +" onclick=\"lbVerw(this.id)\">Leaderboard anzeigen</button>"+ "</td>"
+					+ "<td>" + "<button type=\"button\" id="+ t.getId() +" onclick=\"goGraph(this.id)\">Preisveränderung in den letzten 24h</button>"+ "</td>" 
 					+ "</tr>";
 			
 			buttonText= "Zu Favoriten Hinzufügen";
@@ -191,7 +198,13 @@ public class APIConnection {
 		String table = "";
 		
 		for (Tankstelle t : TankstellenFavListe) {
+			//Wenn die Tankstelle geschlossen ist, den text ändern
+			String open ="Geöffnet";
+			if(t.isOpen()==false) {
+				open="Geschlossen";
+			}
 			
+			//Den String für die Tabelle schreiben
 			table += "<tr>" 
 					+ "<td>" + t.getName() + "</td>" 
 					+ "<td>" + t.getStreet() + "</td>"	
@@ -199,9 +212,10 @@ public class APIConnection {
 					+ "<td>" + t.getDiesel() + " Euro</td>" 
 					+ "<td>" + t.getE10() + " Euro</td>" 
 					+ "<td>" + t.getE5() + " Euro</td>"
-					+ "<td>" + t.isOpen() + " </td>" 
+					+ "<td>" + open + " </td>" 
 					+ "<td>" + "<button type=\"button\" id="+ t.getId() +" onclick=\"favVerw(this.id)\">Von Favoriten entfernen</button>"+ "</td>" 
-					+ "<td>" + "<button type=\"button\" id=\"lb\" onclick=\"lbVerw()\">Leaderboard anzeigen</button>" + "</td>" 					
+					+ "<td>" + "<button type=\"button\" id=\"lb\" onclick=\"lbVerw()\">Leaderboard anzeigen</button>" + "</td>" 
+					+ "<td>" + "<button type=\"button\" id="+ t.getId() +" onclick=\"goGraph(this.id)\">Preisveränderung in den letzten 24h</button>"+ "</td>" 
 					+ "</tr>";
 		}		
 		
