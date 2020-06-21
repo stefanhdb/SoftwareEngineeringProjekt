@@ -423,13 +423,11 @@ margin-bottom: 0px;
 
 			<form action="index.jsp" method="GET" >
 					 
-					<input id="latLabel" type="text" name="lat" class="mytext" readonly="readonly" 
-						required > 
-					<input id="lngLabel"  type="text" name="lng"
-						readonly="readonly" required>
-						<div class="sdd">
+					<input id="latLabel" type="text" name="lat" class="mytext" readonly="readonly" required > 
+					<input id="lngLabel"  type="text" name="lng" readonly="readonly" required>
+					<div class="sdd">
 					<button  type="button"  id="myBtn" onclick="showPosition()" style="height:45px; width:250px;">Zeige meine Position an</button>	
-					<input type="submit"  id="myBtn" >Bestätigen</input>
+					<button type="submit"  id="myBtn" >Bestätigen</button>
 					</div>			
 			</form>
 		
@@ -513,29 +511,6 @@ margin-bottom: 0px;
 			
 
 				
-			
-			<div class="col-lg-3">				
-				<!-- Hintergrund und Leiste -->
-				<div class="header">
-					<div class="logo">
-						<image src="">
-					</div>
-
-<!-- 					<ul> -->
-<!-- 						<li><a target="_blank" style="text-decoration: none;" -->
-<!-- 							href="http://www.hs-pforzheim.de">Home</a></li> -->
-<!-- 						<li><a href="searchTankstelle.jsp">Service</a></li> -->
-<!-- 						<li><a href="fahrtenbuch.jsp">Gallerie</a></li> -->
-<!-- 						<li><a href="#">Kontakt</a></li> -->
-<!-- 					</ul> -->
-
-				</div>
-			</div>
-		</div>
-
-
-	</div>
-</div>
 
 
 
@@ -655,6 +630,11 @@ margin-bottom: 0px;
 		// Ausgewählten Radius abspeichern
 		var rad = document.getElementById("rad").value;
 	}
+
+	function submitCoord(){
+		car url = window.location.href + "?lat="+ document.getElementById("latLabel").value + "lng="+ document.getElementById("lngLabel").value;
+
+		}
 </script>
 
 
