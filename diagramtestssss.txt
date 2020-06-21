@@ -1,0 +1,59 @@
+
+
+<body>
+<div class="container">
+				<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+				<script
+					src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+				<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+			</div>
+</body>
+<script>
+window.onload = function hello (t) {
+
+
+	
+    var dataPoints = [];
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        theme: "light2",
+        zoomEnabled: true,
+        title: {
+            text: "Stunde und Preis"
+        },
+        axisY: {
+            title: "Preise pro Stunde",
+            titleFontSize: 24,
+            includeZero: false
+        },
+        axisX: {
+            title: "Hours",
+            maximum: 25,
+        },
+        data: [{
+            type: "line",
+            yValueFormatString: "number",
+            xValueType: "number",
+            dataPoints: dataPoints
+        }]
+    });
+
+    function addData(data) {
+
+
+        for (var i = 0; i < data.length; i++) {
+            dataPoints.push({
+                x: data[i].hour,
+                y: data[i].price
+            });
+        }
+        chart.render();
+    }
+    $
+        .getJSON(
+            https://www.volzinnovation.com/fuel_price_variations_germany/data/fbc4af15/1e1d/46ba/9a44/80c47900f3a5/e10.json,
+            addData);
+
+    
+}
+</script>
