@@ -82,7 +82,8 @@ public class APIConnection {
 					+ "<td>" + t.getE5() + " Euro</td>"
 					+ "<td>" + t.isOpen() + " </td>" 
 					+ "<td>" + "<button type=\"button\" id="+ t.getId() +" onclick=\"favVerw(this.id)\">"+buttonText+"</button>"+ "</td>"
-					+ "<td>" + "<button type=\"button\" id="+ t.getId() +" onclick=\"lbVerw(this.id)\">Leaderboard anzeigen</button>"+ "</td>" 					
+					+ "<td>" + "<button type=\"button\" id="+ t.getId() +" onclick=\"lbVerw(this.id)\">Leaderboard anzeigen</button>"+ "</td>"
+					+ "<td>" + "<button type=\"button\" id="+ t.getId() +" onclick=\"goGraph(this.id)\">Preisveränderung in den letzten 24h</button>"+ "</td>" 
 					+ "</tr>";
 			
 			buttonText= "Zu Favoriten Hinzufügen";
@@ -201,7 +202,8 @@ public class APIConnection {
 					+ "<td>" + t.getE5() + " Euro</td>"
 					+ "<td>" + t.isOpen() + " </td>" 
 					+ "<td>" + "<button type=\"button\" id="+ t.getId() +" onclick=\"favVerw(this.id)\">Von Favoriten entfernen</button>"+ "</td>" 
-					+ "<td>" + "<button type=\"button\" id=\"lb\" onclick=\"lbVerw()\">Leaderboard anzeigen</button>" + "</td>" 					
+					+ "<td>" + "<button type=\"button\" id=\"lb\" onclick=\"lbVerw()\">Leaderboard anzeigen</button>" + "</td>" 
+					+ "<td>" + "<button type=\"button\" id="+ t.getId() +" onclick=\"goGraph(this.id)\">Preisveränderung in den letzten 24h</button>"+ "</td>" 
 					+ "</tr>";
 		}		
 		
