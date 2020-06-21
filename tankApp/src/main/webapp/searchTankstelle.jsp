@@ -5,9 +5,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Tankstelle suchen</title>
 
-<%
-	//jQuery
-%>
+<script
+	src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+	
+	<script
+	src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	
 <!-- CSS only -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -133,6 +136,7 @@ float: left;
 							<th>Geöffnet</th>
 							<th>Favoriten</th>
 							<th>Leaderboard</th>
+							<th>Preisveränderung</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -222,9 +226,10 @@ float: left;
 	function favVerw(t) {
 		var cookie = Cookies.get("FavoritenID");
 
-		//
+		//Wenn keine Cookies vorhanden sind, wird ein neuer erstellt
 		if (cookie == null) {
 			Cookies.set("FavoritenID", t + "&");
+			alert("Favoritenliste wurde mit der Tankstelle erstellt!");
 		}
 
 		//Hinzufügen der Tankstelle	
@@ -232,16 +237,19 @@ float: left;
 			cookie += t
 			cookie += "&"
 			Cookies.set("FavoritenID", cookie);
+			alert("Tankstelle wurde zur Favoritenliste hinzugefügt!");
 		}
 
 		//Löschen einer Vorhandenen Tankstelle
 		else {
 			var newCookie = cookie.replace(t + "&", "");
 			Cookies.set("FavoritenID", newCookie);
+			alert("Tankstelle wurde von der Favoritenliste gelöscht!");
 		}
 
-		location.reload();
 	}
+
+	function goGraph(t){window.location.href = "http://localhost:8080/tankApp/preisGraph.jsp?id="+t+"&fuel=diesel";}
 </script>
 
 
