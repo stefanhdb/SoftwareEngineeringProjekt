@@ -418,31 +418,24 @@ margin-bottom: 0px;
 					<h5 class="text-white h4">Position/Umkreis</h5>
 			
 						<span class="text-muted">
-						
-					
+
 <!-- 					<button id="myBtn" style="height:45px; width:120px">hassf</button> -->
-				
-					
-					
-				
-			<form action="index.jsp" method="GET">
-				<fieldset>
+
+			<form action="index.jsp" method="GET" >
 					 
 					<input id="latLabel" type="text" name="lat" class="mytext" readonly="readonly" 
 						required > 
 					<input id="lngLabel"  type="text" name="lng"
 						readonly="readonly" required>
 						<div class="sdd">
-					<button  type="button" type="button" id="myBtn" onclick="showPosition()" style="height:45px; width:250px;">Zeige
-						meine Position an</button>	
-					<button type="submit" type="button" id="myBtn" >Bestätigen</button>
-					</div>
-				</fieldset>
-				
+					<button  type="button"  id="myBtn" onclick="showPosition()" style="height:45px; width:250px;">Zeige meine Position an</button>	
+					<input type="submit"  id="myBtn" >Bestätigen</input>
+					</div>			
 			</form>
 		
 			<form action="index.jsp" method="GET" >
-				<label>Umkreis:</label> <select id="rad" name="rad" ">
+				<label>Umkreis:</label> 
+				<select id="rad" name="rad">
 					<option value="5">5 km</option>
 					<option value="10">10 km</option>
 					<option value="15">15 km</option>
@@ -450,24 +443,7 @@ margin-bottom: 0px;
 				</select>
 				<button id="myBtn" class ="fetsleg" type="submit" onclick="getRad()" >Umkreis festlegen</button>
 			</form>
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-				
+
 					</span>
 				</div>
 			</div>
@@ -505,6 +481,7 @@ margin-bottom: 0px;
 								<th>Geöffnet</th>
 								<th>Favoriten</th>
 								<th>Leaderboard</th>
+								<th>Preisveränderung anzeigen</th>
 							</tr>
 						</thead>
 						<tbody>

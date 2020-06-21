@@ -58,7 +58,7 @@ window.onload = function hello (t) {
         theme: "light2",
         zoomEnabled: true,
         title: {
-            text: "Preisveränderung"
+            text: "Preisveränderung <%out.print(request.getParameter("fuel")); %>"
         },
         axisY: {
             title: "Preise pro Stunde",
