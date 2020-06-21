@@ -91,6 +91,7 @@ float: left;
 								<th>Geöffnet</th>
 								<th>Favoriten</th>
 								<th>Leaderboard</th>
+								<th>Preisveränderung</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -155,6 +156,8 @@ function lbVerw(t) {
 
 
 function goHome(){window.location.href = "http://localhost:8080/tankApp/index.jsp";}
+
+function goGraph(t){window.location.href = "http://localhost:8080/tankApp/preisGraph.jsp?id="+t+"&fuel=diesel";}
 
 </script>
 </html>
