@@ -15,10 +15,14 @@ public class DbData {
 	Date date;
 	double tsPreis;
 	double avgP;
+	double gespart;
+	
+	
+	
 	
 	
 	public DbData(int tId, String tsId, String tsName, String user, String fuel, double preis, double liter, Date date,
-			double tsPreis, double avgP) {
+			double tsPreis, double avgP, double gespart) {
 		super();
 		this.tId = tId;
 		this.tsId = tsId;
@@ -30,8 +34,8 @@ public class DbData {
 		this.date = date;
 		this.tsPreis = tsPreis;
 		this.avgP = avgP;
+		this.gespart = gespart;
 	}
-	
 	
 	public int gettId() {
 		return tId;
@@ -93,6 +97,15 @@ public class DbData {
 	public void setAvgP(double avgP) {
 		this.avgP = avgP;
 	}
+	public double getGespart() {
+		return gespart;
+	}
+	public void setGespart(double gespart) {
+		this.gespart = gespart;
+	}
+	
+	
+	
 	
 	
 

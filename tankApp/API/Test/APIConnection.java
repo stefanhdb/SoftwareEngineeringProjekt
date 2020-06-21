@@ -72,11 +72,17 @@ public class APIConnection {
 			}
 
 			
-			table += "<tr>" + "<td>" + t.getName() + "</td>" + "<td>" + t.getStreet() + "</td>"	+ "<td>" + t.getPlace() + "</td>" + "<td>" + t.getDist() 
-			+ "<td>" + t.getDiesel() + " Euro</td>" + "<td>" + t.getE10() + " Euro</td>" + "<td>" + t.getE5() + " Euro</td>"
-					+ "</td>" +  "<td>" + t.isOpen() + " </td>" + "<td>" + "<button type=\"button\" id="+ t.getId() +" onclick=\"favVerw(this.id)\">"+buttonText+"</button>"
-					+ "</td>" + "<td>" + "<button type=\"button\" id="+ t.getId() +" onclick=\"lbVerw(this.id)\">Leaderboard anzeigen</button>"
-					+ "</td>" 					
+			table += "<tr>" 
+					+ "<td>" + t.getName() + "</td>" 
+					+ "<td>" + t.getStreet() + "</td>"	
+					+ "<td>" + t.getPlace() + "</td>" 
+					+ "<td>" + t.getDist() + "</td>"
+					+ "<td>" + t.getDiesel() + " Euro</td>" 
+					+ "<td>" + t.getE10() + " Euro</td>" 
+					+ "<td>" + t.getE5() + " Euro</td>"
+					+ "<td>" + t.isOpen() + " </td>" 
+					+ "<td>" + "<button type=\"button\" id="+ t.getId() +" onclick=\"favVerw(this.id)\">"+buttonText+"</button>"+ "</td>"
+					+ "<td>" + "<button type=\"button\" id="+ t.getId() +" onclick=\"lbVerw(this.id)\">Leaderboard anzeigen</button>"+ "</td>" 					
 					+ "</tr>";
 			
 			buttonText= "Zu Favoriten Hinzufügen";
@@ -186,11 +192,16 @@ public class APIConnection {
 		
 		for (Tankstelle t : TankstellenFavListe) {
 			
-			table += "<tr>" + "<td>" + t.getName() + "</td>" + "<td>" + t.getStreet() + "</td>"	+ "<td>" + t.getPlace() + "</td>" + "<td>" + t.getDist() 
-			+ "<td>" + t.getDiesel() + " Euro</td>" + "<td>" + t.getE10() + " Euro</td>" + "<td>" + t.getE5() + " Euro</td>"
-					+ "</td>" + "<td>" + t.isOpen() + " </td>" + "<td>" + "<button type=\"button\" id="+ t.getId() +" onclick=\"favVerw(this.id)\">Von Favoriten entfernen</button>"
-					+ "</td>" + "<td>" + "<button type=\"button\" id=\"lb\" onclick=\"lbVerw()\">Leaderboard anzeigen</button>"
-					+ "</td>" 					
+			table += "<tr>" 
+					+ "<td>" + t.getName() + "</td>" 
+					+ "<td>" + t.getStreet() + "</td>"	
+					+ "<td>" + t.getPlace()  + "</td>"
+					+ "<td>" + t.getDiesel() + " Euro</td>" 
+					+ "<td>" + t.getE10() + " Euro</td>" 
+					+ "<td>" + t.getE5() + " Euro</td>"
+					+ "<td>" + t.isOpen() + " </td>" 
+					+ "<td>" + "<button type=\"button\" id="+ t.getId() +" onclick=\"favVerw(this.id)\">Von Favoriten entfernen</button>"+ "</td>" 
+					+ "<td>" + "<button type=\"button\" id=\"lb\" onclick=\"lbVerw()\">Leaderboard anzeigen</button>" + "</td>" 					
 					+ "</tr>";
 		}		
 		

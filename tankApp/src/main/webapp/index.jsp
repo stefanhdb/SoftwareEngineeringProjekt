@@ -322,7 +322,7 @@ width:250px;
 				}
 			}
 	if(boo==false){
-		out.print("<script>var url = \"http://localhost:8080/tankApp/Login.jsp\";alert(\"Sie müssen zuerst ein Benutzkonto anlegen! Sie werden automatisch zum Login umgeleitet.\"); window.location.href = url;</script>");
+		out.print("<script>var url = \"http://localhost:8080/tankApp/Login.jsp?uname=\";alert(\"Sie müssen zuerst ein Benutzkonto anlegen! Sie werden automatisch zum Login umgeleitet.\"); window.location.href = url;</script>");
 	}
 	
 	%>
@@ -447,21 +447,6 @@ width:250px;
 					
 					
 					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-				
 					</span>
 				</div>
 			</div>
@@ -662,7 +647,7 @@ width:250px;
 
 	function goST(){window.location.href = "http://localhost:8080/tankApp/searchTankstelle.jsp";}
 
-	function goLog(){window.location.href = "http://localhost:8080/tankApp/Login.jsp";}
+	function goLog(){window.location.href = "http://localhost:8080/tankApp/Login.jsp?uname=";}
 
 	function goFav(){window.location.href = "http://localhost:8080/tankApp/favoritenListe.jsp";}
 

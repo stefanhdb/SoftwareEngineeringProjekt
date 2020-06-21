@@ -95,19 +95,22 @@ float: left;
 		
 		<% try{
 			String uname = request.getParameter("uname");
-					
-			if(!uname.equals(null) || !uname.equals("")){
 			
+			//Überprüfen, ob der User etwas eingegeben hat
+			if(!uname.equals(null) && !uname.equals("")){
+			
+			//Überprüfen, ob der eingegebene Name schon vorhanden ist!
 			boolean boo = DbConnection.searchUName(uname);
 					
 			int counter = 0;
 					
 			Cookie[] cookies = request.getCookies();
-			if(cookies != null){
+			if(boo==true){
+			//Wenn der Benutzername noch nicht vorhanden ist:
+			
 				for(Cookie c : cookies){
 					if(c.getName().equals("Benutzer")){
-						counter=1;
-						if(boo==true){
+						//Wenn es bereits einen Benutzcookie gibt, wird dieser aktualisiert
 						counter=2;						
 						c.setValue(uname);
 						response.addCookie(c);	
@@ -116,16 +119,20 @@ float: left;
 						}
 						}
 					}
+			else{
+				//Wenn der Benutzname vergeben ist, wird eine Fehlermeldung ausgelöst
+				counter=1;
+				out.print("<script>alert(\"Benutzername ist bereits vorhanden! Wählen sie einen anderen.\")</script>");
 			}
+			
 			if(counter==0){
+				//Wenn es noch keinen Benutzercookie gibt, wird ein neuer erstellt
 				Cookie cookie = new Cookie("Benutzer", uname);	
 				response.addCookie(cookie);		
 				out.print("<script>alert(\"Benutzerprofil wurde erstellt!\")</script>");
 			}
-			if(counter==1){
-				out.print("<script>alert(\"Benutzername ist bereits vorhanden! Wählen sie einen anderen.\")</script>");
 			}
-			}}
+			}
 		catch(Exception e){}
 					%>
 	

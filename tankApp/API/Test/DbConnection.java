@@ -29,7 +29,7 @@ public class DbConnection {
 	
     private static Connection connect() {
     	
-    	String url = "jdbc:sqlite:" + "C:\\Users\\stefa\\Documents\\GitHub\\SoftwareEngineeringProjekt\\tankApp\\Datenbank\\Leaderboard.db";
+    	String url = "jdbc:sqlite:" + "C:\\Users\\nicho\\OneDrive\\Dokumente\\GitHub\\SoftwareEngineeringProjekt\\tankApp\\Datenbank\\Leaderboard.db";
     	//String url = "jdbc:sqlite:" + DB_PATH;
     	//System.out.println(url);
         Connection connection = null;
@@ -48,7 +48,7 @@ public class DbConnection {
   //Rufe die gesamte Tabelle "DbData" ab und erstellt eine ArrayList mit TestObjects
     public static ArrayList<DbData> getData(String id)    {
         ArrayList<DbData> list = new ArrayList<DbData>();
-        String sql = "SELECT * FROM Leaderboard";
+        String sql = "SELECT * FROM Leaderboard ORDER BY Gespart ASC";
         try  
         {     	
         	Connection conn = connect(); 
@@ -70,12 +70,13 @@ public class DbConnection {
                 String dateStr = resultSet.getString("Datum");
                 double tsPreis = resultSet.getDouble("TankstellenPreis");
         		double avgP =  resultSet.getDouble("DurchschnittAbweichung");
+        		double gespart =  resultSet.getDouble("Gespart");
                 
                 Date date = new SimpleDateFormat("dd.MM.yyyy").parse( dateStr);
 
                 
                 if(id.equals(tsId)) {
-                DbData data = new DbData(tid, tsId, tnId, user, fuel, price, liter, date, tsPreis, avgP);
+                DbData data = new DbData(tid, tsId, tnId, user, fuel, price, liter, date, tsPreis, avgP, gespart);
                 list.add(data);
                 }
                 }
@@ -114,17 +115,26 @@ public class DbConnection {
 	    	
 	    	for (DbData db : list) {
 	    		//Nur Transaktionen, bei denen der Treibstoff und das Datum passt, werden angegeben
-				if((fuel.equals(db.getFuel())||fuel.equals("")) && (db.getDate().compareTo(dateAb)>0 && db.getDate().compareTo(dateBis)<0 )) {
+				if((fuel.equals(db.getFuel())||fuel.equals("")) && (db.getDate().compareTo(dateAb)>=0 && db.getDate().compareTo(dateBis)<=0 )) {
+				
+					double pPl = (db.getPreis()/db.getLiter());
+					double preisProLiter = (int) (pPl*100)/100d;
 					
-				double preisProLiter = db.getPreis()/db.getLiter();
-				double gespartProLiter = preisProLiter - (db.getTsPreis()+db.getAvgP());
-				
-				
-				table += "<tr>" + 
-				"<td>" + db.getUser() + "</td>" + 
-				"<td>" + preisProLiter + "</td>" +
-				"<td>" + gespartProLiter + "</td>" +
-				"</tr>";
+					String gespart = String.format("%.2f", (db.getGespart()));
+					
+					String plus="";
+					if(db.getGespart()>0) {
+						plus=" + ";
+					}
+					
+					
+					table += "<tr>" + 
+					"<td>" + db.getUser() + "</td>" + 
+					"<td>" + db.getFuel() + "</td>" + 
+					"<td>" + formatter.format(db.getDate()) + "</td>" + 
+					"<td>" + preisProLiter + " Euro/Liter"+ "</td>" +
+					"<td>" + plus + gespart +" Euro/Liter"+ "</td>" +
+					"</tr>";
 				}
 			}
 		}
@@ -132,17 +142,26 @@ public class DbConnection {
 			//Wenn nur das Ab-Datum eingegeben wurde
 			Date dateAb = formatter.parse(dateAbStr);
 			for (DbData db : list) {
-				if((fuel.equals(db.getFuel())||fuel.equals("")) && db.getDate().compareTo(dateAb)>0 ) {
+				if((fuel.equals(db.getFuel())||fuel.equals("")) && db.getDate().compareTo(dateAb)>=0 ) {
 				//Nur Transaktionen, bei denen der Treibstoff und das Datum passt, werden angegeben	
-				double preisProLiter = db.getPreis()/db.getLiter();
-				double gespartProLiter = preisProLiter - (db.getTsPreis()+db.getAvgP());
-				
-				
-				table += "<tr>" + 
-				"<td>" + db.getUser() + "</td>" + 
-				"<td>" + preisProLiter + "</td>" +
-				"<td>" + gespartProLiter + "</td>" +
-				"</tr>";
+					double pPl = (db.getPreis()/db.getLiter());
+					double preisProLiter = (int) (pPl*100)/100d;
+					
+					String gespart = String.format("%.2f", (db.getGespart()));
+					
+					String plus="";
+					if(db.getGespart()>0) {
+						plus=" + ";
+					}
+					
+					
+					table += "<tr>" + 
+					"<td>" + db.getUser() + "</td>" + 
+					"<td>" + db.getFuel() + "</td>" + 
+					"<td>" + formatter.format(db.getDate()) + "</td>" + 
+					"<td>" + preisProLiter + " Euro/Liter"+ "</td>" +
+					"<td>" + plus + gespart +" Euro/Liter"+ "</td>" +
+					"</tr>";
 				}
 			}
     	}
@@ -150,17 +169,26 @@ public class DbConnection {
 			//Wenn nur das Bis-Datum eingegeben wurde
 	    	Date dateBis = formatter.parse(dateBisStr);
 	    	for (DbData db : list) {
-				if((fuel.equals(db.getFuel())||fuel.equals("")) &&  db.getDate().compareTo(dateBis)<0 ) {
+				if((fuel.equals(db.getFuel())||fuel.equals("")) &&  db.getDate().compareTo(dateBis)<=0 ) {
 				//Nur Transaktionen, bei denen der Treibstoff und das Datum passt, werden angegeben	
-				double preisProLiter = db.getPreis()/db.getLiter();
-				double gespartProLiter = preisProLiter - (db.getTsPreis()+db.getAvgP());
-				
-				
-				table += "<tr>" + 
-				"<td>" + db.getUser() + "</td>" + 
-				"<td>" + preisProLiter + "</td>" +
-				"<td>" + gespartProLiter + "</td>" +
-				"</tr>";
+					double pPl = (db.getPreis()/db.getLiter());
+					double preisProLiter = (int) (pPl*100)/100d;
+					
+					String gespart = String.format("%.2f", (db.getGespart()));
+					
+					String plus="";
+					if(db.getGespart()>0) {
+						plus=" + ";
+					}
+					
+					
+					table += "<tr>" + 
+					"<td>" + db.getUser() + "</td>" + 
+					"<td>" + db.getFuel() + "</td>" + 
+					"<td>" + formatter.format(db.getDate()) + "</td>" + 
+					"<td>" + preisProLiter + " Euro/Liter"+ "</td>" +
+					"<td>" + plus + gespart +" Euro/Liter"+ "</td>" +
+					"</tr>";
 				}
 			}
 	    	}
@@ -169,15 +197,24 @@ public class DbConnection {
 			for (DbData db : list) {
 				if(fuel.equals(db.getFuel())||fuel.equals("")) {
 				//Nur Transaktionen, bei denen der Treibstoff und das Datum passt, werden angegeben	
-				double preisProLiter = db.getPreis()/db.getLiter();
-				double gespartProLiter = preisProLiter - (db.getTsPreis()+db.getAvgP());
-				
-				
-				table += "<tr>" + 
-				"<td>" + db.getUser() + "</td>" + 
-				"<td>" + preisProLiter + "</td>" +
-				"<td>" + gespartProLiter + "</td>" +
-				"</tr>";
+					double pPl = (db.getPreis()/db.getLiter());
+					double preisProLiter = (int) (pPl*100)/100d;
+					
+					String gespart = String.format("%.2f", (db.getGespart()));
+					
+					String plus="";
+					if(db.getGespart()>0) {
+						plus=" + ";
+					}
+					
+					
+					table += "<tr>" + 
+					"<td>" + db.getUser() + "</td>" + 
+					"<td>" + db.getFuel() + "</td>" + 
+					"<td>" + formatter.format(db.getDate()) + "</td>" + 
+					"<td>" + preisProLiter + " Euro/Liter"+ "</td>" +
+					"<td>" + plus + gespart +" Euro/Liter"+ "</td>" +
+					"</tr>";
 				}
 			}
 			
@@ -236,7 +273,7 @@ public class DbConnection {
 
         //SQL statement wird vorbereitet, noch mit variablen Werten
         //die beiden Fragezeichen entspechen hier den Werten für ID und Text
-        String sql = "INSERT INTO Leaderboard(TankId,TankstellenId, TankstellenName, Tanker, Treibstoff, Preis, Liter, Datum, TankstellenPreis,DurchschnittAbweichung) VALUES(?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO Leaderboard(TankId,TankstellenId, TankstellenName, Tanker, Treibstoff, Preis, Liter, Datum, TankstellenPreis,DurchschnittAbweichung, Gespart) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
         try {
         	Connection conn = connect(); 
         	PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -255,9 +292,11 @@ public class DbConnection {
             pstmt.setString(8, dateForm);            
             pstmt.setDouble(9, db.get(0).getTsPreis());            
             pstmt.setDouble(10, db.get(0).getAvgP());
+            pstmt.setDouble(11, db.get(0).getGespart());
             //Nun vollständiges SQL statement wird jetzt ausgeführt
             pstmt.executeUpdate();
             conn.close();
+            
 
         } 
         catch (Exception e) {
@@ -274,10 +313,11 @@ public static ArrayList<DbData> getArray(int id, String tsId, String tsName, Str
 	double literDoub = Double.parseDouble(liter);
 	double tsPreis = Double.parseDouble(tsPreisStr);
 	double avgP = Double.parseDouble(avgPStr);	
+	double gespart = preis/literDoub - (tsPreis + avgP);
 	
 	Date date = new Date();
 	
-	DbData data = new DbData(id, tsId, tsName, user, fuel, preis, literDoub, date, tsPreis, avgP);
+	DbData data = new DbData(id, tsId, tsName, user, fuel, preis, literDoub, date, tsPreis, avgP,gespart);
 	list.add(data);
 	
 	}

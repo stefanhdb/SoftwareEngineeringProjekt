@@ -4,7 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Favoriten</title>
+
+<script
+	src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+
+
+
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
 	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
@@ -27,7 +33,7 @@
 
 
 </head>
-<body>
+
 <Style>
 
 .containers {
@@ -55,9 +61,10 @@ float: left;
 
 }
 </Style>
+<body>
 
 
-<form >
+
 				<div class="containers">
 				 <div class="p-3 mb-2 bg-dark text-white">
 				<div class="logo">
@@ -66,9 +73,9 @@ float: left;
 							width="115" /></a>
 					</nav>
 				</div>
-					<button type="button" onclick="goHome()">Zum Hauptmenü zurüch gehen</button>
 					
-			</form>
+					
+			
 
                  <div class="boxfav">
 
@@ -78,7 +85,6 @@ float: left;
 								<th>Tankstelle</th>
 								<th>Straße</th>
 								<th>Ort</th>
-								<th>Distanz</th>
 								<th>Diesel</th>
 								<th>E10</th>
 								<th>E5</th>
@@ -111,5 +117,44 @@ float: left;
 				</div>
 
 </body>
-<script >function goHome(){window.location.href = "http://localhost:8080/tankApp/index.jsp";}</script>
+<script >
+
+function favVerw(t) {
+	var cookie = Cookies.get("FavoritenID");
+	//Wenn keine Cookies vorhanden sind, wird ein neuer erstellt
+	if (cookie == null) {
+		Cookies.set("FavoritenID", t + "&");
+		alert("Favoritenliste wurde mit der Tankstelle erstellt!");
+	}
+
+	//Hinzufügen der Tankstelle	
+	else if (!cookie.includes(t)) {
+		cookie += t
+		cookie += "&"
+		Cookies.set("FavoritenID", cookie);
+		alert("Tankstelle wurde zur Favoritenliste hinzugefügt!");
+	}
+
+	//Löschen einer Vorhandenen Tankstelle
+	else {
+		var newCookie = cookie.replace(t + "&", "");
+		Cookies.set("FavoritenID", newCookie);
+		alert("Tankstelle wurde von der Favoritenliste gelöscht!");
+	}
+	
+	location.reload();
+
+}
+
+
+function lbVerw(t) {
+
+	var url = "http://localhost:8080/tankApp/leaderboard.jsp?id=" + t + "&fuel=&dateAb=&dateBis=";
+	window.location.href = url;
+}
+
+
+function goHome(){window.location.href = "http://localhost:8080/tankApp/index.jsp";}
+
+</script>
 </html>
