@@ -1,20 +1,15 @@
 package Test;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
-
-import java.io.InputStream;
 
 public class APIConnection {
 
@@ -60,6 +55,8 @@ public class APIConnection {
 //		TankstellenListe.add(new Tankstelle("101"));
 
 	}
+	
+	
 
 	public static String createTable() {
 		String table = "";
@@ -75,11 +72,17 @@ public class APIConnection {
 			}
 
 			
-			table += "<tr>" + "<td>" + t.getName() + "</td>" + "<td>" + t.getStreet() + "</td>"	+ "<td>" + t.getPlace() + "</td>" + "<td>" + t.getDist() 
-			+ "<td>" + t.getDiesel() + " Euro</td>" + "<td>" + t.getE10() + " Euro</td>" + "<td>" + t.getE5() + " Euro</td>"
-					+ "</td>" +  "<td>" + t.isOpen() + " </td>" + "<td>" + "<button type=\"button\" id="+ t.getId() +" onclick=\"favVerw(this.id)\">"+buttonText+"</button>"
-					+ "</td>" + "<td>" + "<button type=\"button\" id="+ t.getId() +" onclick=\"lbVerw(this.id)\">Leaderboard anzeigen</button>"
-					+ "</td>" 					
+			table += "<tr>" 
+					+ "<td>" + t.getName() + "</td>" 
+					+ "<td>" + t.getStreet() + "</td>"	
+					+ "<td>" + t.getPlace() + "</td>" 
+					+ "<td>" + t.getDist() + "</td>"
+					+ "<td>" + t.getDiesel() + " Euro</td>" 
+					+ "<td>" + t.getE10() + " Euro</td>" 
+					+ "<td>" + t.getE5() + " Euro</td>"
+					+ "<td>" + t.isOpen() + " </td>" 
+					+ "<td>" + "<button type=\"button\" id="+ t.getId() +" onclick=\"favVerw(this.id)\">"+buttonText+"</button>"+ "</td>"
+					+ "<td>" + "<button type=\"button\" id="+ t.getId() +" onclick=\"lbVerw(this.id)\">Leaderboard anzeigen</button>"+ "</td>" 					
 					+ "</tr>";
 			
 			buttonText= "Zu Favoriten Hinzufügen";
@@ -189,14 +192,65 @@ public class APIConnection {
 		
 		for (Tankstelle t : TankstellenFavListe) {
 			
-			table += "<tr>" + "<td>" + t.getName() + "</td>" + "<td>" + t.getStreet() + "</td>"	+ "<td>" + t.getPlace() + "</td>" + "<td>" + t.getDist() 
-			+ "<td>" + t.getDiesel() + " Euro</td>" + "<td>" + t.getE10() + " Euro</td>" + "<td>" + t.getE5() + " Euro</td>"
-					+ "</td>" + "<td>" + t.isOpen() + " </td>" + "<td>" + "<button type=\"button\" id="+ t.getId() +" onclick=\"favVerw(this.id)\">Von Favoriten entfernen</button>"
-					+ "</td>" + "<td>" + "<button type=\"button\" id=\"lb\" onclick=\"lbVerw()\">Leaderboard anzeigen</button>"
-					+ "</td>" 					
+			table += "<tr>" 
+					+ "<td>" + t.getName() + "</td>" 
+					+ "<td>" + t.getStreet() + "</td>"	
+					+ "<td>" + t.getPlace()  + "</td>"
+					+ "<td>" + t.getDiesel() + " Euro</td>" 
+					+ "<td>" + t.getE10() + " Euro</td>" 
+					+ "<td>" + t.getE5() + " Euro</td>"
+					+ "<td>" + t.isOpen() + " </td>" 
+					+ "<td>" + "<button type=\"button\" id="+ t.getId() +" onclick=\"favVerw(this.id)\">Von Favoriten entfernen</button>"+ "</td>" 
+					+ "<td>" + "<button type=\"button\" id=\"lb\" onclick=\"lbVerw()\">Leaderboard anzeigen</button>" + "</td>" 					
 					+ "</tr>";
 		}		
 		
 		return table;
 	}
+	
+	public static double getPrice(String id, String fuel) {		
+			HttpURLConnection connection = null;
+			String realId = id.replace("\"", "");
+			
+			String urlStr = "https://creativecommons.tankerkoenig.de/json/detail.php?";
+			urlStr += "id=" + realId +"&apikey=1ed6e591-71c8-44d4-ada3-0ddfb623d87d";
+			
+			try {
+				// Create connection
+				URL targetUrl = new URL(urlStr);
+				connection = (HttpURLConnection) targetUrl.openConnection();
+				connection.setRequestMethod("GET");
+				connection.connect();
+
+				JsonElement element = JsonParser.parseReader(new InputStreamReader(connection.getInputStream()));
+				JsonObject obj = element.getAsJsonObject();
+				
+				if (obj.get("status").getAsString().equals("ok")) {
+					
+					String jsonString = obj.toString().substring(obj.toString().indexOf("station")+9,
+							(obj.toString().length()-1));
+					Gson gson = new Gson();
+					ArrayList<Tankstelle> TankstellenPreis = new ArrayList<Tankstelle>();
+					TankstellenPreis.add(gson.fromJson(jsonString, Tankstelle.class));
+					if(fuel.equals("diesel")) {
+					double price = TankstellenPreis.get(0).getDiesel();
+					return price;	
+					}
+					else if(fuel.equals("e5")) {
+						double price = TankstellenPreis.get(0).getE5();
+						return price;	
+						}
+					else {
+						double price = TankstellenPreis.get(0).getE10();
+						return price;	
+					}
+					}
+				
+			
+				}
+			catch (Exception e) {
+				}
+			return 0;
+		
+			}	
 }

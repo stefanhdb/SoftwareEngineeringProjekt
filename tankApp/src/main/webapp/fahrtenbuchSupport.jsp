@@ -1,3 +1,4 @@
+<%@page import="Test.APIConnection"%>
 <%@page import="Test.DbData"%>
 <%@page import="Test.DbConnection"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -33,9 +34,18 @@ String fuel = request.getParameter("fuel");
 
 String price = request.getParameter("price");
 String liter = request.getParameter("liter");
-String date = request.getParameter("date");
+String date = "";
 
-DbConnection.insertData(DbConnection.getArray(id, tsId, tsName, user, fuel, price, liter, date));
+
+
+String tsPreis = "" + APIConnection.getPrice(tsId,fuel);
+
+
+double avgP =  DbConnection.avgP(tsId, fuel);
+String avgPStr = ""+avgP;
+
+
+DbConnection.insertData(DbConnection.getArray(id, tsId, tsName, user, fuel, price, liter, date, tsPreis, avgPStr));
 
 %>
 

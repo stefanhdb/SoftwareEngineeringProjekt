@@ -1,12 +1,23 @@
 package Test;
 
 import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,7 +31,7 @@ public class DbConnection {
     	
     	String url = "jdbc:sqlite:" + "C:\\Users\\nicho\\OneDrive\\Dokumente\\GitHub\\SoftwareEngineeringProjekt\\tankApp\\Datenbank\\Leaderboard.db";
     	//String url = "jdbc:sqlite:" + DB_PATH;
-    	System.out.println(url);
+    	//System.out.println(url);
         Connection connection = null;
 
         try 
@@ -36,9 +47,8 @@ public class DbConnection {
     
   //Rufe die gesamte Tabelle "DbData" ab und erstellt eine ArrayList mit TestObjects
     public static ArrayList<DbData> getData(String id)    {
-    	
         ArrayList<DbData> list = new ArrayList<DbData>();
-        String sql = "SELECT * FROM Leaderboard";
+        String sql = "SELECT * FROM Leaderboard ORDER BY Gespart ASC";
         try  
         {     	
         	Connection conn = connect(); 
@@ -58,14 +68,15 @@ public class DbConnection {
                 double price = resultSet.getDouble("Preis");
                 double liter = resultSet.getDouble("Liter");
                 String dateStr = resultSet.getString("Datum");
+                double tsPreis = resultSet.getDouble("TankstellenPreis");
+        		double avgP =  resultSet.getDouble("DurchschnittAbweichung");
+        		double gespart =  resultSet.getDouble("Gespart");
                 
                 Date date = new SimpleDateFormat("dd.MM.yyyy").parse( dateStr);
-                
-                System.out.println(id);
-                System.out.println(tsId);
+
                 
                 if(id.equals(tsId)) {
-                DbData data = new DbData(tid, tsId, tnId, user, fuel, price, liter, date);
+                DbData data = new DbData(tid, tsId, tnId, user, fuel, price, liter, date, tsPreis, avgP, gespart);
                 list.add(data);
                 }
                 }
@@ -83,36 +94,191 @@ public class DbConnection {
 
     }
     
-    public static String createTable(ArrayList<DbData> list) {
+    public static String createTable(ArrayList<DbData> list, String fuel ,String dateAbStr, String dateBisStr) {
 		String table = "";
+		try {
+		//Die Date-Strings in den typ Date umwandeln, damit man sie mit dem Datum der Transaktion vergleichen kann
+		SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");	
+		if(!dateAbStr.equals("")) {	
+		String[] dateAbAr = dateAbStr.split("-");
+		dateAbStr = dateAbAr[2]  + "."+ dateAbAr[1]  + "."+ dateAbAr[0];	
+		}
+		if(!dateBisStr.equals("")) {			
+		String[] dateBisAr = dateBisStr.split("-");
+		dateBisStr = dateBisAr[2] + "."+ dateBisAr[1]  + "."+ dateBisAr[0];
+		}
 		
-		
-		
-		for (DbData db : list) {
-//			System.out.println(db.getLiter());
-//			System.out.println(db.getPreis());
-			double preisProLiter = db.getPreis()/db.getLiter();
+		if(!dateAbStr.equals("")&&!dateBisStr.equals("")) {
+			//Wenn beide Daten eingegeben wurden
+	    	Date dateAb = formatter.parse(dateAbStr);
+	    	Date dateBis = formatter.parse(dateBisStr);
+	    	
+	    	for (DbData db : list) {
+	    		//Nur Transaktionen, bei denen der Treibstoff und das Datum passt, werden angegeben
+				if((fuel.equals(db.getFuel())||fuel.equals("")) && (db.getDate().compareTo(dateAb)>=0 && db.getDate().compareTo(dateBis)<=0 )) {
+				
+					double pPl = (db.getPreis()/db.getLiter());
+					double preisProLiter = (int) (pPl*100)/100d;
+					
+					String gespart = String.format("%.2f", (db.getGespart()));
+					
+					String plus="";
+					if(db.getGespart()>0) {
+						plus=" + ";
+					}
+					
+					
+					table += "<tr>" + 
+					"<td>" + db.getUser() + "</td>" + 
+					"<td>" + db.getFuel() + "</td>" + 
+					"<td>" + formatter.format(db.getDate()) + "</td>" + 
+					"<td>" + preisProLiter + " Euro/Liter"+ "</td>" +
+					"<td>" + plus + gespart +" Euro/Liter"+ "</td>" +
+					"</tr>";
+				}
+			}
+		}
+		else if(!dateAbStr.equals("")) {
+			//Wenn nur das Ab-Datum eingegeben wurde
+			Date dateAb = formatter.parse(dateAbStr);
+			for (DbData db : list) {
+				if((fuel.equals(db.getFuel())||fuel.equals("")) && db.getDate().compareTo(dateAb)>=0 ) {
+				//Nur Transaktionen, bei denen der Treibstoff und das Datum passt, werden angegeben	
+					double pPl = (db.getPreis()/db.getLiter());
+					double preisProLiter = (int) (pPl*100)/100d;
+					
+					String gespart = String.format("%.2f", (db.getGespart()));
+					
+					String plus="";
+					if(db.getGespart()>0) {
+						plus=" + ";
+					}
+					
+					
+					table += "<tr>" + 
+					"<td>" + db.getUser() + "</td>" + 
+					"<td>" + db.getFuel() + "</td>" + 
+					"<td>" + formatter.format(db.getDate()) + "</td>" + 
+					"<td>" + preisProLiter + " Euro/Liter"+ "</td>" +
+					"<td>" + plus + gespart +" Euro/Liter"+ "</td>" +
+					"</tr>";
+				}
+			}
+    	}
+		else if(!dateBisStr.equals("")) {
+			//Wenn nur das Bis-Datum eingegeben wurde
+	    	Date dateBis = formatter.parse(dateBisStr);
+	    	for (DbData db : list) {
+				if((fuel.equals(db.getFuel())||fuel.equals("")) &&  db.getDate().compareTo(dateBis)<=0 ) {
+				//Nur Transaktionen, bei denen der Treibstoff und das Datum passt, werden angegeben	
+					double pPl = (db.getPreis()/db.getLiter());
+					double preisProLiter = (int) (pPl*100)/100d;
+					
+					String gespart = String.format("%.2f", (db.getGespart()));
+					
+					String plus="";
+					if(db.getGespart()>0) {
+						plus=" + ";
+					}
+					
+					
+					table += "<tr>" + 
+					"<td>" + db.getUser() + "</td>" + 
+					"<td>" + db.getFuel() + "</td>" + 
+					"<td>" + formatter.format(db.getDate()) + "</td>" + 
+					"<td>" + preisProLiter + " Euro/Liter"+ "</td>" +
+					"<td>" + plus + gespart +" Euro/Liter"+ "</td>" +
+					"</tr>";
+				}
+			}
+	    	}
+		else {
+			//Wenn kein Datum angegeben wurde
+			for (DbData db : list) {
+				if(fuel.equals(db.getFuel())||fuel.equals("")) {
+				//Nur Transaktionen, bei denen der Treibstoff und das Datum passt, werden angegeben	
+					double pPl = (db.getPreis()/db.getLiter());
+					double preisProLiter = (int) (pPl*100)/100d;
+					
+					String gespart = String.format("%.2f", (db.getGespart()));
+					
+					String plus="";
+					if(db.getGespart()>0) {
+						plus=" + ";
+					}
+					
+					
+					table += "<tr>" + 
+					"<td>" + db.getUser() + "</td>" + 
+					"<td>" + db.getFuel() + "</td>" + 
+					"<td>" + formatter.format(db.getDate()) + "</td>" + 
+					"<td>" + preisProLiter + " Euro/Liter"+ "</td>" +
+					"<td>" + plus + gespart +" Euro/Liter"+ "</td>" +
+					"</tr>";
+				}
+			}
 			
-			
-			table += "<tr>" + "<td>" + db.getUser() + "</td>" + "<td>" + preisProLiter + "</td>"					
-					+ "</tr>";
-			
+		}
+		}
+		catch(Exception e) {
+			System.out.println(e);
 		}
 		return table;
 	}
+    
+    public static double avgP(String id, String fuel) {
+    	HttpURLConnection con = null;
+    	double totalPrice =0;	
+    	String newId = id.replace("-", "/");
+    	
+    	String urlSt = "https://www.volzinnovation.com/fuel_price_variations_germany/data/"+ newId + "/"+ fuel +".json";
+    	try {
+			// Create connection
+			URL url = new URL(urlSt);
+			con = (HttpURLConnection) url.openConnection();
+			con.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0");
+			con.setRequestMethod("GET");
+			con.connect();			
+
+			JsonElement element = JsonParser.parseReader(new InputStreamReader(con.getInputStream()));
+			JsonArray  obj = element.getAsJsonArray();
+
+
+				String jsonString = obj.toString();
+				Gson gson = new Gson();
+				ArrayList<Preise> preis = new ArrayList<Preise>();
+				Type listType = new TypeToken<ArrayList<Preise>>() {
+				}.getType();
+				preis = gson.fromJson(jsonString, listType);
+				for (Preise p : preis) {
+					totalPrice = totalPrice + p.getPrice();
+				}
+				double avgP = totalPrice/preis.size();
+				return avgP;
+			
+
+
+		}
+
+		catch (Exception e) {
+			System.out.println("Ein Fehler ist bei der Preisabfrage entstanden: " + e);
+			
+		}
+    	return 0;	
+    	
+    }
     
     
     public static void insertData(ArrayList<DbData> db) {
 
         //SQL statement wird vorbereitet, noch mit variablen Werten
         //die beiden Fragezeichen entspechen hier den Werten für ID und Text
-        String sql = "INSERT INTO Leaderboard(TankId,TankstellenId, TankstellenName, Tanker, Treibstoff, Preis, Liter, Datum) VALUES(?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO Leaderboard(TankId,TankstellenId, TankstellenName, Tanker, Treibstoff, Preis, Liter, Datum, TankstellenPreis,DurchschnittAbweichung, Gespart) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
         try {
         	Connection conn = connect(); 
         	PreparedStatement pstmt = conn.prepareStatement(sql);
             //füllt das SQL statement mit den Werten des TestObjects, welches übergeben wurde
             //erstes Fragezeichen wird mit der ID  des übergebenen TestObjects gefüllt
-
         	SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
         	String dateForm = formatter.format(db.get(0).getDate());
         	
@@ -123,31 +289,35 @@ public class DbConnection {
             pstmt.setString(5, db.get(0).getFuel());
             pstmt.setDouble(6, db.get(0).getPreis());
             pstmt.setDouble(7, db.get(0).getLiter());
-            pstmt.setString(8, dateForm);
+            pstmt.setString(8, dateForm);            
+            pstmt.setDouble(9, db.get(0).getTsPreis());            
+            pstmt.setDouble(10, db.get(0).getAvgP());
+            pstmt.setDouble(11, db.get(0).getGespart());
             //Nun vollständiges SQL statement wird jetzt ausgeführt
             pstmt.executeUpdate();
             conn.close();
+            
 
         } 
         catch (Exception e) {
-            System.out.println("Ein fehler beim Eintragen in die Datenbank ist entstanden: "+e.getMessage());
+            System.out.println("Ein fehler beim Eintragen in die Datenbank ist entstanden: " + e.getMessage());
         }
 
     }
     
-public static ArrayList<DbData> getArray(int id, String tsId, String tsName, String user, String fuel, String price, String liter, String dateStr)    {
+public static ArrayList<DbData> getArray(int id, String tsId, String tsName, String user, String fuel, String price, String liter, String dateStr, String tsPreisStr, String avgPStr)    {
 	
 	ArrayList<DbData> list = new ArrayList<DbData>();
 	try {
 	double preis = Double.parseDouble(price);
 	double literDoub = Double.parseDouble(liter);
+	double tsPreis = Double.parseDouble(tsPreisStr);
+	double avgP = Double.parseDouble(avgPStr);	
+	double gespart = preis/literDoub - (tsPreis + avgP);
 	
-	String[] result = dateStr.split("-");
-	String newDate =  result[2] + "." + result[1] + "." + result[0];
+	Date date = new Date();
 	
-	Date date = new SimpleDateFormat("dd.MM.yyyy").parse( newDate);
-	
-	DbData data = new DbData(id, tsId, tsName, user, fuel, preis, literDoub, date);
+	DbData data = new DbData(id, tsId, tsName, user, fuel, preis, literDoub, date, tsPreis, avgP,gespart);
 	list.add(data);
 	
 	}
@@ -157,6 +327,40 @@ public static ArrayList<DbData> getArray(int id, String tsId, String tsName, Str
 	return list;
 	
 	}
+
+
+public static boolean searchUName(String uname) {
+	String sql = "SELECT Tanker FROM Leaderboard";
+	try  
+    {     	
+    	Connection conn = connect(); 
+    	PreparedStatement pstmt = conn.prepareStatement(sql);
+        ResultSet resultSet = pstmt.executeQuery();
+                    
+        //Iteriert durch das gesamte Ergebnis der Abfrage 
+        //und erstellt für jede Zeile ein neues Testobjekt
+        while (resultSet.next()) 
+        {
+        	try {
+            String user = resultSet.getString("Tanker"); 
+        	if(uname.equals(user)) {
+        		System.out.println(user);
+        	return false;
+        	}
+
+            }
+            catch(Exception e) {
+            System.out.println("Es ist ein Fehler mit der Datenbank aufgetreten: " + e);	
+            } 
+        }
+        conn.close();
+    } 
+    catch (SQLException e) 
+    {
+        System.out.println(e.getMessage());
+    }
+	return true;
+}
     
     
     
