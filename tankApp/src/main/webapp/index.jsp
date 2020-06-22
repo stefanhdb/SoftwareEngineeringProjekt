@@ -634,7 +634,7 @@ margin-bottom: 0px;
 	}
 
 	function subCoord(){
-		var url = window.location.href+ "?lat="+document.getElementById("latLabel").value+"&lng="+document.getElementById("lngLabel").value;
+		var url = "http://localhost:8080/tankApp/index.jsp"+ "?lat="+document.getElementById("latLabel").value+"&lng="+document.getElementById("lngLabel").value;
 		window.location.href = url;
 		}
 </script>

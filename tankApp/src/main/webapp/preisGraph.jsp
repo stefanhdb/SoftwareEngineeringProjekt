@@ -112,7 +112,7 @@ window.onload = function hello (t) {
         theme: "light2",
         zoomEnabled: true,
         title: {
-            text: "Preisveränderung <%out.print(request.getParameter("fuel")); %>"
+            text: "Preisveränderung <%out.print(request.getParameter("fuel")); %> des letzten Tages"
         },
         axisY: {
             title: "Preise pro Stunde",
@@ -120,7 +120,7 @@ window.onload = function hello (t) {
             includeZero: false
         },
         axisX: {
-            title: "Hours",
+            title: "Uhr",
             maximum: 25,
         },
         data: [{
@@ -136,8 +136,8 @@ window.onload = function hello (t) {
 	
         for (var i = 0; i < data.length; i++) {
             dataPoints.push({
-                x: data[i].hour,
-                y: data[i].price + <%String idB = request.getParameter("id"); String fuelU = request.getParameter("fuel"); out.print(Test.APIConnection.getPrice(idB,fuelU));%>
+                x: data[i].hour,                
+                y: data[i].price
             });
         }
         chart.render();
