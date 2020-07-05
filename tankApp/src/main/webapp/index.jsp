@@ -356,6 +356,7 @@ margin-bottom: 0px;
 	}
 	
 	%>
+	
     <div class="navbaar">
   <ul>
   <li><a class="active" onclick="goLog()">Login</a></li>

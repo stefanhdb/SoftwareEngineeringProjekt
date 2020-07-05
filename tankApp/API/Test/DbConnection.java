@@ -31,7 +31,6 @@ public class DbConnection {
     	
     	String url = "jdbc:sqlite:" + "C:\\Users\\nicho\\OneDrive\\Dokumente\\GitHub\\SoftwareEngineeringProjekt\\tankApp\\Datenbank\\Leaderboard.db";
     	//String url = "jdbc:sqlite:" + DB_PATH;
-    	//System.out.println(url);
         Connection connection = null;
 
         try 
@@ -76,6 +75,7 @@ public class DbConnection {
 
                 
                 if(id.equals(tsId)) {
+                	//Datenbank in Array List speichern
                 DbData data = new DbData(tid, tsId, tnId, user, fuel, price, liter, date, tsPreis, avgP, gespart);
                 list.add(data);
                 }
@@ -227,10 +227,12 @@ public class DbConnection {
 	}
     
     public static double avgP(String id, String fuel) {
+    	//Berechnung der durchschnittlichen Preisabweichung des letzten Tages
     	HttpURLConnection con = null;
     	double totalPrice =0;	
     	String newId = id.replace("-", "/");
     	
+    	//URL für die Preisdaten
     	String urlSt = "https://www.volzinnovation.com/fuel_price_variations_germany/data/"+ newId + "/"+ fuel +".json";
     	try {
 			// Create connection
@@ -246,10 +248,12 @@ public class DbConnection {
 
 				String jsonString = obj.toString();
 				Gson gson = new Gson();
+				//Speichern der JSON Datei in Array List
 				ArrayList<Preise> preis = new ArrayList<Preise>();
 				Type listType = new TypeToken<ArrayList<Preise>>() {
 				}.getType();
 				preis = gson.fromJson(jsonString, listType);
+				//Berechnung der durchschnittlichen Preisabweichung
 				for (Preise p : preis) {
 					totalPrice = totalPrice + p.getPrice();
 				}
@@ -271,8 +275,7 @@ public class DbConnection {
     
     public static void insertData(ArrayList<DbData> db) {
 
-        //SQL statement wird vorbereitet, noch mit variablen Werten
-        //die beiden Fragezeichen entspechen hier den Werten für ID und Text
+        //SQL statement mit dem alle Werte i die Datenbank gespeichert werden
         String sql = "INSERT INTO Leaderboard(TankId,TankstellenId, TankstellenName, Tanker, Treibstoff, Preis, Liter, Datum, TankstellenPreis,DurchschnittAbweichung, Gespart) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
         try {
         	Connection conn = connect(); 
@@ -330,6 +333,7 @@ public static ArrayList<DbData> getArray(int id, String tsId, String tsName, Str
 
 
 public static boolean searchUName(String uname) {
+	//Alle Tanker aus der Datenbank herausnehmen und mit dem Eingegebenen Namen vergleichen
 	String sql = "SELECT Tanker FROM Leaderboard";
 	try  
     {     	
@@ -344,7 +348,7 @@ public static boolean searchUName(String uname) {
         	try {
             String user = resultSet.getString("Tanker"); 
         	if(uname.equals(user)) {
-        		System.out.println(user);
+    		//Wenn der Eingegebene Username in der Datenbank vorhanden ist, wird false returned
         	return false;
         	}
 
@@ -359,6 +363,7 @@ public static boolean searchUName(String uname) {
     {
         System.out.println(e.getMessage());
     }
+	//Wenn der Username nicht in der Datenbank vorhanden ist, wird true ausgegeben
 	return true;
 }
     

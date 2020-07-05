@@ -16,6 +16,8 @@
 <body>
 
 <%
+
+//Username in Variable speichern
 String user = ""; 
 Cookie[] cookies = request.getCookies();
 if(cookies != null){
@@ -44,7 +46,7 @@ String tsPreis = "" + APIConnection.getPrice(tsId,fuel);
 double avgP =  DbConnection.avgP(tsId, fuel);
 String avgPStr = ""+avgP;
 
-
+//Alle Daten in die Datenbank speichern
 DbConnection.insertData(DbConnection.getArray(id, tsId, tsName, user, fuel, price, liter, date, tsPreis, avgPStr));
 
 %>

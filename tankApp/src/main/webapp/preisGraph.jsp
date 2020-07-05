@@ -142,6 +142,7 @@ window.onload = function hello (t) {
         }
         chart.render();
     }
+    <%//Link für die Preisabfrage mithilfe der Parameter erstellen %>
     $.getJSON("https://www.volzinnovation.com/fuel_price_variations_germany/data/<% String id = request.getParameter("id"); String newId = id.replace("-", "/"); out.print(newId);%>/<% String fuel = request.getParameter("fuel"); out.print(fuel);%>.json",addData);
 
     
