@@ -1,3 +1,4 @@
+Gruppe D
 Teilnehmer:
 Nicholas Fischer: 319206
 Stefan Hillenbrand: 319256
