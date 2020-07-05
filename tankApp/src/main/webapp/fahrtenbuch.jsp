@@ -71,6 +71,9 @@ float: left;
 				</div>
  <form action="fahrtenbuchSupport.jsp" method="GET">
   <table>
+  <tr>
+    <td>Geben sie die Daten für die Tankstelle, bei der sie getankt haben an: </td>
+   </tr>
    <tr>
     <td>Straße :</td>
     <td><input type="text" name="street" id="streetInput" required></td>
@@ -100,10 +103,12 @@ float: left;
 		<option value="e10">e10</option>
 	</select>
 	</tr>
-
+	<tr>
+    <td>Lassen sie diese Werte durch den Bestätigungsbutton bestimmen:</td>
+   </tr>
    <tr>
-    <td><input type="text" name="id" id="idInput" required readonly></td>
-    <td><input type="text" name="name" id="nameInput" required readonly></td>
+    <td>ID: <input type="text" name="id" id="idInput" required readonly></td>
+    <td>Name: <input type="text" name="name" id="nameInput" required readonly></td>
    </tr>  
    <tr>
    <td><button type="button" onclick="getAdress()">Bestätigen</button></td>   
